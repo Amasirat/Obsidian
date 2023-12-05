@@ -61,7 +61,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Arrays.md",
+                "file": "Linked Lists.md",
                 "mode": "source",
                 "source": false
               }
@@ -134,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Arrays.md",
+                "file": "Linked Lists.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -151,7 +151,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Arrays.md",
+                "file": "Linked Lists.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -174,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Arrays.md"
+                "file": "Linked Lists.md"
               }
             }
           }
@@ -198,10 +198,10 @@
   "active": "4c202e3a10a1d355",
   "lastOpenFiles": [
     "Rust.md",
-    "Javascript.md",
     "Data Structures.md",
-    "Cargo.md",
     "Arrays.md",
+    "Javascript.md",
+    "Cargo.md",
     "Linked Lists.md",
     "().md",
     "Javascript Engine.md"
