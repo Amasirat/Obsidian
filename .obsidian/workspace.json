@@ -18,8 +18,57 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "148007110a0bc568",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Javascript.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "c97b1e833251dbf7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Linked Lists.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "697834461bde5e3f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Javascript.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "4c202e3a10a1d355",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Arrays.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -85,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Javascript.md",
+                "file": "Arrays.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +151,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Javascript.md",
+                "file": "Arrays.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Javascript.md"
+                "file": "Arrays.md"
               }
             }
           }
@@ -146,8 +195,15 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "3baf0a89b87ea071",
+  "active": "4c202e3a10a1d355",
   "lastOpenFiles": [
-    "Javascript.md"
+    "Rust.md",
+    "Javascript.md",
+    "Data Structures.md",
+    "Cargo.md",
+    "Arrays.md",
+    "Linked Lists.md",
+    "().md",
+    "Javascript Engine.md"
   ]
 }
