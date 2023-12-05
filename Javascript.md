@@ -1,6 +1,8 @@
 
 Javascript is a language first created for the browser, however later able to be used browser-agnostically using node.js.
 
+A great learning resource is [The Modern Javascript Tutorial](https://javascript.info/)
+
 # General
 
 * The program's in javascript are called scripts.
