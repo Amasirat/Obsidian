@@ -1,0 +1,11 @@
+{
+  "obsidian-git:init-repo": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "I"
+    }
+  ]
+}
