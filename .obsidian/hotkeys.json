@@ -1,11 +1,47 @@
 {
-  "obsidian-git:init-repo": [
+  "obsidian-git:commit": [
     {
       "modifiers": [
         "Mod",
         "Shift"
       ],
-      "key": "I"
+      "key": "C"
+    }
+  ],
+  "obsidian-git:list-changed-files": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "L"
+    }
+  ],
+  "obsidian-git:push2": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": " "
+    }
+  ],
+  "obsidian-git:pull": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "P"
+    }
+  ],
+  "obsidian-git:stage-current-file": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "S"
     }
   ]
 }
