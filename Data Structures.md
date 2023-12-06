@@ -2,7 +2,7 @@ In order to keep data organized, and be able to efficiently process or solve pro
 
 Most common data structures are:
 
-* [[Arrays]]
+* [Arrays](Arrays.md)
 * [[Linked Lists]]
 * [[Queues]]
 * [[Stacks]]

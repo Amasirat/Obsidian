@@ -14,8 +14,21 @@
               "type": "graph",
               "state": {}
             }
+          },
+          {
+            "id": "c1fc1bce7dd0136e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Random Variables.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -65,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "efefd46dc0bb422d",
@@ -81,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Random Variables.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Random Variables.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +133,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Random Variables.md"
+              }
             }
           }
         ]
@@ -138,15 +155,18 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "707addb891c36e26",
+  "active": "c1fc1bce7dd0136e",
   "lastOpenFiles": [
-    "Rust.md",
-    "Linked Lists.md",
+    "Arrays.md",
     "Cargo.md",
+    "C++.md",
+    "Pointers.md",
+    "Linked Lists.md",
+    "Random Variables.md",
+    "Data Structures.md",
+    "Rust.md",
     "Stacks.md",
     "Javascript.md",
-    "Data Structures.md",
-    "Arrays.md",
     "().md",
     "Javascript Engine.md"
   ]
