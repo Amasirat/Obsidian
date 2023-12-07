@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Trees.md",
+                "file": "Rust.md",
                 "mode": "source",
                 "source": false
               }
@@ -97,7 +97,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Trees.md",
+                "file": "Rust.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +114,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Trees.md",
+                "file": "Rust.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,7 +137,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Trees.md"
+                "file": "Rust.md"
               }
             }
           }
@@ -160,14 +160,14 @@
   },
   "active": "707addb891c36e26",
   "lastOpenFiles": [
-    "Graphs.md",
+    "Cargo.md",
     "Trees.md",
+    "Graphs.md",
     "Attachments/tree-data-structure-terminologies.webp",
     "Attachments",
     "Data Structures.md",
     "Random Variables.md",
     "Arrays.md",
-    "Cargo.md",
     "C++.md",
     "Pointers.md",
     "Linked Lists.md",
