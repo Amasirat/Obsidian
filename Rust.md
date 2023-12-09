@@ -126,8 +126,80 @@ let tup = (500, 2.0, 321);
 let five_hundred = tup.0;
 ```
 
+The Tuple without any values has a special name known as a **unit** which represents an empty value.
 
+```Rust
+let unit: () = ();
+```
 
+**The Array Type:**
 
+Fixed length array and it is usefull when you want to allocate data on the stack.
 
+```Rust
+let a: [i32; 5] = [1,2,3,4,5];//i32 is the type of the array and 5 is the size
+```
 
+You can also initialize an array like this:
+
+```Rust
+let a = [3; 5];
+```
+
+Where you'll get:
+
+```Rust
+a = [3, 3, 3, 3, 3];
+```
+
+accessing array elements is just like c++
+
+## Statements and Expressions
+
+* Statements are instructions that perform action and do not return a value.
+
+```Rust
+let a = 6;//this is a statement
+```
+Because statements do not return values, then you can't do something like this:
+
+```Rust
+let a = (let b = 6);
+```
+
+* Expressions evaluate to a value.
+
+```Rust
+5 + 6;//evaluates to 11
+
+println!();//calling macros is an expression
+
+func();//if it returns a value, it is  an expression
+
+{
+//yes...curly brackets are fucking expressions...yes, this is rust.
+}
+
+let a = { //you can fucking do this
+	let x = 5;
+	x + 1//if you add a semicolon here, this will turn into a statement and it will no longer be an expression for some reason.
+}
+```
+
+That's how functions work, functions that return a value are expressions, therefore their last line has to be an expression. So no semicolon on the ending line of a function
+
+```Rust
+fn five() -> i32 {
+	5//if a semicolon was here, a compile error would occur
+}
+```
+
+## Control Flow
+
+If statements are largely the same as any other language except:
+
+* It only expects expressions that evaluate to bool. Anything else will NOT be converted to bool.
+* if here in rust terminology is actually an expression.
+```Rust
+let number if condition { 5 } else {6}; //this is totally valid because if-else evaluate to an expression
+```
