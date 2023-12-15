@@ -20,6 +20,18 @@
             }
           },
           {
+            "id": "e355ff011c564d71",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "OpenGL.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "c1fc1bce7dd0136e",
             "type": "leaf",
             "state": {
@@ -31,7 +43,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -81,7 +94,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "efefd46dc0bb422d",
@@ -97,7 +111,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Rust.md",
+                "file": "OpenGL.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +128,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Rust.md",
+                "file": "OpenGL.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,7 +151,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Rust.md"
+                "file": "OpenGL.md"
               }
             }
           }
@@ -158,10 +172,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "707addb891c36e26",
+  "active": "e355ff011c564d71",
   "lastOpenFiles": [
-    "Stacks.md",
     "Rust.md",
+    "OpenGL.md",
+    "Stacks.md",
     "Cargo.md",
     "Trees.md",
     "Graphs.md",
