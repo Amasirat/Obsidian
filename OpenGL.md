@@ -11,7 +11,7 @@ OpenGL has in general two kinds of functions:
 * **State Changing Functions,** change the context.
 * **State Using Functions,** that do operations based on the current context.
 
-
+Everything that we do in OpenGL is in some way just trying to alter this giant state machine to draw the particular pixels that we want on screen.
 ## Objects
 
 An object is a collection of options that represents a subset of OpenGL's state.
@@ -22,7 +22,6 @@ We can define more than one object in our applications, set their options and wh
 
 ```C++
 //init boilerplate
-
 glfwInit();
 glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -42,7 +41,6 @@ std::cout << "Glad was not initialized\n";
 glfwTerminate();
 return -1;
 }
-framebuffer_size_callback(window, w_height, w_width);
 ```
 
 glViewport() adjusts the size of the render window. In order to calibrate it incase the user changes the window size, we have to call this function everytime a change happens. To do that we can create a framebuffer_size_callback() function and give that to glfwSetFramebufferSizeCallback() function as a function pointer.
@@ -53,8 +51,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	glViewport(0, 0, width, height);
 }
 
-int main() {
-
+int main() 
+{
 ...
 
 framebuffer_size_callback(window, w_width, w_height);
@@ -76,20 +74,21 @@ A **vertex** is a collection of data per a 3D coordinate. It could be anything, 
 
 The graphics pipeline can be divided into several steps where each step requires the output of the previous step:
 
-* Vertex Shader: takes in a single vertex, 
+* Vertex Shader
 * Geometry Shader
 * Shape assembly
 * Tests and Blending
 * Fragment Shader
 * Rasterization
 
-A **fragment** in OpenGL is all the data required to draw a single pixel on screen.
+A **fragment** in OpenGL is all the data required to draw a single pixel on screen like color values and such.
 
 OpenGL only processes vertices if they are between -1.0 and 1.0 which we say the vertex is in **Normalized Device Coordinates(NDC)**.
 Any vertex outside this range will be outside the OpenGL window.
 
 Note: In computer graphics, color is represented as an array of 4 values: red, green, blue, alpha (opacity) which is abbreviated to **RGBA**. each value can get a number between 0.0 and 1.0.
 ## Rendering a triangle
+
 We have to first define an array containing three points of the traingle called vertices.
 ```C++
 float vertices {
@@ -134,7 +133,23 @@ A usuage of GL_DYNAMIC_DRAW will ensure the data is placed in a way that reading
 
 Next we have to create both a **vertex** and **fragment** shader that can process the array of vertices we put in the GPU's memory.
 
-Shaders are written in GLSL(OpenGL Shading language).
+*Shaders are written in GLSL(OpenGL Shading language)*
+
+Here is a simple vertex shader for our traingle:
+
+```GLSL
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+	gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+```
+
+
+
+
+
 
 
 
