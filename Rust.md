@@ -203,3 +203,46 @@ If statements are largely the same as any other language except:
 ```Rust
 let number if condition { 5 } else {6}; //this is totally valid because if-else evaluate to an expression
 ```
+
+There's a keyword loop that creates a non-ending loop that can only be cut out with a break statement
+
+```Rust
+loop {
+	if condition {
+		break;
+	}
+}
+```
+
+loops can also bring back values
+
+```Rust
+let mut count = 0;
+let result = loop {
+	count += 1;
+	if count == 10 {
+		break count //not putting semicolon at the end will make this line an expression and the value of result will become 10
+	}
+}
+```
+
+You can label loops like this:
+
+```Rust
+'outer: loop {
+...
+	loop {
+	...
+	break 'outer;
+	}
+}
+```
+
+label names **must** begin with a single quote ( ' ).
+
+range:
+
+```Rust
+(1..4).rev()
+```
+
