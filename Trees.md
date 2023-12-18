@@ -23,7 +23,3 @@ struct treeNode {
 	treeNode* right;
 };
 ```
-
-
-
-

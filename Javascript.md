@@ -166,3 +166,118 @@ Three common functions for these types of modal functionality are:
 let userAge = prompt("What is your age?", 18);
 ```
 * confirm(): Asks user for confirmation, returns true if yes and false if no.
+
+
+# Comparisons
+
+In javascript, while checking for equality, variables of different types are converted:
+
+```Javascript
+"3" == 3 // True
+"null" == 0 //False, string of non empty value will be converted to NaN
+false == 0 // True
+```
+
+Therefore, there's another operator called the strict equality that checks data without type conversion.
+
+```Javascript
+"3" === 3 // false, different types
+true == 1 // false
+```
+
+# Functions
+
+Functions are declared like this:
+```Javascript
+function sayHi() {
+	alert("Hi!");
+}
+
+sayHi();
+```
+
+The javascript engine when running scripts will first process all global scope functions at once, therefore once a function is declared, they can be used anywhere inside that script, even above the point of declaration. 
+
+In modern versions of javascript, functions declared inside brackets, have scopes inside the bracket only. Functions declared in global scope behave the same way
+### Function Expressions
+
+We can create functions in the middle of an expression. Kind of like lambdas in C++
+
+```Javascript
+let sayHi = function() {
+	alert("Hello!");
+}
+```
+
+In javascript, functions are values, so we can deal with them like values
+
+```Javascript
+function sayHi() {
+alert("Hi!");
+}
+
+alert(sayHi);//without (), this will just alert the function body and is totally valid syntax.
+```
+
+We can copy a function into another variable:
+
+```Javascript
+function sayHi() {
+	...
+}
+
+let func = sayHi;
+
+func();
+sayHi(); //they do the same thing
+```
+
+Example:
+
+```Javascript
+function ask(question, yes, no) {
+  if (confirm(question)) yes()
+  else no();
+}
+
+function showOk() {
+  alert( "You agreed." );
+}
+
+function showCancel() {
+  alert( "You canceled the execution." );
+}
+
+// usage: functions showOk, showCancel are passed as arguments to ask
+ask("Do you agree?", showOk, showCancel);
+```
+
+showOk and showCancel are called callback functions. Functions that we expect to be called back later.
+
+Functions in javascript are actions, strings and numbers etc represent data while functions are values that represent actions. (which is Fing up my brain right now!!!!!!!!!!!!!!!!!!!!!!!!!!)
+We can pass it to functions and call them whenever we want.
+
+### The Differences between Function Declaration and Expression
+
+Usually, Function declaration is preferable because they can be used anywhere inside the file, but Function Expressions can only be used after the line in which they are defined(like a regular variable)
+
+However in cases when function declaration does not cut it, for example when a function needs to be used with terneray operator (?), function expression is required.
+
+# Arrow Functions
+
+```Javascript
+let func = (parameter1, parameter2, ...) => expression;
+```
+
+which is equal to:
+
+```Javascript
+function func(prameter1, parameter2, ...) {
+	return expression;
+}
+```
+
+Arrow functions are handy for simple actions, especially for one-liners. They come in two flavors:
+
+1. Without curly braces: `(...args) => expression` – the right side is an expression: the function evaluates it and returns the result. Parentheses can be omitted, if there’s only a single argument, e.g. `n => n*2`.
+2. With curly braces: `(...args) => { body }` – brackets allow us to write multiple statements inside the function, but we need an explicit `return` to return something.
