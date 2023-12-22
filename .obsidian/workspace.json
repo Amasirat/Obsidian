@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Random Variables.md",
+                "file": "Rust's Ownership Model.md",
                 "mode": "source",
                 "source": false
               }
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Random Variables.md",
+                "file": "Rust's Ownership Model.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Random Variables.md",
+                "file": "Rust's Ownership Model.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Random Variables.md"
+                "file": "Rust's Ownership Model.md"
               }
             }
           }
@@ -173,13 +173,13 @@
   },
   "active": "dadacda251cf0842",
   "lastOpenFiles": [
+    "Random Variables.md",
     "OpenGL.md",
     "Binary Trees.md",
     "Trees.md",
     "Rust's Ownership Model.md",
     "Rust.md",
     "Binary Search Tree.md",
-    "Random Variables.md",
     "Pointers.md",
     "Javascript.md",
     "Stacks.md",

@@ -1,0 +1,1 @@
+Ownership is a set of rules that guarantees Rust is memory safe without a grabage collector. 
