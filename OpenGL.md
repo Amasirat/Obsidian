@@ -1,6 +1,6 @@
 OpenGL is a Graphics API that can be used to create graphical applications.
 
-It is not a framework, It is simply a standard created by the Khronos Group, that different graphics manufactureres create implementations for the functions.
+It is not a framework, It is simply a standard created by the Khronos Group, that different graphics manufacturers create implementations for the functions.
 
 ## State machine
 
