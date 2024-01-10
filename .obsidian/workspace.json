@@ -4,35 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "6ed8e116652eafdb",
+        "id": "03ed25fa1cffe54d",
         "type": "tabs",
         "children": [
           {
-            "id": "0afe3935fe90d229",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Trees.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "92883690fb03c691",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Rust.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "dadacda251cf0842",
+            "id": "707addb891c36e26",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -43,8 +19,7 @@
               }
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -171,26 +146,29 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "dadacda251cf0842",
+  "active": "707addb891c36e26",
   "lastOpenFiles": [
+    "Attachments/trpl04-05.svg",
+    "Attachments/trpl04-03.svg",
+    "Attachments/trpl04-04.svg",
+    "Attachments/tree-data-structure-terminologies.webp",
+    "Rust's Ownership Model.md",
+    "Rust.md",
     "Random Variables.md",
     "OpenGL.md",
     "Binary Trees.md",
-    "Trees.md",
-    "Rust's Ownership Model.md",
-    "Rust.md",
     "Binary Search Tree.md",
-    "Pointers.md",
-    "Javascript.md",
     "Stacks.md",
     "Cargo.md",
+    "Trees.md",
     "Graphs.md",
-    "Attachments/tree-data-structure-terminologies.webp",
     "Attachments",
     "Data Structures.md",
     "Arrays.md",
     "C++.md",
+    "Pointers.md",
     "Linked Lists.md",
+    "Javascript.md",
     "().md",
     "Javascript Engine.md"
   ]

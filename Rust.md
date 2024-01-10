@@ -67,7 +67,7 @@ They represent a single value. Rust has 4 primary scalar types. **integers**, **
 
 **Integer types:
 
-There are two types of integer types, one unsigned(u) and one signed (i), for which you have specify it's bit size explicitly like this:
+There are two types of integer types, one unsigned(u) and one signed (i), for which you have specify its bit size explicitly like this:
 
 ```Rust
 let x: u32 = 25;
@@ -79,8 +79,8 @@ Bit size can either be: 8, 16, 32, 64, or size which defaults to the size of the
 
 **Floating-Point:**
 
-Just like above but with the f letter.
-***f32 is a single-precision float and f64 has double precision.**
+Just like above but with the letter **f**.
+***f32 is a single-precision float and f64 is double precision.**
 
 **The Boolean Type:**
 
@@ -134,7 +134,7 @@ let unit: () = ();
 
 **The Array Type:**
 
-Fixed length array and it is usefull when you want to allocate data on the stack.
+Fixed length array and it is useful when you want to allocate data on the stack.
 
 ```Rust
 let a: [i32; 5] = [1,2,3,4,5];//i32 is the type of the array and 5 is the size
@@ -170,11 +170,11 @@ let a = (let b = 6);
 * Expressions evaluate to a value.
 
 ```Rust
-5 + 6;//evaluates to 11
+5 + 6//evaluates to 11
 
 println!();//calling macros is an expression
 
-func();//if it returns a value, it is  an expression
+func() { 5 }//if it returns a value, it is  an expression
 
 {
 //yes...curly brackets are fucking expressions...yes, this is rust.
@@ -199,7 +199,7 @@ fn five() -> i32 {
 If statements are largely the same as any other language except:
 
 * It only expects expressions that evaluate to bool. Anything else will NOT be converted to bool.
-* if here in rust terminology is actually an expression.
+* the "if" in this line in rust terminology is actually an expression.
 ```Rust
 let number if condition { 5 } else {6}; //this is totally valid because if-else evaluate to an expression
 ```
@@ -240,9 +240,39 @@ You can label loops like this:
 
 label names **must** begin with a single quote ( ' ).
 
-range:
+There's also While and for control flows that work just like in other common languages (They work similarly to python). You can use While to loop if a condition is true and you can use for to loop through collections and arrays like python
 
 ```Rust
-(1..4).rev()
+for item in array {
+	println!("{item}");
+}
 ```
+
+You can do this to countdown. The rev() function starts the range from reverse, meaning 4 instead of 1.
+
+```Rust
+for i in (1..4).rev() {
+	println!("{i} seconds remaining!");
+}
+```
+
+## String Type
+
+A complex type that allocates memory on the heap in Rust is the String. 
+
+You can create a String from a string literal like this:
+
+```Rust
+let x = String::from("Hello");
+```
+
+This type of string can be mutated
+
+```Rust
+let mut s = String::from("Hello");
+
+s.push_str(", World!");
+```
+
+
 
