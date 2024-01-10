@@ -100,7 +100,7 @@ float vertices {
 
 After defining the vertices of a triangle, they have to be sent to the first stage of the graphics pipeline. To do that, we have to create memory on the GPU and store the vertices there. 
 
-Sending Data to the GPU is slow, therefore we need to do that all in one batch and not do it a lot continously. It's like when you have bring all the fruit your mom bought, it'll be much faster to bring as much as it's possible with you to the house even though you will be spent in the process. If you don't do that, it'll be less strain but it'll take more time.
+Sending Data to the GPU is slow, therefore we need to do that all in one batch and not do it a lot continously. It's like when you have to bring all the bags of fruit your mom bought into the house. It'll be much faster if you bring as much as possible with you to the house even though you will be spent in the process. If you don't do that, it'll be less strain but it'll take more time.
 
 In OpenGL, we create **Vertex Buffer Objects** that store vertices, so that we can send large amounts of vertex data at once.
 
@@ -113,7 +113,7 @@ glGenBuffers(1, &VBO);//1 means creating only 1 buffer and we send a reference t
 glBindBuffer(GL_ARRAY_BUFFER, VBO);//first parameter is the type of buffer
 ```
 
-There are many types of buffers in OpenGL and GL_ARRAY_BUFFER is the type of a vertex buffer object, because at the end of the day it is just an array of float numbers.
+There are many types of buffers in OpenGL and GL_ARRAY_BUFFER is the type of a vertex buffer object, because at the end of the day our triangle is just an array of float numbers.
 
 Then finally we copy the vertices we defined into our buffer object by making a call to glBufferData()
 
