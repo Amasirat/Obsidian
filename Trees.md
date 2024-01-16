@@ -30,3 +30,4 @@ There are a number of different types of tree in use for programming:
 
 * [[Binary Trees]]
 * [[AVL Trees]]
+* [[Binary Search Tree]]
