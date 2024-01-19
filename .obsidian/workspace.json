@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Javascript.md",
+                "file": "Bernouli Distribution.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Javascript.md",
+                "file": "Bernouli Distribution.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Javascript.md",
+                "file": "Bernouli Distribution.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Javascript.md"
+                "file": "Bernouli Distribution.md"
               }
             }
           }
@@ -148,6 +148,8 @@
   },
   "active": "37fcccebf23b3632",
   "lastOpenFiles": [
+    "OpenGL.md",
+    "Javascript.md",
     "Linked Lists.md",
     "Arrays.md",
     "Bernouli Distribution.md",
@@ -167,7 +169,6 @@
     "Random.md",
     "Random Variables.md",
     "Pointers.md",
-    "OpenGL.md",
     "random.md",
     "Attachments/2024-01-16_22-01.png",
     "Attachments/trpl04-05.svg",
@@ -180,7 +181,6 @@
     "Attachments",
     "Data Structures.md",
     "C++.md",
-    "Javascript.md",
     "().md",
     "Javascript Engine.md"
   ]
