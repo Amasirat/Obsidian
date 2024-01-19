@@ -1,0 +1,1 @@
+Decoder circuits are used to decode encoded information. A hypothetical binary decoder has n inputs + an Enable input and 2^n outputs. The En input controls whether the outputs are active or not. if En = 0 then it's not active and En = 1 then they are active.![[2024-01-19_17-37.png]]

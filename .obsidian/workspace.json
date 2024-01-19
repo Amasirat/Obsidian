@@ -13,13 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Probability Models.md",
+                "file": "Polynomial Distribution.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "d3e526bdd71aadfd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Decoder.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Probability Models.md",
+                "file": "Decoder.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Probability Models.md",
+                "file": "Decoder.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Probability Models.md"
+                "file": "Decoder.md"
               }
             }
           }
@@ -146,10 +159,13 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "37fcccebf23b3632",
+  "active": "d3e526bdd71aadfd",
   "lastOpenFiles": [
-    "Poisson Distribution.md",
+    "Attachments/2024-01-19_17-37.png",
+    "Polynomial Distribution.md",
+    "Decoder.md",
     "Probability Models.md",
+    "Poisson Distribution.md",
     "Uniform Random Variable.md",
     "Javascript.md",
     "Inorder.md",
@@ -180,9 +196,6 @@
     "Cargo.md",
     "Graphs.md",
     "Attachments",
-    "Data Structures.md",
-    "C++.md",
-    "().md",
-    "Javascript Engine.md"
+    "Data Structures.md"
   ]
 }
