@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Bernouli Distribution.md",
+                "file": "Probability Models.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Bernouli Distribution.md",
+                "file": "Probability Models.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Bernouli Distribution.md",
+                "file": "Probability Models.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Bernouli Distribution.md"
+                "file": "Probability Models.md"
               }
             }
           }
@@ -148,21 +148,22 @@
   },
   "active": "37fcccebf23b3632",
   "lastOpenFiles": [
-    "OpenGL.md",
-    "Javascript.md",
-    "Linked Lists.md",
-    "Arrays.md",
-    "Bernouli Distribution.md",
-    "Binomial Distribution.md",
-    "Attachments/binomial.png",
+    "Poisson Distribution.md",
     "Probability Models.md",
     "Uniform Random Variable.md",
+    "Javascript.md",
+    "Inorder.md",
+    "Binomial Distribution.md",
+    "Bernouli Distribution.md",
+    "OpenGL.md",
+    "Linked Lists.md",
+    "Arrays.md",
+    "Attachments/binomial.png",
     "Attachments/2024-01-16_22-34.png",
     "Attachments/2024-01-16_22-25.png",
     "Attachments/2024-01-16_22-19.png",
     "Trees.md",
     "Stacks.md",
-    "Inorder.md",
     "Binary Search Tree.md",
     "Rust's Ownership Model.md",
     "Rust.md",

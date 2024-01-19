@@ -4,7 +4,9 @@ There are a lot of probability models:
 
 * [[Binomial Distribution]]
 * [[Bernouli Distribution]]
+* [[Polynomial Distribution]]
 * [[Poisson Distribution]]
+* [[Laplace Distribution]]
 * [[Geometric Distribution]]
 * [[Hypergeometric Distribution]]
 * [[Uniform Random Variable]]
@@ -16,4 +18,4 @@ There are a lot of probability models:
 * [[F-Distribution]]
 * [[Logistics Distribution]]
 
-I'm sure there are more however this is all I need to pass my exams, as sad of a thinking that is university is forcing me!!!!!
+I'm sure there are more however this is all I need to pass my exams, as sad of a thinking that is, university is forcing me!!!!!
