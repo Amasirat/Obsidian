@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Binomial Distribution.md",
+                "file": "Linked Lists.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Binomial Distribution.md",
+                "file": "Linked Lists.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Binomial Distribution.md",
+                "file": "Linked Lists.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Binomial Distribution.md"
+                "file": "Linked Lists.md"
               }
             }
           }
@@ -148,9 +148,11 @@
   },
   "active": "37fcccebf23b3632",
   "lastOpenFiles": [
+    "Arrays.md",
+    "Bernouli Distribution.md",
+    "Binomial Distribution.md",
     "Attachments/binomial.png",
     "Probability Models.md",
-    "Binomial Distribution.md",
     "Linked Lists.md",
     "Uniform Random Variable.md",
     "Attachments/2024-01-16_22-34.png",
@@ -177,7 +179,6 @@
     "Graphs.md",
     "Attachments",
     "Data Structures.md",
-    "Arrays.md",
     "C++.md",
     "Javascript.md",
     "().md",
