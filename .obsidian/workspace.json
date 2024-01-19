@@ -4,28 +4,28 @@
     "type": "split",
     "children": [
       {
-        "id": "03ed25fa1cffe54d",
+        "id": "6ed8e116652eafdb",
         "type": "tabs",
         "children": [
           {
-            "id": "37fcccebf23b3632",
+            "id": "dadacda251cf0842",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Polynomial Distribution.md",
+                "file": "Rust's Ownership Model.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "d3e526bdd71aadfd",
+            "id": "b477adb1609e4987",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Decoder.md",
+                "file": "CSharp.md",
                 "mode": "source",
                 "source": false
               }
@@ -82,7 +82,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "efefd46dc0bb422d",
@@ -98,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Decoder.md",
+                "file": "CSharp.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +116,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Decoder.md",
+                "file": "CSharp.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +139,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Decoder.md"
+                "file": "CSharp.md"
               }
             }
           }
@@ -159,43 +160,44 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d3e526bdd71aadfd",
+  "active": "b477adb1609e4987",
   "lastOpenFiles": [
-    "Attachments/2024-01-19_17-37.png",
-    "Polynomial Distribution.md",
-    "Decoder.md",
-    "Probability Models.md",
-    "Poisson Distribution.md",
+    "Rust's Ownership Model.md",
+    "CSharp.md",
     "Uniform Random Variable.md",
-    "Javascript.md",
-    "Inorder.md",
+    "Probability Models.md",
+    "Polynomial Distribution.md",
+    "Poisson Distribution.md",
+    "Decoder.md",
     "Binomial Distribution.md",
     "Bernouli Distribution.md",
-    "OpenGL.md",
-    "Linked Lists.md",
-    "Arrays.md",
+    "Attachments/trpl04-05.svg",
+    "Attachments/trpl04-04.svg",
+    "Attachments/trpl04-03.svg",
     "Attachments/binomial.png",
+    "Attachments/2024-01-19_17-37.png",
     "Attachments/2024-01-16_22-34.png",
     "Attachments/2024-01-16_22-25.png",
     "Attachments/2024-01-16_22-19.png",
-    "Trees.md",
-    "Stacks.md",
-    "Binary Search Tree.md",
-    "Rust's Ownership Model.md",
-    "Rust.md",
-    "Random.md",
-    "Random Variables.md",
-    "Pointers.md",
-    "random.md",
     "Attachments/2024-01-16_22-01.png",
-    "Attachments/trpl04-05.svg",
-    "Attachments/trpl04-03.svg",
-    "Attachments/trpl04-04.svg",
-    "Attachments/tree-data-structure-terminologies.webp",
+    "Random Variables.md",
+    "OpenGL.md",
     "Binary Trees.md",
+    "Trees.md",
+    "Rust.md",
+    "Binary Search Tree.md",
+    "Pointers.md",
+    "Javascript.md",
+    "Stacks.md",
     "Cargo.md",
     "Graphs.md",
+    "Attachments/tree-data-structure-terminologies.webp",
     "Attachments",
-    "Data Structures.md"
+    "Data Structures.md",
+    "Arrays.md",
+    "C++.md",
+    "Linked Lists.md",
+    "().md",
+    "Javascript Engine.md"
   ]
 }
