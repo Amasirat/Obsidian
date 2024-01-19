@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Probability Models.md",
+                "file": "Binomial Distribution.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Probability Models.md",
+                "file": "Binomial Distribution.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Probability Models.md",
+                "file": "Binomial Distribution.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Probability Models.md"
+                "file": "Binomial Distribution.md"
               }
             }
           }
@@ -148,8 +148,10 @@
   },
   "active": "37fcccebf23b3632",
   "lastOpenFiles": [
-    "Linked Lists.md",
+    "Attachments/binomial.png",
     "Probability Models.md",
+    "Binomial Distribution.md",
+    "Linked Lists.md",
     "Uniform Random Variable.md",
     "Attachments/2024-01-16_22-34.png",
     "Attachments/2024-01-16_22-25.png",
