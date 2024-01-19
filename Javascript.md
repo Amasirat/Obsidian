@@ -66,7 +66,7 @@ var myvar = 8;
 common practice is to name literal constants in uppercase and variables that are calculated at runtime like any normal variable:
 
 ```Javascript
-let COLOR_WHITE = "#00000";
+const COLOR_WHITE = "#00000";
 
 let age = calculateAge(currentYear);
 ```
