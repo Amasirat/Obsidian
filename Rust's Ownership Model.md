@@ -50,7 +50,7 @@ We can borrow variables using a reference instead of moving ownership. Therefore
 ![[trpl04-05.svg]]
 
 ```Rust
-let s1 = String::from("Hello");
+let s1 = String::from("hello");
 calculate_length(&s1);//We're passing a reference to s1 instead of moving it to the function parameter
 fn calculate_length(s: &String) -> usize
 {

@@ -67,7 +67,7 @@ They represent a single value. Rust has 4 primary scalar types. **integers**, **
 
 **Integer types:
 
-There are two types of integer types, one unsigned(u) and one signed (i), for which you have specify its bit size explicitly like this:
+There are two types of integer types, one unsigned(u) and one signed (i), for which you have to specify its bit size explicitly like this:
 
 ```Rust
 let x: u32 = 25;
