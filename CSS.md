@@ -83,8 +83,28 @@ background-size: 500px 300px or {cover, contain};
 ```
 ## Positions
 
+All tags have the position property that dictates how they should be laid out.
+Elements are positioned using the top, bottom, left, right properties, However **these properties won't work unless position is set first.**
 
+There are 5 different positions:
+* **static**: is positioned according to the normal flow of the page. Elements positioned with this are not affected by top, left, right,... properties.
+* **relative**: is positioned relative to its normal position
+* **absolute**: is positioned relative to the nearest positioned ancestor.
+* **sticky**: is positioned based on the user's scroll position
+* **fixed**: is positioned relative to the viewport
+All tags are **static** by default.
 
+## Z-Index
+
+Z-index is a number that a tag can have when if its number is larger than another tag it will appear on top of the other tags.
+```CSS
+div 
+{
+z-index: 5;
+}
+```
+
+**The number of the z-index does not matter, it only matters in relation to z-index of others.**
 ## Selectors
 
 CSS selectors are used to *find* html tags. We can not write every CSS properties of html tags inline, so there needs to be a mechanism to detach CSS from HTML for readability's sake.
