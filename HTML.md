@@ -113,9 +113,28 @@ The value parameter for input tags give a default value for the input tag.
 
 A form contains a method parameter that can contain a few values:
 
-* get: which is the default method value and sends data while also showing the data in the current url you are in
+* **get**: which is the default method value and sends data while also showing the data in the current url you are in
 
-* post: sends data but does not show data in url. It's useful for login or sign up pages where important and sensitive data is taken
+* **post**: sends data but does not show data in url. It's useful for login or sign up pages where important and sensitive data is taken
 
-* dialog: 
+* **dialog**: 
+
+## Finer Details
+
+The p tag is a block tag, meaning it takes up the entire width of a webpage and does not let any other tags to be around it by default. We can change this behaviour using [[CSS]]'s different display properties. 
+
+All of these tags are block by default:
+
+* ***div, p, h1-h6, ul, li,  ol**
+
+All of these tags are inline by default:
+
+* ***span, b, i, u, s, a, sub, sup, ...
+
+All of these tags are inline-block by default(they have some functionality from both block and inline tags):
+
+* ***img, button, input, textarea, select**
+
+Inline blocks do not accept height or width properties. however block tags do
+**However, inline-block tags do accept height or width properties
 
