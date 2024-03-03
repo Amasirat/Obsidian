@@ -69,16 +69,17 @@ let mut s1 = String::from("Hello");
 let r1: &mut String = &mut s1;
 ```
 
-In order for mutable references be possible, the value they are referencing has to also be mutable.
+In order for mutable references to be possible, the value they are referencing has to also be mutable.
 
 However, huge Caveat!
 
-You can not make mutable references to one variable more than once.
+**You can not make mutable references to one variable more than once.**
 
 You can also not make a normal reference to one that has already been borrowed by a mutable reference. This is to prevent data races to occur in Rust, where more than one variable has access to data to write into.
 
-However **Multiple immutable references are allowed**.
+However **Multiple *immutable* references are allowed**.
 
 **Rust also does not allow dangled references.**
 
 ## Slices
+
