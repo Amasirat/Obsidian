@@ -121,6 +121,8 @@ A form contains a method parameter that can contain a few values:
 
 ## Finer Details
 
+### Different ways that tags are displayed 
+
 The p tag is a block tag, meaning it takes up the entire width of a webpage and does not let any other tags to be around it by default. We can change this behaviour using [[CSS]]'s different display properties. 
 
 All of these tags are block by default:
@@ -135,6 +137,6 @@ All of these tags are inline-block by default(they have some functionality from 
 
 * ***img, button, input, textarea, select**
 
-Inline blocks do not accept height or width properties. however block tags do
-**However, inline-block tags do accept height or width properties
+
+
 

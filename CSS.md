@@ -1,6 +1,4 @@
 CSS is made up of different properties that are applied on [[HTML]] tags.
-
-
 ## Box Model
 
 In CSS, the term *Box Model* is basically a box that wraps around every HTML tag. It consists of properties like: content, padding, margin, and borders. Every HTML tag has these properties.
@@ -23,6 +21,68 @@ For example we can change the default block behaviour of the p tag like this:
 ```HTML
 <p style="display: inline;">Hello</p>
 ```
+
+Inline tags do not accept height or width properties. however block tags do
+**However, inline-block tags do accept height or width properties.
+
+* block tags have width set to auto which takes up the entire width of the device viewing the webpage.
+* Inline-block tags set width to auto too however their width is only as much as their contents.
+
+## Typography
+
+Properties that relate to fromatting text
+* font-weight: {normal, bold, ...}
+* font-style: {italic, normal, }
+* text-decoration: {none, line-through, overline, underline, ...}
+* font-size: {5px, 10px, ...}
+* font-family: {'b nazanin', ubuntu, jetbrains, any font family that exists on the client computer} We can also give multiple font families incase a font family does not exist on the client computer
+* text-align: {left, right, center, justify}
+
+While writing a complex text with a combination of different directional languages like English and persian, you can give a direction property that gets ltr meaning left to right or rtl meaning right to left. 
+For more complex instances this technique is useful:
+
+```HTML
+در انگلیسی 
+<span style="direction: ltr; display: inline-block;">No pain no gain</span>
+ضربالمثل است
+```
+## CSS Units
+
+We have two types of units in CSS:
+
+* Absolute: Like px, cm, mm, in, pt, ...
+* Relative: vw(relative to viewport), %(scale relative to parent), em(relative to font size), rem(relative to font size of root) ....
+
+**Relative height can only be used if the parent's height can be found.**
+
+[More information here](https://www.w3schools.com/cssref/css_units.php)
+## Background
+
+You can put background-color, background-image, etc on html tags. especially div tags.
+
+```CSS
+div {
+background-image: url(images.jpg);
+background-repeat: no-repeat;
+background-position: center;
+background-size: 500px 300px;
+background-color: green;
+}
+```
+
+* **if background-size is contain, the image will scale alongside the viewport when it gets smaller**
+* **if background-size is cover, it will cover the entire div background**
+
+the short hand for all of above, is this:
+
+```CSS
+div {
+background: green url(images.jpg) no-repeat center;
+background-size: 500px 300px or {cover, contain};
+}
+```
+## Positions
+
 
 
 ## Selectors
@@ -64,8 +124,4 @@ div ~ div {
 ...
 }
 ```
-
-
-
-## Positions
 
