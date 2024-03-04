@@ -93,7 +93,6 @@ There are 5 different positions:
 * **sticky**: is positioned based on the user's scroll position
 * **fixed**: is positioned relative to the viewport
 All tags are **static** by default.
-
 ## Z-Index
 
 Z-index is a number that a tag can have when if its number is larger than another tag it will appear on top of the other tags.
@@ -111,8 +110,8 @@ CSS selectors are used to *find* html tags. We can not write every CSS propertie
 
 * **Simple Selectors**: select based on name, class, id, etc
 * **Combinator selectors**: select elements based on relationships
-* **Pseudo-elements selectors**
-* **Attribute selectors**
+* **Pseudo-elements selectors**: selecting a specific characteristics of html tags, for example for a tags which have a "hover" characteristic.
+* **Attribute selectors**: selecting based on attributes that html tags have
 #### Combinator Selectors
 
 * decendant selector:
@@ -129,6 +128,7 @@ div > p {
 ....
 }
 ```
+all tag elements who are the children of the chosen tag element are selected.
 
 * adjacent sibling selector:
 
@@ -137,6 +137,7 @@ div + div {
 ....
 }
 ```
+the tag right after the current tag element is affected
 
 * general sibling selector:
 ```CSS
@@ -144,4 +145,61 @@ div ~ div {
 ...
 }
 ```
+all tag elements after the tag element are affected.
+
+### Attribute Selectors
+
+They're very common while being used with input tags.
+
+```CSS
+input[type="text"]
+{
+
+}
+input[value] {
+
+}
+input[title="flower"] {
+}
+
+[class^="top"] { //"meaning any tag with a class starting with top"
+}
+[class*="te"]//"if the class name starts with te"
+
+[class~="flower"]//if the word flower exists in class
+```
+
+### Pseudo-Classes
+
+```CSS
+a:hover { //"properties for when cursor hovers over element"
+
+}
+a:visited {//"when link is already visited"
+
+}
+a:active {//"when link is being clicked on"
+
+}
+// "to change color of label if input of type='checked' is currently checked"
+.aggreement + label {
+	color: red;
+}
+.aggreement:checked + label {
+	color: black;
+}
+...
+```
+
+You can look for references for different psuedo-classes to use.
+## CSS Priorities
+
+There are rules as to which duplicate property sets are prioritized and used.
+
+* The property that is set later than the others is prioritized.
+* The more specific the CSS selector is, the more priority its property sets are.
+* Inline-style has the most priority, since they have the most specificity.
+* You can prioritize a specific property by adding !important at the end of the property value you've set.
+
+## Responsive Design Rules and Techniques
 
