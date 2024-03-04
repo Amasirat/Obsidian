@@ -192,6 +192,51 @@ a:active {//"when link is being clicked on"
 ```
 
 You can look for references for different psuedo-classes to use.
+
+```CSS
+.readable-text p:not(.active) { //"if a child p of readable-text class does not have the class active
+
+}
+
+<div class="readable-text">
+<p></p>
+
+<p class="active"></p> //"this will not be affected"
+
+<p></p>
+
+
+</div>
+```
+### nth-child and etc
+
+```HTML
+<style>
+p:first-child {
+
+}
+
+p:last-child
+
+p:nth-child(3)//"the third child" {
+
+}
+
+p:nth-child(even)//"even children, second, fourth, etc are affected"
+
+p:nth-child(odd)//"odd children, third, fifth, seventh, are effected"
+</style>
+
+<div>
+<p></p>//"this is the first child"
+.
+<p></p> //"this is the third child"
+.
+<p></p>//"this is the last child"
+
+</div>
+```
+
 ## CSS Priorities
 
 There are rules as to which duplicate property sets are prioritized and used.
