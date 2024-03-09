@@ -1,7 +1,7 @@
 CSS is made up of different properties that are applied on [[HTML]] tags.
 ## Box Model
 
-In CSS, the term *Box Model* is basically a box that wraps around every HTML tag. It consists of properties like: content, padding, margin, and borders. Every HTML tag has these properties.
+In CSS, the term *Box Model* is basically describing a box that wraps around every HTML tag. It consists of properties like: content, padding, margin, and borders. Every HTML tag has these properties.
 
 ```HTML
 <style>
@@ -15,15 +15,15 @@ div {
 ```
 ## Displays
 
-We can change a displays (block or inline functionality) by specifying the display property.
+We can change a tag's display (block or inline functionality) by specifying the display property.
 For example we can change the default block behaviour of the p tag like this:
 
 ```HTML
 <p style="display: inline;">Hello</p>
 ```
 
-Inline tags do not accept height or width properties. however block tags do
-**However, inline-block tags do accept height or width properties.
+Inline tags do not accept height or width properties, block tags do
+**However, inline-block tags accept both height or width properties.
 
 * block tags have width set to auto which takes up the entire width of the device viewing the webpage.
 * Inline-block tags set width to auto too however their width is only as much as their contents.
