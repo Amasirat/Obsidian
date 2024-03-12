@@ -81,5 +81,17 @@ However **Multiple *immutable* references are allowed**.
 
 **Rust also does not allow dangled references.**
 
-## Slices
+## The Slice Type
+
+You can explicitly control from what starting index to what ending syntax a reference has access to.
+
+```Rust
+let s = String::from("Hello World");
+let hello = &s[0..5];//[..5] also does the same
+let world = &s[6..11];//[6..] does the same
+```
+
+These are called String slices. The &str type is a String Slice type. All string literals are deemed as string slices in rust.
+
+The general slice type works the same way on arrays as well.
 

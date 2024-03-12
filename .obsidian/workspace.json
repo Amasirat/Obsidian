@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CSS.md",
+                "file": "Rust.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "CSS.md",
+                "file": "Rust.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "CSS.md",
+                "file": "Rust.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CSS.md"
+                "file": "Rust.md"
               }
             }
           }
@@ -148,10 +148,10 @@
   },
   "active": "d4d518dd2f8e5a6e",
   "lastOpenFiles": [
-    "CSS.md",
-    "HTML.md",
-    "Attachments/color_psychology.png",
     "Rust's Ownership Model.md",
+    "HTML.md",
+    "CSS.md",
+    "Attachments/color_psychology.png",
     "Rust.md",
     "Intervals.md",
     "Fundamental Theorem of Music.md",

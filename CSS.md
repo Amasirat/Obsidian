@@ -241,7 +241,7 @@ p:nth-child(odd)//"odd children, third, fifth, seventh, are effected"
 
 There are rules as to which duplicate property sets are prioritized and used.
 
-* The property that is set later than the others is prioritized.
+* The property that is set later than the others is prioritized. 
 * The more specific the CSS selector is, the more priority its property sets are.
 * Inline-style has the most priority, since they have the most specificity.
 * You can prioritize a specific property by adding !important at the end of the property value you've set.

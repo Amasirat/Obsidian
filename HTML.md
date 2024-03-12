@@ -61,6 +61,12 @@ You can indicate multiple sources for the audio and video tags like this:
 Your browser does not support audio element's formats
 </audio>
 ```
+
+```HTML
+<nav></nav> //"just like div but only used for navbar type entities"
+```
+
+This tag is known as a type of semantic html tag which are simillar to div or span tags however they give these tags extra meaning.
 ## Input and form related tags
 
 **Here's the most common input types:**

@@ -153,6 +153,23 @@ a = [3, 3, 3, 3, 3];
 ```
 
 accessing array elements is just like c++
+## String Type
+
+A complex type that allocates memory on the heap in Rust is the String. 
+
+You can create a String from a string literal like this:
+
+```Rust
+let x = String::from("Hello");
+```
+
+This type of string can be mutated
+
+```Rust
+let mut s = String::from("Hello");
+
+s.push_str(", World!");
+```
 
 ## Statements and Expressions
 
@@ -255,24 +272,6 @@ for i in (1..4).rev() {
 	println!("{i} seconds remaining!");
 }
 ```
-
-## String Type
-
-A complex type that allocates memory on the heap in Rust is the String. 
-
-You can create a String from a string literal like this:
-
-```Rust
-let x = String::from("Hello");
-```
-
-This type of string can be mutated
-
-```Rust
-let mut s = String::from("Hello");
-
-s.push_str(", World!");
-```
-
+## Structs
 
 
