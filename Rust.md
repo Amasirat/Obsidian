@@ -274,4 +274,49 @@ for i in (1..4).rev() {
 ```
 ## Structs
 
+Structs work pretty much in the same way as C++.
 
+```Rust
+struct User {
+	first_name: String,
+	last_name: String,
+	email: String,
+}
+```
+* Struct variables need to be declared as mut if their data needs to be changed. You can't make just *Some* data be immutable.
+```Rust
+let mut User = User {
+	first_name: String::from("Amirhossein"),
+	last_name: String::from("Basirat"),
+	email: String::from("JohnDoe@gmail.com"),
+}
+```
+* if a variable name is the same as a struct variable, you can just input it when creating a variable of that struct type. This is called **Field Init Shorthand**.
+```Rust
+let first_name: String;
+let last_name: String;
+let mut User = User {
+	first_name,
+	last_name,
+	email: String::from("ssss",
+	.
+	.
+	.
+}
+```
+
+* We can create a struct tuple for cases when we need to differentiate different types but we don't need any verbose variable names.
+```Rust
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
+
+let black = Color(0, 0, 0);
+let origin = Point(0, 0, 0);
+```
+
+* You can also create unit-like structs without any data fields.
+```Rust
+struct AlwaysEqual;
+
+let subject = AlwaysEqual;
+```
