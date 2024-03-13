@@ -18,8 +18,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "8ca04d9b5e5b4379",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Strings.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Rust.md",
+                "file": "Strings.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Rust.md",
+                "file": "Strings.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Rust.md"
+                "file": "Strings.md"
               }
             }
           }
@@ -146,13 +159,25 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d4d518dd2f8e5a6e",
+  "active": "8ca04d9b5e5b4379",
   "lastOpenFiles": [
+    "Attachments/2024-03-13_20-14.png",
+    "Attachments/2024-03-13_20-07.png",
+    "Attachments/2024-03-13_20-01.png",
+    "Attachments/2024-01-16_22-25.png",
+    "Attachments/violin_constrct.png",
+    "Attachments/trpl04-05.svg",
+    "Attachments/trpl04-04.svg",
+    "Attachments/receipt.png",
+    "Attachments/tree-data-structure-terminologies.webp",
+    "Strings.md",
+    "Orchestration.md",
+    "Bowed String Instruments.md",
+    "Rust.md",
     "Rust's Ownership Model.md",
     "HTML.md",
     "CSS.md",
     "Attachments/color_psychology.png",
-    "Rust.md",
     "Intervals.md",
     "Fundamental Theorem of Music.md",
     "Decoder.md",
@@ -169,20 +194,9 @@
     "OpenGL.md",
     "Linked Lists.md",
     "Arrays.md",
-    "Attachments/binomial.png",
-    "Attachments/2024-01-16_22-34.png",
-    "Attachments/2024-01-16_22-25.png",
-    "Attachments/2024-01-16_22-19.png",
     "Trees.md",
     "Stacks.md",
     "Binary Search Tree.md",
-    "Random.md",
-    "Random Variables.md",
-    "Pointers.md",
-    "Attachments/2024-01-16_22-01.png",
-    "Attachments/trpl04-05.svg",
-    "Attachments/trpl04-03.svg",
-    "Attachments/trpl04-04.svg",
     "Attachments"
   ]
 }
