@@ -246,5 +246,40 @@ There are rules as to which duplicate property sets are prioritized and used.
 * Inline-style has the most priority, since they have the most specificity.
 * You can prioritize a specific property by adding !important at the end of the property value you've set.
 
+
+## Pseudo-Elements
+
+Using psuedo-elements we can add special tags after or before a tag's contents.
+
+```HTML
+
+<style>
+	.nav a::after {
+		content: "s";
+	}
+</style>
+```
+
+* "after" means after a tag's contents
+* "before" means before a tag's contents
 ## Responsive Design Rules and Techniques
+
+In order to create a well-designed layout, we use a few techniques
+
+### **Flex** 
+
+Using this property on a tag, will organize its children in an inline fashion. A characteristic of this property is that if one tag's height changes, the others change with it. Here's a few properties that will be activated for its parent and its children.
+
+*  **flex-direction**: its default value is row which aligns the flex of its children in rows.
+	* row-reverse: reverses row direction
+	* column: is aligned in columns.
+	* column-reverse: reverses column direction.
+* **flex-wrap**: 
+
+
+
+* Grid:
+* Flout:
+
+
 

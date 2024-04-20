@@ -84,7 +84,7 @@ This tag is known as a type of semantic html tag which are simillar to div or sp
 <input type="submit">
 ```
 
-We can relate a label tag to an input tag by giving the input tag's id to the for variable of the label tag.
+We can relate a label tag to an input tag by giving the input tag's id to the 'for' variable of the label tag.
 
 We can give a name to the variable we use to send the value of input tags into the backend.
 
@@ -143,6 +143,14 @@ All of these tags are inline-block by default(they have some functionality from 
 
 * ***img, button, input, textarea, select**
 
+## Special Characters
 
+For special characters like space or greater than and smaller than symbol, we use a format like this:
+
+```HTML
+2 &gt; 5       2 > 5
+2 &lt; 5       2 < 5
+salaam &nbsp;
+```
 
 

@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Signals and Systems.md",
+                "file": "CSS.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Signals and Systems.md",
+                "file": "CSS.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Signals and Systems.md",
+                "file": "CSS.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Signals and Systems.md"
+                "file": "CSS.md"
               }
             }
           }
@@ -133,7 +133,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -147,8 +148,10 @@
   },
   "active": "0f18efce67b36189",
   "lastOpenFiles": [
-    "Strings.md",
+    "HTML.md",
+    "CSS.md",
     "Signals and Systems.md",
+    "Strings.md",
     "Attachments/2024-03-13_20-25.png",
     "Attachments/2024-03-13_20-20.png",
     "Attachments/2024-03-13_20-14.png",
@@ -163,8 +166,6 @@
     "Bowed String Instruments.md",
     "Rust.md",
     "Rust's Ownership Model.md",
-    "HTML.md",
-    "CSS.md",
     "Intervals.md",
     "Fundamental Theorem of Music.md",
     "Decoder.md",
