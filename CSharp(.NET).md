@@ -14,7 +14,6 @@ A subset of the CTS which every .NET aware language can support.
 ## Managed Code
 
 You can not use C# for non-dotnet related runtimes, officially speaking, code targetting the .NET runtime is called **managed code**. Code not targeting .NET is called **unmanaged code**.
-
 ## Assembly
 
 The binary unit that contains managed code is called an *assembly*. .NET binaries have no platform-specific instructions and instead have platform-agnostic instructions called the *Common Intermediate Language (IL)* and aside from that, they also contain type metadata that describes in detail the characteristics of each type within the binary like classes, enums, structs,...
@@ -166,6 +165,16 @@ Basic System.Array functionalities:
 * Reverse(): static method, reverse contents of a one-dimensional array
 * Sort(): sorts intrinsic types that implement the IComparer interface
 
+## Tuples
+
+Lightweight data structures that contain multiple fields. It uses the ValueTuple data type in the CTS. The ValueTuple creates different structs based on the number of properties for a tuple.
+
+```C#
+(string , int, string) values = ("a", 9, "c");
+
+public (int Xpos, int Ypos) Deconstruct() => (X, Y);
+```
+
 ## Methods and Parameter Modifiers
 
 A few modifiers can control how an argument is given to the called method.
@@ -187,5 +196,5 @@ Value types by default can not have the value "null" because null is for represe
 int? nullableNum = 1;
 ```
 
-? is shorthand for creating an instance of System.Nullable<T> structure type. You can use the HasValue boolean property to know if it is null or not.
+# Object Oriented Programming
 
