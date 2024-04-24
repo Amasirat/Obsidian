@@ -198,3 +198,5 @@ int? nullableNum = 1;
 
 # Object Oriented Programming
 
+Objects are user-defined types composed of field data (variables) and members that operate on that data (methods, constructors, events, etc). For more information on Object Oriented Methodology click [here](Object-Oriented-Paradigm)
+

@@ -8,7 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "0f18efce67b36189",
+            "id": "36b8176ae547e59b",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -146,10 +146,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "0f18efce67b36189",
+  "active": "36b8176ae547e59b",
   "lastOpenFiles": [
-    "CSS.md",
+    "Object-Oriented-Paradigm.md",
+    "Object Oriented Paradigm.md",
     "CSharp(.NET).md",
+    "\"Object.md",
+    "Object.md",
+    "CSS.md",
     "HTML.md",
     "Signals and Systems.md",
     "Strings.md",
@@ -180,10 +184,6 @@
     "Bernouli Distribution.md",
     "OpenGL.md",
     "Linked Lists.md",
-    "Arrays.md",
-    "Trees.md",
-    "Stacks.md",
-    "Binary Search Tree.md",
     "Attachments"
   ]
 }
