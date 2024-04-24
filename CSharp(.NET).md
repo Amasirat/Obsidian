@@ -200,3 +200,41 @@ int? nullableNum = 1;
 
 Objects are user-defined types composed of field data (variables) and members that operate on that data (methods, constructors, events, etc). For more information on Object Oriented Methodology click [here](Object-Oriented-Paradigm)
 
+### Constructors
+
+You can chain constructor calls using the "this" keyword in C#. The this pointer represents the current instance of a class or stuct. The this pointer is a pointer accessible only within the nonstatic methods of a class or struct.
+
+Designate the constructor with the most parameters as the "Master Constructor" and call each relevant constructor for each parameter and pass it to those constructors instead.
+
+```C#
+class Motorcycle{ 
+	public int driverIntensity; 
+	public string driverName; 
+	// Constructor chaining. 
+	public Motorcycle() {} 
+	public Motorcycle(int intensity): this(intensity, "") {} 
+	public Motorcycle(string name): this(0, name) {} 
+	// This is the 'master' constructor that does all the real work. 
+	public Motorcycle(int intensity, string name) 
+	{
+	if (intensity > 10){
+		intensity = 10;
+	}
+	driverIntensity = intensity;driverName = name;
+	}
+}
+```
+
+When loading a class instance in memory, C# will first visit the master constructor and then goes on to finish executing any remaining instructions.
+
+### Static keyword
+
+Static methods in classes are used for methods that do not require an object instance to be used. Utility classes that provide a utility and does not maintain any state such as the Console class use static methods often.
+
+A few notes:
+
+* Static data of a class is shared by all objects of the class.
+* A static member can not reference non-static members.
+* Assigning an static member inside a constructor will reset its value each time an object is created.
+* 
+
