@@ -1,0 +1,1 @@
+Pointers are variables that contain addresses of other variables. They are used in many different aspects of computer programming. One of which is in [Linked List](Linked Lists.md) data structures. They are also used in [[C++]] and [[C]] to store addresses to dynamic heap allocations.

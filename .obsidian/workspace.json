@@ -1,0 +1,190 @@
+{
+  "main": {
+    "id": "0bb2629526ebbe91",
+    "type": "split",
+    "children": [
+      {
+        "id": "05e33f266d53ccf5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "36b8176ae547e59b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CSharp(.NET).md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6ccea402dc657269",
+    "type": "split",
+    "children": [
+      {
+        "id": "b788ecf6d6ddd0ba",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "197def98a9b4a3a4",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "2c5e720f6c56de5b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "8b66b1a2b377378c",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 213.5,
+    "collapsed": true
+  },
+  "right": {
+    "id": "efefd46dc0bb422d",
+    "type": "split",
+    "children": [
+      {
+        "id": "c467ace96b433eb3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1cf7311e6b78e742",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "CSharp(.NET).md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "718a9701c248376d",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "CSharp(.NET).md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "1868745d2adb4ef1",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "54d62097b7a5798c",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "CSharp(.NET).md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "36b8176ae547e59b",
+  "lastOpenFiles": [
+    "Object-Oriented-Paradigm.md",
+    "Object Oriented Paradigm.md",
+    "CSharp(.NET).md",
+    "\"Object.md",
+    "Object.md",
+    "CSS.md",
+    "HTML.md",
+    "Signals and Systems.md",
+    "Strings.md",
+    "Attachments/2024-03-13_20-25.png",
+    "Attachments/2024-03-13_20-20.png",
+    "Attachments/2024-03-13_20-14.png",
+    "Attachments/2024-03-13_20-07.png",
+    "Attachments/2024-03-13_20-01.png",
+    "Attachments/2024-01-16_22-25.png",
+    "Attachments/violin_constrct.png",
+    "Attachments/trpl04-05.svg",
+    "Attachments/trpl04-04.svg",
+    "Attachments/receipt.png",
+    "Orchestration.md",
+    "Bowed String Instruments.md",
+    "Rust.md",
+    "Rust's Ownership Model.md",
+    "Intervals.md",
+    "Fundamental Theorem of Music.md",
+    "Decoder.md",
+    "Polynomial Distribution.md",
+    "Probability Models.md",
+    "Poisson Distribution.md",
+    "Uniform Random Variable.md",
+    "Javascript.md",
+    "Inorder.md",
+    "Binomial Distribution.md",
+    "Bernouli Distribution.md",
+    "OpenGL.md",
+    "Linked Lists.md",
+    "Attachments"
+  ]
+}
