@@ -195,7 +195,6 @@ Value types by default can not have the value "null" because null is for represe
 ```C#
 int? nullableNum = 1;
 ```
-
 # Object Oriented Programming
 
 Objects are user-defined types composed of field data (variables) and members that operate on that data (methods, constructors, events, etc). For more information on Object Oriented Methodology click [here](Object-Oriented-Paradigm)
@@ -236,6 +235,47 @@ A few notes:
 * Static data of a class is shared by all objects of the class.
 * A static member can not reference non-static members.
 * Assigning an static member inside a constructor will reset its value each time an object is created.
-* a static constructor is only called once and handles the assignment of value to static data fields of a class
-* 
+* a static constructor is only called once and handles the assignment of value to static data fields of a class, especially when the data is not known at compile-time.
+* a static class can be created. It will only allow static members and will not be able to be created using the new keyword. Utility classes are usually static classes.
+
+## Access Modifiers
+
+* public: No access restrictions
+* private: Only accessed by class
+* protected: Only accessed by class and its children gained through inheritence
+* internal: Only accessed by the current assembly.
+* protected internal: Only accessed within the class and its children of the current assemby
+
+**Default access modifier is private and classes are internal**
+
+Non-nested types (for example a class) can not be assigned as private.
+
+You can encapsulate object state using .NET properties. Properties are basically a simplified form and way of writing set and get methods for state.
+
+```C#
+public string Name
+{
+	get { return name; }
+	set
+	{
+		if (value.Length > 15) //value is the value that a user outside the class gives the property
+			Console.WriteLine("Error! Name length exceeds 15 characters!");
+		else
+			empName = value;
+	}
+}
+```
+
+**value** is a *contextual keyword* only in the set scope. 
+
+You can then treat these properties as variables outside of the class and in user space.
+
+A few notes:
+* Omiting each of the get or set blocks will make the property either "write-only" or "read-only".
+* You can use *automatic property syntax* to create properties that do not have particular bussiness logic required.
+```C#
+public string PetName { get; set; }
+public int Speed { get; set; }
+public string Color { get; set; }
+```
 

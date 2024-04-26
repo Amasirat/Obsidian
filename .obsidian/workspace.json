@@ -69,7 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 213.5,
+    "width": 200,
     "collapsed": true
   },
   "right": {
@@ -150,8 +150,8 @@
   "active": "36b8176ae547e59b",
   "lastOpenFiles": [
     "Object-Oriented-Paradigm.md",
-    "Object Oriented Paradigm.md",
     "CSharp(.NET).md",
+    "Object Oriented Paradigm.md",
     "\"Object.md",
     "Object.md",
     "CSS.md",
