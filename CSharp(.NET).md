@@ -1,5 +1,4 @@
 First introduced to the world in 2002, intending to replace the [[COM Model]] and create a more flexible and simpler solution.
-
 ## CLR: Common Langauge Runtime
 
 CLR, called the *Common Language Runtime*, is the runtime environment of C# which handles loading, locating and managing .NET entities and also low level details such as coordinating threads, memory management, etc.
@@ -26,7 +25,7 @@ The entitity that compiles CIL code is called the *jitter*. The .NET runtime use
 
 Every type in the CTS is inherited by the System.Object class.
 
-Each type has a TryParse method that tries to parse a string and returns a System.Boolean of its success state.
+Each type has a TryParse static method that tries to parse a string and returns a System.Boolean of its success state.
 
 ## DateTime and TimeSpan
 
@@ -278,4 +277,61 @@ public string PetName { get; set; }
 public int Speed { get; set; }
 public string Color { get; set; }
 ```
+These properties don't need private backing fields as they create their own automatically at compile time.
+
+From C#6 onwards, you can create read-only properties **however no write-only properties**.
+
+## Constant Field Data
+
+Constant fields are implicitly static and class-level.
+
+a const field data has to be initialized at the point of definition, and at compile-time.
+
+## Read-only Fields
+
+A read-only field can not be changed, just like a constant however you can give it data at runtime and can be legally asigned within the scope of a constructor but no where else.
+
+```C#
+public readonly double PI;
+```
+
+readonly fields are **not static implicitly**. 
+
+In order to define a static readonly variable, you have to mark it explicitly as static. If you want to give it value at runtime, you'll need to use a static constructor.
+
+## Partial Classes
+
+You can seperate class definitions throughout your codebase given that it is in the same .NET namespace and its name is identical each time it is referenced again.
+
+```C#
+class Car
+{
+//constructors
+
+//fields
+
+//properties
+
+//methods
+}
+
+//above turns into
+
+partial class Car
+{
+//constructors
+
+//fields
+}
+
+partial class Car
+{
+//properties
+
+//methods
+}
+```
+
+At assembly level, not much is made and it will still combine into a full class, however it is mostly used to seperate boilerplate, and actual useful sections of the class that a developer has to interact with during development.
+
 
