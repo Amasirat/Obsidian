@@ -23,7 +23,9 @@ The entitity that compiles CIL code is called the *jitter*. The .NET runtime use
 
 ## Types
 
-Every type in the CTS is inherited by the System.Object class.
+Every type in the CTS is inherited by the System.Object class which is represented by *object* inside C#.
+
+
 
 Each type has a TryParse static method that tries to parse a string and returns a System.Boolean of its success state.
 
@@ -333,5 +335,175 @@ partial class Car
 ```
 
 At assembly level, not much is made and it will still combine into a full class, however it is mostly used to seperate boilerplate, and actual useful sections of the class that a developer has to interact with during development.
+
+## Inheritance
+
+There are two flavors of Inheritance: 
+
+* **Classic Inheritance**: The "is-a" relationship
+* **Containment/Delegation Model**: The "has-a" relationship
+## Classical Inheritance
+
+You can derive classes from a base class in C#. 
+
+```C#
+class MiniVan : Car
+{
+}
+```
+
+By doing this, the MiniVan access has every public field that the Car class has.
+
+**Constructors, only belong to the current class so a derived class can not use a public constructor of a base class, however it can chainload using it in its own constructors**
+
+Derived classes do not have access to any private members of the base class.
+
+C# demands a class have only **one** base class. **Multiple Inheritance is not allowed**.
+
+if you mark a class as "sealed", that class can not be derived from any further.
+
+```C#
+//MiniVan will be derived from Car, however no other class can be derived from MiniVan.
+sealed class MiniVan : Car
+{
+}
+```
+
+*C# Structs are always implicitly sealed.*
+
+You can chainload constructors of the base class to fill in the properties that are base class related.
+
+```C#
+class Manager : Employee
+{
+	public Manager(string fullName, int age, int empID, float currPay, string ssn, int numbOfOpts) : base(fullName, age, empID, currPay, ssn)
+	{
+	StockOptions = numbOfOpts;
+	}
+}
+```
+
+You will be able to use an appropriate constructor from the base class inside a constructor of a derived class if that specific constructor exists.
+
+using "base()" is not restricted to just constructors.
+
+
+
+## Containment/Delegation Model
+
+You can create data fields of another type of class to show that a class "has" another class within itself
+
+```C#
+class Car
+{
+private Engine eng1;
+}
+```
+
+## Nested Types
+
+You can create class level classes, Enums, and structs which are relevant. For example a soldier in a game can only have a few types of weapons which can be enforced by creating a class-level enum to contain the types of weapons they are allowed to have.
+
+# Polymorphism
+
+*Polymorphism* provides a way for sub-classes to perform a particular method in different ways using *method overloading*.
+
+A base class has to indicate that a method it contains can be overriden by a sub-class, and that indicator is the *virtual* keyword. These methods are called *Virtual Methods*.
+
+```C#
+partial class Employee
+{
+	public virtual void GiveBonus(float amount)
+	{
+		Pay += amount;
+	}
+}
+
+partial class Manager : Employee
+{
+	public override void GiveBonus(float amount)
+	{
+		...
+		base.GiveBonus(amount * ...);//you can use the base method, if an implemantation exists for this method
+	}
+}
+```
+
+You can also seal virtual methods from being further overridden by another derived class.
+
+```C#
+public override sealed void GiveBonus()
+{
+....
+}
+```
+
+The further derived classes in the chain will not be able to override this method anymore.
+
+You can use the *abstract* keyword to create abstract classes that can not be instanced.
+
+You can also use the same keyword to force derived classes to override a method from an abstract base class.
+
+```C#
+public abstract void Draw();
+```
+
+Abstract methods can only be defined in abstract classes.
+
+You can hold any derived classes from the base class inside a variable of the base class type.
+
+```C#
+Shape[] shapes = {Circle, Hexagon, ...}//you can have arrays of type shape which is allowed to take any derived class from shape
+```
+
+You can shadow methods of the base class with the *new* keyword. Essentially using your own definition of a function or property instead of the one from base class.
+
+```C#
+public new void Draw();
+
+public new string PetName{set; get;};
+```
+
+## Class Casting rules
+
+We have two rules regarding how casting derived classes work.
+
+* Rule 1: Any derived class can be implicitly upcasted to one of their base classes but not vise-versa.
+* Rule 2: You can explicitly castdown a class to one of its derived classes.
+
+Casting is evaluated at runtime, so any invalid castings will not be caught by the compiler. Instead you will get an InvalidCastException error.
+
+You can use the *as* keyword to determine if a cast is valid at runtime.
+
+```C#
+object[] things = new object[4];
+things[0] = new Circle();
+things[1] = false;
+things[2] = 3;
+things[3] = "three";
+
+foreach(object item in things)
+{
+	Circle c = item as Circle;
+	if (c == null)
+		Console.WriteLine("item is not a circle");
+	else
+		c.Draw();
+}
+```
+
+There is also the *is* keyword that returns false if the casting failed.
+
+*Each class you define will implicitly inherit from System.Object if another base class is not defined*
+These are the members of the object class:
+
+* **virtual bool Equals(object)**: it returns true if an object refers to the same memory. You can override it to instead check for internal state of two objects. if this method is overriden , GetHashCode needs to be overriden as well.
+* **virtual void Finalize()**: garbage collection related function
+* **virtual int GetHashCode():** returns an int that identifies object instance.
+* **virtual string ToString()**: returns a string representation of the current type
+* **Type GetType()**: returns a Type object that describes fully the currently referenced type.
+* **object MemberwiseClone()**: a method that returns a member-by-member copy of the current object. It has a *protected* access level.
+
+# Structued Error Handling
 
 
