@@ -503,7 +503,136 @@ These are the members of the object class:
 * **virtual string ToString()**: returns a string representation of the current type
 * **Type GetType()**: returns a Type object that describes fully the currently referenced type.
 * **object MemberwiseClone()**: a method that returns a member-by-member copy of the current object. It has a *protected* access level.
+# Interfaces
 
+Interfaces are a set of abstract methods. Their difference to abstract classes is that they are *just* a set of abstract members and there are no constructors or the sort. 
+
+The problem with using abstract classes to define properties for classes is that only derived classes can access them and also each derived class *has* to define every abstract member even though it might not make sense to do so. With interfaces, any class, even ones seemingly unconnected to each other in their chain of hiearchy can define properties from an interface.
+
+Interfaces do not specify base classes and are not even derived from System.Object, and the members of interfaces are always public and abstract so there is no need for specification on that front.
+
+After defining an interface, when defining class types, interfaces have to come after a derived class(if one exists) and are seperated by commas.
+
+**Any type given properties of an interface, has the responsibility to define every abstract member of the interface for itself**
+
+In order to tell which Interfaces are implemented for a given type, you can use an explicit cast to that interface type. If it fails it will throw an InvalidCastException. You can also use the *as* and *is* keywords.
+
+```C#
+interface IPointy 
+{
+	byte GetPoints();
+}
+
+void Main()
+{
+	Hexagon hex = new Hexagon();
+	if(hex is IPointy _)
+	{
+		Console.WriteLine(hex.GetPoints());
+	}
+}
+
+```
+
+**If you have multiple interfaces that contain the same method and which a class implements, you can use the dot operator to signify which interface's method you are going to implement.**
+
+The two wide uses of interfaces are:
+
+* There are characteristics that only a subset of classes in the inheritance chain have.
+* There are characteristics that a bunch of unrelated classes should have.
+
+## Some Common Interfaces in .NET ecosystem.
+
+### IEnumerable
+
+In order for a type to be used by the C# foreach construct, it has to implement the GetEnumerator() method which is formalized by IEnumerable. 
+
+GetEnumerator() itself returns a reference to another interface called IEnumerator
+### IEnumerator
+
+It is an interface that provides the formalization of members dictating the infrastructure of Enumerating through a class.
+
+If you are creating an Enumerable class, you can either define all of the abstract methods of these interfaces yourself, or you can simply call the definition of the System.Array.
+```C#
+using System.Collections;
+
+class Garage : IEnumerable
+{
+	private Car[] carArray = new Car[4];
+	public Garage()
+	{
+		carArray[0] = ...
+		...
+		..
+		.
+	}
+	public IEnumerator GetEnumerator()
+	{
+		return carArray.GetEnumerator();
+	}
+}
+```
+
+Or you can use *yield* as well
+
+```C#
+class Garage : IEnumerable
+{
+
+	public IEnumerator GetEnumerator()
+	{
+		foreach (Car c in carArray)
+		{
+			yield return c;
+		}
+	}
+}
+```
+
+*yield* keyword determines the value that needs to be returned to the caller's foreach.
+
+### ICloneable
+
+The ICloneable interface contains the object Clone() method. You can implement this interface and define this method in order to be able to create a copy of the class state into another variable.
+
+**If your type contains only valuetypes, use MemberwiseClone(). If not you have to create a new object to take into account any reference type members**
+### IComparable
+
+Provides a key in order to be able to compare two class states or be able to sort.
+
+```C#
+class Car : IComparable
+{
+
+int IComparable.CompareTo(object obj)
+{
+	Car temp = obj as Car;
+	if(temp != null)
+	{
+		if(this.CarID > temp.CarID)
+			return 1;//every number more than zero means greater than
+		if(this.CarID < temp.CarID)
+			return -1;//any number less than zero means smaller than
+		else
+			return 0;//zero means equal
+	}
+	else
+	{
+		throw new ArgumentException("Parameter is not a car!");
+	}
+}
+```
 # Structued Error Handling
 
+Exception handling in .NET is streamlined.
+
+The System.Exception class is the main exception class that encapsulates exception message and call stack trace.
+
+System.SystemException is a class derived from Exception that only .NET runtime throws.
+
+System.ApplicationException is another class derived from the main Exception class meant to be used to derive your own specific Exception class tailored to your own codebase.
+
+Most of these different exception classes do not change much from the original Exception class and are used to know what sector of the application rasied an error with the help of the *is* keyword.
+
+System.Exception is also derived from System.Object.
 
