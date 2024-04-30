@@ -12,7 +12,7 @@ CLR, called the *Common Language Runtime*, is the runtime environment of C# whic
 A subset of the CTS which every .NET aware language can support.
 ## Managed Code
 
-You can not use C# for non-dotnet related runtimes, officially speaking, code targetting the .NET runtime is called **managed code**. Code not targeting .NET is called **unmanaged code**.
+Officially speaking, code targetting the .NET runtime is called **managed code**. Code not targeting .NET is called **unmanaged code**.
 ## Assembly
 
 The binary unit that contains managed code is called an *assembly*. .NET binaries have no platform-specific instructions and instead have platform-agnostic instructions called the *Common Intermediate Language (IL)* and aside from that, they also contain type metadata that describes in detail the characteristics of each type within the binary like classes, enums, structs,...
@@ -635,4 +635,5 @@ System.ApplicationException is another class derived from the main Exception cla
 Most of these different exception classes do not change much from the original Exception class and are used to know what sector of the application rasied an error with the help of the *is* keyword.
 
 System.Exception is also derived from System.Object.
+# Collections and Generics
 
