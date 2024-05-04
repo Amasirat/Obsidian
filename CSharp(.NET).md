@@ -637,3 +637,94 @@ Most of these different exception classes do not change much from the original E
 System.Exception is also derived from System.Object.
 # Collections and Generics
 
+The most primitive container is an Array, however arrays are fixed sizes, so there are different types of containers in the System.Collections namespace that contain different data structures for varied usecases. 
+
+Collection classes are built to dynamically resize themselves. There are two types of collection classes:
+
+* Nongeneric: Those that can not be given a type and can take in types they are designed for
+* Generic: Which have explicit static types
+
+## Boxing
+
+**Boxing refers to the act of assigning a value type to a System.Object.
+```C#
+int myInt = 5;
+object myIntBox = myInt;
+```
+
+When you box a value, the CLR creates a new object on the heap and copies the value inside and returns a reference to it.
+
+**Unboxing is the process of copying the value of a boxed object to a variable of appropriate type on the stack**
+```C#
+object myIntBox = myInt;
+int unboxed = (int)myInt
+```
+
+If this fails, an *InvalidCastException* will be thrown.
+## System.Collections
+
+System.Collections contains nongeneric collection classes. When data is added to these class instances, they will usually be boxed into an object type.
+
+Some collections include:
+* ArrayList
+* BitArray: Stores 0s and 1s
+* Hashtable
+* Queue
+* Stack
+* SortedList
+## System.Collections.Generics
+
+However because the process of boxing and unboxing takes resources and some time, it is not an efficient solution, not to mention there is a possibility that a cast will fail therefore it is not a type safe solution either. 
+Generics exist to solve these problems that collections have.
+
+Generics are a way of defining variables of any type T. They work kind of similarly to C++'s templates.
+
+**Anything can be of a generic type except for enums**
+
+Interfaces can also be generics. Forexample, here's Icomparable, both of generic and nongeneric types.
+
+```C#
+//non-generic
+public class Car: IComparable
+{
+	int IComparable.CompareTo(object obj)
+	{
+		...
+	}
+}
+//generic
+public class Car : IComparable<Car>
+{
+	int IComparable<Car>.CompareTo(Car obj)
+	{
+		...
+	}
+}
+```
+
+Most non-generic classes in System.Collections and other interfaces have generic equivelents.
+
+## Collection Initialization
+
+You can use *Collection Initialization Syntax* with classes that implement the ICollection interface or its generic equivelent.
+
+```C#
+//primative array
+int[] myArray = {0,2,3,8,4,9,7};
+//generic list
+List<int> myGenericList = new List<int> {1,8,7,9,2,5,4};
+//ArrayList
+ArrayList myList = new ArrayList{"d", "i","c","k"};
+```
+
+## System.Collections.ObjectModel
+
+A few classes exist here which are used with events and delegates.
+
+* ObservableCollection<T>: Represents a dynamic data collection that provides notifications when items get added or removed or any sort of change.
+
+
+
+
+
+
