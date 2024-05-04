@@ -717,11 +717,35 @@ List<int> myGenericList = new List<int> {1,8,7,9,2,5,4};
 ArrayList myList = new ArrayList{"d", "i","c","k"};
 ```
 
-## System.Collections.ObjectModel
 
-A few classes exist here which are used with events and delegates.
+# Delegates
 
-* ObservableCollection<T>: Represents a dynamic data collection that provides notifications when items get added or removed or any sort of change.
+Delegates are objects that point to a method or a list of methods and can invoke them. Similar to function pointers of C however Delegates in C# give asynchronous capability to the programmer.
+
+When you define a delegate:
+
+```C#
+public delegate int BinaryOp(int x, int y);
+```
+
+The compiler creates a sealed class which contains the following methods
+
+```C#
+public sealed class BinaryOp : System.MuticastDelegate
+{
+	public int Invoke(int x, int y);
+
+	public IAsyncResult BeginInvoke(int x, int y, 
+	AsyncCallback cb, object state);
+
+	public int EndInvoke(IAsyncResult result);
+}
+```
+
+Invoke(), invokes the method the delegate is pointing to synchronously, while the other two methods begin invoking the method asynchronously.
+
+## System.MulticastDelegate
+
 
 
 
