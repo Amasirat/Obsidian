@@ -37,14 +37,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SOLID.md",
+                "file": "Bitcoin.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "d251c218ad02adde",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Bitcoin.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -73,7 +85,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "cs",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -90,7 +102,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -110,7 +123,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "SOLID.md",
+                "file": "Bitcoin.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +140,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "SOLID.md",
+                "file": "Bitcoin.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +163,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SOLID.md"
+                "file": "Bitcoin.md"
               }
             }
           }
@@ -171,11 +184,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "43f3bbf0525e576a",
+  "active": "d251c218ad02adde",
   "lastOpenFiles": [
     "CSharp(.NET).md",
-    "SOLID.md",
+    "2008 Economy Crash.md",
     "Bitcoin.md",
+    "SOLID.md",
     "CSS.md",
     "Object-Oriented-Paradigm.md",
     "Object Oriented Paradigm.md",
@@ -208,7 +222,6 @@
     "Javascript.md",
     "Inorder.md",
     "Binomial Distribution.md",
-    "Bernouli Distribution.md",
     "Attachments"
   ]
 }

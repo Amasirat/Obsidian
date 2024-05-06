@@ -746,9 +746,86 @@ Invoke(), invokes the method the delegate is pointing to synchronously, while th
 
 ## System.MulticastDelegate
 
+The hidden class that is created when you use the delegate keyword is derived from System.MulticastDelegate class and that class is also derived from System.Delegate.
+
+The MulticastDelegate has a few methods that it has inherited or implemented that you can use along with your delegate. 
+
+* Delegate[] GetInvocationList(): List of methods that the delegate is pointing to. *(MulticastDelegate)*
+* static Delegate Combine(params Delegate[] delegates): Add method to the list *(Delegate)*
+* static Delegate Remove\/RemoveAll(Delegate source, Delegate value): remove method from invocation list *(Delegate)*
+* Target: returns class name of the method the delegate points to if that method is *not* static *(Delegate)*
+* Method: returns details of a method maintained by delegate *(Delegate)*
 
 
+**When using delegates, it is advised to check if they are null first**
 
+Giving a method to a delegate is like this:
+```C#
+public delegate int temp(int x, int y);
 
+temp delegateVar = new temp(wh.Add);//adding a method through its ctor
 
+class wh
+{
+	int Add(int x, int y)
+	{
+	...
+	}
+}
+```
+You can use the Combine() indirectly through this syntax.
+
+```C#
+public deligate int Notifier(int x, int y);
+
+Notifier deligateVariable = new Notifier();
+Notifier method = new Notifier(wh.Add);
+
+deligateVariable += method;
+```
+
+You can remove a specific method like this.
+
+```C#
+deligateVariable -= method;
+```
+
+*Be careful that, if the deligate is empty, this will throw an error. Only do this if you know a deligate does have at least one other method.*
+
+## Method Group Conversion
+
+Instead of creating a seperate delegate to add a method to another delegate, *Method Group Conversion* allows you to pass in the method directly without going the extra step.
+
+Passing in a method to an object deriving form the Delegate class will cast that method as a delegate.
+
+```C#
+public deligate int deligateVar(int x, int y);
+
+deligateVar = new deligateVar();
+
+deligateVar = wh.Add;
+```
+
+## Generic Delegates
+
+```C#
+public delegate void MyGenericDelegate<T>(T arg);
+```
+
+## Action<> and Func<> delegates
+
+There are two delegates that C# has by default.
+
+* Action<>: Which can take in any method with up to 16 parameters and **void** return type.
+```C#
+Action<int,int> AddDeligate = wh.Add;
+```
+* Func<>: Which can take in methods with any return type and 16 parameters.
+```C#
+string someFunction(int, double)
+{
+...
+}
+Func<int, double, string> funcDelegate = someFunction;
+```
 
