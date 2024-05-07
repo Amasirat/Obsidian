@@ -8,19 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "36b8176ae547e59b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "CSS.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "55e92eeee1c579f4",
+            "id": "d251c218ad02adde",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -30,33 +18,8 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "43f3bbf0525e576a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Bitcoin.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "d251c218ad02adde",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Bitcoin.md",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -85,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "cs",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -102,12 +65,12 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "efefd46dc0bb422d",
@@ -123,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Bitcoin.md",
+                "file": "CSharp(.NET).md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -140,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Bitcoin.md",
+                "file": "CSharp(.NET).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -163,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Bitcoin.md"
+                "file": "CSharp(.NET).md"
               }
             }
           }
@@ -186,9 +149,12 @@
   },
   "active": "d251c218ad02adde",
   "lastOpenFiles": [
+    "C++.md",
+    "Cargo.md",
+    "Bowed String Instruments.md",
+    "Bitcoin.md",
     "CSharp(.NET).md",
     "2008 Economy Crash.md",
-    "Bitcoin.md",
     "SOLID.md",
     "CSS.md",
     "Object-Oriented-Paradigm.md",
@@ -209,7 +175,6 @@
     "Attachments/trpl04-04.svg",
     "Attachments/receipt.png",
     "Orchestration.md",
-    "Bowed String Instruments.md",
     "Rust.md",
     "Rust's Ownership Model.md",
     "Intervals.md",
@@ -220,8 +185,6 @@
     "Poisson Distribution.md",
     "Uniform Random Variable.md",
     "Javascript.md",
-    "Inorder.md",
-    "Binomial Distribution.md",
     "Attachments"
   ]
 }

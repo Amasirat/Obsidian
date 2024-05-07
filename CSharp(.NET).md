@@ -829,3 +829,60 @@ string someFunction(int, double)
 Func<int, double, string> funcDelegate = someFunction;
 ```
 
+## Events
+
+Instead of creating custom encapsulation methods in order to interact with a delegate of our class. We can instead use the event keyword to create an event that a class can fire. Basically abstracting away the process of registering and unregistering with our delegates.
+
+```C#
+class Car
+{
+public delegate void CarEngineHandler(string msg);
+
+public event CarEngineHandler Explode;
+public event CarEngineHandler AboutToExplode;
+
+}
+```
+
+You can then use these events the same way as a delegate class.
+
+```C#
+if(Explode != null)
+	Explode("Car Exploded");
+```
+
+Under the hood, when the event is called it will call the Remove(), Add() or Invoke() methods by itself.
+
+You can listen for events in caller space like this:
+
+```C#
+Car.CarEngineHandler d = new Car.CarEngineHandler(functionToCall);//delegate
+myCar.Exploded += d;//add delegate to event list
+myCar.Exploded -= d;//remove delegate from event list
+
+//or we can use method group conversion
+Car c1 = new c1();
+
+c1.AboutToExplode += CarIsAlmostDoomed;
+void CarIsAlmostDoomed(string msg)
+{
+...
+}
+```
+
+Instead checking against null everytime you invoke a delegate, you can use *Null-Conditional Operator* to check it automatically. in C#6+ only
+
+```C#
+if(CarIsDead)
+{
+	Exploded?.Invoke("Sorry, Car's dead fam!");
+}
+```
+
+
+
+
+
+
+
+
