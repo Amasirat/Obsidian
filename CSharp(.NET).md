@@ -870,7 +870,7 @@ void CarIsAlmostDoomed(string msg)
 }
 ```
 
-Instead checking against null everytime you invoke a delegate, you can use *Null-Conditional Operator* to check it automatically. in C#6+ only
+Instead of checking against null everytime you invoke a delegate, you can use *Null-Conditional Operator* to check it automatically. in C#6+ only
 
 ```C#
 if(CarIsDead)
@@ -880,6 +880,36 @@ if(CarIsDead)
 ```
 
 
+# Anonymous Methods
+
+Most of the time we register methods to events that we don't use anywhere else, therefore it is a bother to create a seperate method for that strict purpose, therefore there is a functionality called *Anonymous Methods* that lets us define an unnamed method that is only used when an event is called.
+
+```C#
+Sometype t = new Sometype();
+
+t.SomeEvent += delegate(someArgs...) 
+{ 
+// Statements 
+};
+```
+
+Anonymous methods have access to the local variables of the method they are used in. The variables are formerly known as *outer variables*. Some rules regarding this are:
+
+* They can't use ref or out parameters
+* it cannot have a local variable of the same name of its own, however it *can* have local variables with the same name as some in the class
+* it can also access instance or static variables of the class of the method
+
+# Lambda Expressions
+
+Using Lambda expressions you can abbreviate anonymous methods even further.
+
+```C#
+Delegate t = new Delegate((T1 variable, T2 variable, ...) => {
+	//Statements
+});
+```
+
+The compiler can implicitly understand what type a variable is based on the definition of your delegate. If your lambda method is just one line, the brackets are not necessary. 
 
 
 
