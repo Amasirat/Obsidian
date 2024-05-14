@@ -681,7 +681,7 @@ Generics are a way of defining variables of any type T. They work kind of simila
 
 **Anything can be of a generic type except for enums**
 
-Interfaces can also be generics. Forexample, here's Icomparable, both of generic and nongeneric types.
+Interfaces can also be generics. Forexample, here's IComparable, both of generic and nongeneric types.
 
 ```C#
 //non-generic

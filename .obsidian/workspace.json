@@ -18,8 +18,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "aa65aa92f0c1998a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CSharp(.NET).md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -69,8 +82,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "efefd46dc0bb422d",
@@ -147,13 +159,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d251c218ad02adde",
+  "active": "aa65aa92f0c1998a",
   "lastOpenFiles": [
+    "MIPS Assembly.md",
+    "CSharp(.NET).md",
     "C++.md",
     "Cargo.md",
     "Bowed String Instruments.md",
     "Bitcoin.md",
-    "CSharp(.NET).md",
     "2008 Economy Crash.md",
     "SOLID.md",
     "CSS.md",
@@ -184,7 +197,6 @@
     "Probability Models.md",
     "Poisson Distribution.md",
     "Uniform Random Variable.md",
-    "Javascript.md",
     "Attachments"
   ]
 }
