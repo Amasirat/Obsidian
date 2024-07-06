@@ -911,6 +911,8 @@ Delegate t = new Delegate((T1 variable, T2 variable, ...) => {
 
 The compiler can implicitly understand what type a variable is based on the definition of your delegate. If your lambda method is just one line, the brackets are not necessary. 
 
+# Advanced Features
+
 
 
 

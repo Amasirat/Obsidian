@@ -182,7 +182,7 @@ Therefore, there's another operator called the strict equality that checks data 
 
 ```Javascript
 "3" === 3 // false, different types
-true == 1 // false
+true === 1 // false
 ```
 
 # Functions

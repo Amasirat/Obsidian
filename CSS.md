@@ -16,7 +16,7 @@ div {
 ## Displays
 
 We can change a tag's display (block or inline functionality) by specifying the display property.
-For example we can change the default block behaviour of the p tag like this:
+For example we can change the default block behavior of the p tag like this:
 
 ```HTML
 <p style="display: inline;">Hello</p>
@@ -25,20 +25,20 @@ For example we can change the default block behaviour of the p tag like this:
 Inline tags do not accept height or width properties, block tags do
 **However, inline-block tags accept both height or width properties.
 
-* block tags have width set to auto which takes up the entire width of the device viewing the webpage.
+* block tags have width set to auto which takes up the entire width of the device viewing the web-page.
 * Inline-block tags set width to auto too however their width is only as much as their contents.
 
 ## Typography
 
-Properties that relate to fromatting text
+Properties that relate to fromating text
 * font-weight: {normal, bold, ...}
 * font-style: {italic, normal, }
 * text-decoration: {none, line-through, overline, underline, ...}
 * font-size: {5px, 10px, ...}
-* font-family: {'b nazanin', ubuntu, jetbrains, any font family that exists on the client computer} We can also give multiple font families incase a font family does not exist on the client computer
+* font-family: {'b nazanin', ubuntu, jetbrains, any font family that exists on the client computer} We can also give multiple font families in-case a font family does not exist on the client computer
 * text-align: {left, right, center, justify}
 
-While writing a complex text with a combination of different directional languages like English and persian, you can give a direction property that gets ltr meaning left to right or rtl meaning right to left. 
+While writing a complex text with a combination of different directional languages like English and Persian, you can give a direction property that gets ltr meaning left to right or rtl meaning right to left. 
 For more complex instances this technique is useful:
 
 ```HTML
@@ -56,6 +56,20 @@ We have two types of units in CSS:
 **Relative height can only be used if the parent's height can be found.**
 
 [More information here](https://www.w3schools.com/cssref/css_units.php)
+
+## Variables in CSS
+
+You can define variables inside **:root**.
+
+```CSS
+:root {
+	--text-color: blue;
+}
+
+h1 {
+	color: var(--text-color);
+}
+```
 ## Background
 
 You can put background-color, background-image, etc on html tags. especially div tags.
