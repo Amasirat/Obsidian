@@ -7,7 +7,7 @@ A great learning resource is [The Modern Javascript Tutorial](https://javascript
 
 * The programs in javascript are called scripts.
 
-* These scripts can run by any device that has a [Javascript engine](https://en.wikipedia.org/wiki/JavaScript_engine)
+* These scripts can be run by any device that has a [Javascript engine](https://en.wikipedia.org/wiki/JavaScript_engine)
 
 * Most browsers have an embedded engine called a JavaScript virtual machine. Chrome, Opera, and Edge have [V8], while Firefox has [SpiderMonkey].
 
@@ -216,7 +216,7 @@ function sayHi() {
 alert("Hi!");
 }
 
-alert(sayHi);//without (), this will just alert the function body and is totally valid syntax.
+alert(sayHi);//without (), this will just alert the function body as a string
 ```
 
 We can copy a function into another variable:
@@ -281,3 +281,105 @@ Arrow functions are handy for simple actions, especially for one-liners. They co
 
 1. Without curly braces: `(...args) => expression` – the right side is an expression: the function evaluates it and returns the result. Parentheses can be omitted, if there’s only a single argument, e.g. `n => n*2`.
 2. With curly braces: `(...args) => { body }` – brackets allow us to write multiple statements inside the function, but we need an explicit `return` to return something.
+
+## Objects
+
+Objects are basically key value pairs in javascript.
+
+There are a bunch of different types of objects.
+
+* **plain objects**
+* **Arrays**
+* **Dates**
+* **Errors**
+### Plain Objects
+
+```javascript
+let user = {
+	name: "John"
+	surname: "smith"
+	age: 30
+};
+```
+
+**Keys get converted to strings but values can be of any type**
+
+There are two ways of accessing object values:
+
+dot product:
+```Javascript
+alert(user.name);
+alert(user.age);
+```
+
+brackets:
+```Javascript
+alert(user["name"]);
+alert(user["age"]);
+```
+
+You can use runtime variables as keys inside a plain object as well.
+```Javascript
+let key = prompt("Enter key");
+
+let object = {
+	[key]: 5
+}
+```
+
+You can use the *in* operator to tell if a key exists in object.
+
+```Javascript
+let user = {
+	name: "John"
+	surname: "Smith"
+	age: 30
+}
+
+if ("phone" in user) alert(user.phone);//this line will skip
+```
+
+You can also loop through objects with `for (let key in object)` 
+
+Objects are also *copied by reference*.
+
+```Javascript
+let a = {};
+let b = a;
+a == b //is true
+a === b //is true. The same object
+```
+
+Therefore const objects, are only constant in the object they point to and not their properties.
+
+You can copy other properties into a destination object like this:
+
+```Javascript
+let user = { name: "John" };
+
+let permissions1 = { canView: true };
+let permissions2 = { canEdit: true };
+
+// copies all properties from permissions1 and permissions2 into user
+Object.assign(user, permissions1, permissions2);
+
+// now user = { name: "John", canView: true, canEdit: true }
+alert(user.name); // John
+alert(user.canView); // true
+alert(user.canEdit); // true
+```
+
+We also can use `Object.assign` to perform a simple object cloning:
+
+```javascript
+let user = {
+  name: "John",
+  age: 30
+};
+
+let clone = Object.assign({}, user);
+
+alert(clone.name); // John
+alert(clone.age); // 30
+```
+

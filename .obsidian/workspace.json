@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CSharp(.NET).md",
+                "file": "Javascript.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 213.5,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "efefd46dc0bb422d",
@@ -86,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "CSharp(.NET).md",
+                "file": "Javascript.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "CSharp(.NET).md",
+                "file": "Javascript.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CSharp(.NET).md"
+                "file": "Javascript.md"
               }
             }
           }
@@ -147,11 +146,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "36b8176ae547e59b",
+  "active": "197def98a9b4a3a4",
   "lastOpenFiles": [
+    "CSharp(.NET).md",
     "Object-Oriented-Paradigm.md",
     "Object Oriented Paradigm.md",
-    "CSharp(.NET).md",
     "\"Object.md",
     "Object.md",
     "CSS.md",
