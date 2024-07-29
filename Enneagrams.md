@@ -197,17 +197,16 @@ Their patience finally gives out and they become bossy, dramatic and super aggre
 
 * Disconnection or frustration with their parents.
 * They start out very attached to the idea of perfection and beauty
-* But at some point their view of reality clashes with their parents view of reality
+* But at some point their view of reality clashes with their parents' view of reality
 * This makes them create a vivid world of imagination in their minds which is in someway either subtly or agressively dismissed by their parents
 * Because of this, they can seek a rescuer or savior of some kind.
-
 ## Variations (Wings)
 
 #### 4w3: Aristocrat
 
 Although 4s and 3s are different from each other, both deal with shame around their public identity. 
 * More egotistical, romantic, extroverted and creative
-* These 4 subtypes tend to suppress their emotions in service of their image.
+* They tend to suppress their emotions in service of their image.
 * While they desire success, they are afraid of attaining it because the spotlight could expose their failures
 #### 4w5: Bohemians
 
@@ -216,21 +215,19 @@ Although 4s and 3s are different from each other, both deal with shame around th
 * They are slow to act towards their creative pursuits and procrastinate a lot.
 * Way more withdrawn, private and less concerned with public opinion.
 * If they are too isolated, they can lose touch with reality or develop nihilistic points of view.
-
 ## (Dis)integration movements
 
-Integration: Moves towards type one
-Disintegration: Moves towards type two
-
+Integration: Moves towards 1
+Disintegration: Moves towards 2
 ### Integration
 
-* transcend their narsissistic emotions and work proactively to create a stable environment for themselves and others
+* Transcend their narsissistic emotions and work proactively to create a stable environment for themselves and others
 * They finally stop that endless search for themselves and have the self-esteem to foster healthy relationships.
 * More pragmatic and productive.
 ### Disintegration
 
-* Foster unhealthy relationships with romantic partners
-* overly antagonistic with those responsible for their lack of security or indapendance.
+* Foster unhealthy relationships with romantic partners.
+* Overly antagonistic with those responsible for their lack of security or indapendance.
 * When they struggle getting by on their own, they project that failure onto others.
 
 ## Instinctual Variants
@@ -246,7 +243,7 @@ Disintegration: Moves towards type two
 * They want their more powerful or more famous peer group to confirm that they are special, but since their ego is filled with shame, they don't feel confident in their acceptance.
 * They can feel like their hopeless and their social standing in life and that there is something wrong with them. There are two ways they cope with this:
    * If they have a 5 wing, they cope with creating or joining outsider groups on the fringe that critique the mainstream world
-   * if they have a 3 wing, they overcompensate with their shame by seeking out an undeniable level of success so that they can use to shame people below them.
+   * if they have a 3 wing, they overcompensate with their shame by seeking out an undeniable level of success so that they can use it to shame people below them.
 * Less motivated 4s can fantasize about going on talkshows and stuff rather than cultivating relationships with the people they already know.
 * When they are healthy, they are comfotable being the life of the party and warmth.
 ### Sexual
@@ -258,8 +255,7 @@ Disintegration: Moves towards type two
 * Strong opinions about their loved ones and shameless in their fantasy life, this can make it hard for them to feel settled in commited relationships.
 * They want the perfect rescuer to rescue them from a dull existence, but they may not admit this.
 * When they are healthy, they are unshakbly commited to their friends and lovers.
-
-## Type Five:
+# Type Five:
 
 ### Major Personality Traits
 
@@ -324,7 +320,7 @@ Disintegration: Moves towards type two
 
 #### Sexual
 
-## Type Seven:
+# Type Seven:
 
 ### Major Personality Traits
 
@@ -356,7 +352,7 @@ Disintegration: Moves towards type two
 
 #### Sexual
 
-## Type Eight:
+# Type Eight:
 
 ### Major Personality Traits
 
@@ -388,7 +384,7 @@ Disintegration: Moves towards type two
 
 #### Sexual
 
-## Type Nine:
+# Type Nine:
 
 ### Major Personality Traits
 
