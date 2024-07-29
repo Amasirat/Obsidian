@@ -2,7 +2,8 @@
 * [[#Overview]]
 * [[#Type One Reformers]]
 * [[#Type Two Helper]]
-
+* [[#Type Three The Achiever]]
+* [[#Type Four Indivisualist]]
 
 
 # Overview
@@ -148,7 +149,7 @@ Their patience finally gives out and they become bossy, dramatic and super aggre
 
 #### Sexual
 
-# Type Three:
+# Type Three: The Achiever
 
 ### Major Personality Traits
 
