@@ -23,7 +23,7 @@
 * They are terrified of being the bad guy and they want to be wise, benevolent people that save the world.
 ### Childhood Experiences
 
-* In their earlier years, they are highly energetic, playful and outgoing however they quickly realize life is not all fun and games.
+* In their earlier years, they were highly energetic, playful and outgoing however they quickly realized life is not all fun and games.
 * As children they are usually brought up in a family with a lot of strict rules, which they adhere to above and beyond as a form of rebellion, showing their parental figures that they are undeniably good.
 * They continue to have issues with their authority figure as they grow up, because their fear of punishment gets mixed in with their desire to do things the right way.
 ### Variations (Wings)
@@ -41,12 +41,11 @@ They are called idealists because they prefer their ideal world over the real wo
 * They are more sociable and interested in cultivating relationships.
 * They can however be more intense in their interactions because they want to be right.
 * Their 2 wing however does make them more warm and a desire to serve their community.
-* Their major problem is their need for control. They can become rather obssessive people trying to control other people to adhere to their perfect visions of them.
+* Their major problem is their need for control. They can become rather obssessive people trying to control others to adhere to their perfect visions of them.
 ### (Dis)integration Movements
 
 **Integration**: Moves towards 7
-**Disintegratioon**: Moves towards 4
-
+**Disintegration**: Moves towards 4
 #### Integration
 
 * They become spontaneous and care free. When they transcend their ego, all of their energy will be spent on basking on the beauty of life. They are still in touch with their values however they become more mature and flexible in their ability to navigate gray areas.
@@ -57,7 +56,7 @@ They are called idealists because they prefer their ideal world over the real wo
 * They get moody, irrational and self-indulgent.
 * They start to live in fantasy lands where they can do wahtever they want without repercussions.
 * If they do that, they get plagued with shame and a sense of guilt.
-* They can turn the rage they have against others towards themselves.
+* They can turn the rage that they usually have against others, towards themselves.
 * They can feel depressed and run into trouble if they find out that their vision of the perfect world was false or actually harmful to themselves or others.
 ### Instinctiual Variants
 
@@ -76,40 +75,38 @@ They are called idealists because they prefer their ideal world over the real wo
 * Highly motivated to permote their beliefs among their community. They believe their beliefs are objectively right and true. They like to speak up for people who they believe are being mistreated or advocating for beneficial social causes.
 * These issues they fight for is rooted in their strict sense of morality and attachment to rules and procedures.
 * Try to expose and attack injustice and will readily argue their perspective.
-* They expect people closest to them to aree with their values.
+* They expect people closest to them to agree with their values.
 * They can wind up in extreme political groups that condemn others and can feel outrage.
 * Most sensetive to critique.
 * Biggest fear is to be caught being a hypocrite.
 * Great gift for gathering and mobilizing people to do great things and being able to create long-lasting friendships.
 #### Sexual
 
-* They want the perfect soulmate, and have unrealistic expectations of what their romantic people should be.
+* They want the perfect soulmate, and have unrealistic expectations of what their romantic patners should be.
 * They only need a few perfect romantic partner and friends in their lives.
 * They can find a partner where they think they can fix them.
 * Constantly project their high moral standards on others because they fear the imperfections of their loved ones will destroy the perfect harmony they seek to create.
 * Can be extremely jealous and possesive.
-* They can be both serial daters or perpetually single because no one is good enough.
+* They can be both serial daters or perpetually single because no one is good enough for them.
 * They can control their partners with criticisms of their flaws.
-
-
 # Type Two: Helper
 
 ### Major Personality Traits
 
-* Driven by a deep desire to give and recieve love through acts of service and they want to be needed
+* Driven by a deep desire to give and recieve love through acts of service and they want to be needed.
 * Compassionate and nurturing
 * Some have a genuine desire to help people but some only want others to love and affirm them, depending on their health level.
 * Commited to their relationships.
 * They can love most people of different types.
 * Their core flaw is their subtle sense of pride. They feel as though they have something that others need.
-* They can find their pride is hard to accept because they are great at self-deception.
+* It can be difficult to accept that pride exists because they are great at self-deception.
 * They see themselves in a positive light.
 * They can enable their loved ones' self-destructive behaviors so that they can feel loved or serve love to them.
 * They have the best understanding of how to truly love someone 
 ### Childhood Experiences
 
 * They felt as though they were inherently special. They were more whimsical and imaginative.
-* Their defining childhood experience could be centered around feeling rejected by their father figure. This can be to any degree of extremity. It could be that they had a sibling that was more loved than them.
+* Their defining childhood experience could be centered around feeling rejected by their father figure. This can be to any degree of extremity. It could be that they had a sibling that was more loved than them, or outright rejection.
 * As children, they felt that love had to be earned.
 ### Variations (Wings)
 
@@ -126,7 +123,7 @@ They are called idealists because they prefer their ideal world over the real wo
 * They are more altruistic, thoughtful and far more concerned with serving behind the scenes because they believe it's more noble and also becasue they struggle with fighting for attention.
 * They are driven to express their love by doing the right thing.
 * They can be judgmental and controlling.
-* They long for people to see and appreciate their service but they never speak up to get them that attention. So they can start to resent their loved ones if they don't appreciate what they've done for them.
+* They long for people to see and appreciate their service but they never speak up to get that attention. So they can start to resent their loved ones if they don't appreciate what they've done for them.
 ### (Dis)integration Movements
 
 **Integration**: Moves towards 4
@@ -134,10 +131,10 @@ They are called idealists because they prefer their ideal world over the real wo
 #### Integration
 
 The helper becomes more at peace with the harsh realities of life. Instead they can sit in the awkward silence of not knowing what to do to make a situation better. 
-They choose to embrace their negative emotions rather than their emotions sub-conciously exploding outwards.
+They choose to embrace their negative emotions.
 #### Disintegration
 
-Their patience finally gives out and they become bossy, dramatic and super aggressive with anyone that doesn't seem to agree or appreciate with them.
+Their patience finally gives out and they become bossy, dramatic and super aggressive with anyone that doesn't seem to agree or appreciate them.
 ### Instinctiual Variants
 
 #### Self-Perservation
@@ -187,7 +184,7 @@ Their patience finally gives out and they become bossy, dramatic and super aggre
 ### Major Personaility Traits
 
 * Concerned with establishing unique identity
-* Core fear is that they are not significant or not special
+* Core fear is that they are not significant or special
 * Even though they can make friends with anyone, they can also have a subtle sense of elitism
 * Intense level of creativity
 * They reflect and discuss their pain so they are comfortable with darkness and pain of both themselves and others. You can never overshare with them.
@@ -352,39 +349,90 @@ Disintegration: Moves towards 2
 
 #### Sexual
 
-# Type Eight:
+# Type Eight: The Challenger
 
 ### Major Personality Traits
 
-
+* Soft on the inside and hard on the outside
+* Find their identity by overcoming obstacles and imposing their will on their environement
+* Feel like outsiders
+* They do the right thing even though others might think otherwise.
+* Ton of mental and physical energy
+* Workaholics because they want to be in control of their lives
+* Core fear is being controlled by others
+* They avoid emotions and prefer logic based work
+* Self confident and a even a bit arrogant
+* Team work is hard for them unless they are in charge
+* No patience with weakness because they had to grow up fast
+* They are terrified of being abandoned, so they protect themselves by pushing themselves away, because they want to know beforehand if you've got what it takes to deal with them
 ### Childhood Experiences
 
+* In their childhood, they did acts of service for their friends and they were needy children
+* They were born with this innate sense that their needs should or would be met.
+* This feeling ends quickly, because they find out that their emotional needs won't be met and they have to grow up fast
+* Many eights are abandoned by their protectors
+* Aggressive towards authority figures because it reminds them of their absent or incapable protector
 ### Variations (Wings)
+## 8w7: The Maverick
 
+* They are assertive and engaing and highly controlling
+* Extroverted
+* They are themselves all the time
+* Super inspiring
+* Moves fast and hard towards their goal
+## 8w9: The Bear
 
+* They know how to get their way but in a subtle and observational way
+* Strong but silent type
+* Far more concerned with having small unique sphere of influence
+* Quietly stubborn
+* Less prone to anxiety, they can't be overwhelmed by a scope of a challenge
+* Self-assured
+* Block out negative emotions
 
 ### (Dis)integration Movements
 
-**Integration**: Moves towards 
-**Disintegratioon**: Moves towards 
+**Integration**: Moves towards 2
+**Disintegratioon**: Moves towards 5 
 
 #### Integration
 
-
+They realize that their lives are most fulfiling when they treat others as equals.
+They can enhance the lives of others through their energy, commitment, strength and humility.
 #### Disintegration
 
-
+The begin to sense that they have over-exposed themselves, they have to isolate in order to strategize
+Hold their cards very close to their chests in order to have control
 ### Instinctiual Variants
 
 #### Self-Perservation
 
-
+* Want to control anything that influences their physical security. 
+* Usually find a way to be the boss in order to control how resources are spent.
+* They are materialistic in how they prove their dominance and power.
+* Most self-centered because of their concern for security
+* Justify their behaviours with how much they've worked
 #### Social
 
-
+* Values loyalty and respect.
+* Constantly telling stories that reflect their experiences and ability to overcome adversity
+* Don't mind having heated debates
+* Use arguments as a way to test others
+* Fear abandonment 
+* Hold grudges
+* They can make great scam artists because of their confidence and charisma, they can also justify their actions by "Only weak people will fall for this" and they hate weakness
+* They can be cheerleaders and defenders of their loved ones when they are healthy
 #### Sexual
 
-# Type Nine:
+* Need intense relationships
+* Charismatic but have more of a quiet intensity
+* Passionate about their relationships
+* They are rebelious and enjoy being the bad boy or breaking the rules
+* Play rough with their partner 
+* They struggle being nice because they find niceness as vulnurability and weakness
+* They prefer positions of power in relationships
+* If the relationship is failing, their instinct is to isolate their loved one
+# Type Nine: The Peacemaker
 
 ### Major Personality Traits
 
