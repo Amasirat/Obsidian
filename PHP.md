@@ -202,3 +202,50 @@ $\_REQUEST contains all GET or POST or COOKIE data.
 # Cookies and Sessions
 
 
+**Cookies are data that are saved on the user's browser.**
+
+**Sessions are data that are saved on the server.**
+
+To set a cookie for the current webpage use the setcookie() function.
+
+```php
+setcookie(
+	"site_name",//name of the cookie
+	"Amaweb",//value of the cookie
+	[
+		'expires' => time() + 60//when the cookie expires
+		'domain' => 'localhost'//the domain of the cookie, use . to appply to all subdomains.
+		'path' => '/'
+		'httponly' => 'true'// httponly means the cookie can only be accessed by the server and not in a client-side means like using javascript.
+	],
+);
+```
+
+
+![[2024-08-06_10-56.png]]
+
+$\_COOKIE is superglobal array containing all cookies of the current page.
+
+**By putting the expires key to a time in the past, it will delete the cookie**.
+
+```php
+//__DIR__ is the current script's directory.
+session_start([
+	'name' => 'amaweb',
+	'save_path' => __DIR__ . "/sessions",
+]);
+
+$_SESSION["auth"] = true;
+
+unset($_SESSION["auth"]);// delete the session
+
+session_destroy();//destorys all session variables
+```
+
+**Some security concerns:**
+
+You should never save sessions inside the public directory of your website.
+
+
+
+
