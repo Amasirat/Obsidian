@@ -187,8 +187,17 @@ You should not manually send webpages values like this. You can do this through 
 </html>
 ```
 
+Data like this is usually sent using the post method. Instead of get, put post inside the method attribute of form. Post variables are found in the $\_POST array.
 
+$\_FILES contains any files that are sent to a webpage. 
 
+Once a file is uploaded, that file will remain inside a temperory location. To move it to a permanent location you can use the move_uploaded_file() function. Enter the temperory name of the image using $\_FILES\["image"]\["tmp_name] and the intended permanent path. (The name it has to be saved with has to be included in the path).
+
+$\_SERVER contains server info.
+
+$\_REQUEST contains all GET or POST or COOKIE data.
+
+**A POST data with the same name as a GET data is printed instead.**
 
 # Cookies and Sessions
 
