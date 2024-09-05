@@ -247,5 +247,80 @@ session_destroy();//destorys all session variables
 You should never save sessions inside the public directory of your website.
 
 
+# MySQLi
 
+You can use mysqli to connect to a MySQL database.
+
+```php
+$connect = mysqli_connect("localhost:3306", "root", "");
+```
+
+We can access errors using mysqli_error($connect).
+
+We also have to close these connections when we're done with them, using mysqli_close($connect)
+
+Use mysqli_query and pass in a connection and SQL query, then store the result in a php variable.
+
+passing the resulting variable to mysqli_fetch_all() will give back an array containing the data in the table.
+
+**It's best practice to not put data directly into a SQL query, use mysqli_prepare() or for an Object-oriented way, use PDO.**
+
+```PHP
+$statement = mysqli_preapre($link, "insert into users (email, password) values (?, ?)");
+
+mysqli_stat_bind_param($statement, 'ss', "$email", "$password");
+$result = mysqli_stat_execute($statement);
+```
+
+This is one way you'd print a database into an html table in a dynamic way.
+
+```php
+<?php
+$link = mysqli_connect('localhost:3306', "root", "");
+mysqli_select_db($link, 'roocket');
+$SQL = "SELECT * FROM users";
+if(! $result = mysqli_query($link, $SQL)) {
+	echo "ERROR: " . mysqli_error($link);
+	exit;
+}
+?>
+<html lang="en">
+<body>
+<h1>User List</h1>
+<table>
+<thead>
+	<tr>
+		<th>id</th>
+		<th>Email</th>
+		<th>Password</th>
+	</tr>
+</thead>
+
+<tbody>
+<?php while ($user = mysqli_fetch_assoc($result)) { ?>
+//<?= is short way of saying the data needs to be pasted into the html tag
+	<tr>
+		<td><?= $user["id"] ?></td>
+		<td><?= $user["email"] ?></td>
+		<td><?= $user["password"] ?></td>
+	</tr>
+<?php } ?>
+</tbody>
+</table>
+</body>
+</html>
+```
+
+
+You can use require or include to include other php variables, classes and functions.
+
+Using require makes sure the file can get a valid file directory, otherwise the whole page will stop operating
+```php
+require 'functions.php'
+```
+
+But include does not stop the file from loading. It will just include or fail to include the code inside the file 
+```php
+include 'functions.php'
+```
 

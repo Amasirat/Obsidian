@@ -383,3 +383,34 @@ alert(clone.name); // John
 alert(clone.age); // 30
 ```
 
+# DOM (Document Object Model)
+
+It represents all page content as an object in Javascript. The **document** is the entry point to the page and represents the html document that belongs to the script.
+
+```Javascript
+// change the body of webpage to red
+document.body.style.background = "red";
+
+// change it back after 1 second
+setTimeout(() => document.body.style.background = "", 1000);
+```
+
+DOM is not just for browser related file. Any sort of document can be represented by DOM as an object and not just in Javascript.
+
+Properties and methods are described in the specification: [DOM Living Standard](https://dom.spec.whatwg.org)
+# BOM (Browser Object Model)
+
+For any information that are not part of the document. For instance the client's OS (navigator.platform) or Browser(navigator.userAgent). Manipulating the location of a URL, etc....
+
+```Javascript
+alert(location.href); // shows current URL
+if (confirm("Go to Wikipedia?")) {
+  location.href = "https://wikipedia.org";// redirect the browser to another URL
+}
+```
+
+The BOM is a part of the general [HTML specification](https://html.spec.whatwg.org)
+
+
+
+

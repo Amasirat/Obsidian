@@ -238,8 +238,11 @@ A few notes:
 * Assigning an static member inside a constructor will reset its value each time an object is created.
 
 
+# Delegates and Events
+
+
 
 ## LINQ
 
-
+LINQ is a unified query system designed to retrieve and send data to any sort of database system. 
 
