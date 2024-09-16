@@ -42,9 +42,33 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "9234a2df2a4db273",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Masters Study Research.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "dda8e4409d70e219",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Laravel.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -110,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Network Programming.md",
+                "file": "Laravel.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +151,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Network Programming.md",
+                "file": "Laravel.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Network Programming.md"
+                "file": "Laravel.md"
               }
             }
           }
@@ -171,10 +195,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f4f6f0c8073e4ba7",
+  "active": "197def98a9b4a3a4",
   "lastOpenFiles": [
-    "Javascript.md",
+    "Avalonia.md",
+    "Masters Study Research.md",
     "Network Programming.md",
+    "Javascript.md",
     "CSharp(.NET).md",
     "Laravel.md",
     "Enneagrams.md",
@@ -207,8 +233,6 @@
     "Attachments/trpl04-05.svg",
     "Attachments/trpl04-04.svg",
     "Bowed String Instruments.md",
-    "Intervals.md",
-    "Fundamental Theorem of Music.md",
     "Attachments"
   ]
 }
