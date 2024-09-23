@@ -9,7 +9,6 @@ php -S localhost:<port> -t <path-to-directory>
 ```
 
 *The port can be any unoccupied port on the client computer.*
-
 # Syntax
 
 In order to write php code, you have to write them within a \<?php tag
@@ -50,7 +49,6 @@ $concat = $str1 . $str2;
 
 **You can format variables into strings when using double quotations.**
 
-
 You can make key value pairs
 
 ```php
@@ -67,9 +65,9 @@ define('My_WEBSITE_URL', "https://amaweb.ir");
 const MY_WEBSITE_URL = "https://amaweb.ir";
 ```
 
-define can not be used while defining varaibles in classes.
+define can not be used while defining varaibles inside classes.
 
-These are the control structure syntax.
+These are the control flow structure syntax.
 
 ```php
 do { // do-while
@@ -128,7 +126,7 @@ function sum($a, $b) {   |  sum(...$list)//seperate a list into parameters
 }
 ```
 
-**Variable scope works the same as c++.**
+**Variable scope works the same as C++.**
 
 You can however define a global variable inside a local space such as functions.
 
@@ -201,7 +199,6 @@ $\_REQUEST contains all GET or POST or COOKIE data.
 
 # Cookies and Sessions
 
-
 **Cookies are data that are saved on the user's browser.**
 
 **Sessions are data that are saved on the server.**
@@ -245,8 +242,6 @@ session_destroy();//destorys all session variables
 **Some security concerns:**
 
 You should never save sessions inside the public directory of your website.
-
-
 # MySQLi
 
 You can use mysqli to connect to a MySQL database.

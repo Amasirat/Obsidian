@@ -229,3 +229,338 @@ you can exclusively run your dedicated seeder class like this:
 $ php artisan db:seed --class JobSeeder
 ```
 
+# CSRF and Forms
+
+Imagine a local bank that has no idea what CSRF is. You have an account on there, but because CSRF is not implemented, a malicious actor can send you a fake email, telling you to change your password. Despite the email looking legit, the link is sent to a page hosted by the malicious hacker. Once you send your passwords, your data gets sent to the actual localbank, however this time the hacker can cache your new password as well. This works if you had signed in to the bank and a session cookie was stored on your browser before.
+
+CSRF is basically a hidden token that is sent alongside the data the form sends. This token is compared to the current session token. If they don't align, the form will not get accepted. 
+
+Laravel has support for CSRF and will not accept forms that do not have CSRF implemented. To use CSRF, just add a \@csrf somewhere inside your form. Once turned into vanila php, it will become a hidden input with a token value.
+
+```php
+<form method="POST" action="/jobs">
+	@csrf
+	<input type="text">
+	<input type="text">
+	<input type="submit" value="submit">
+</form>
+```
+
+Once sent, Laravel requires a post route listening for the URL put inside the action attribute of forms.
+
+```php
+Route::post('\jobs', function() {
+// do necessary validation and database manipulation
+return redirect('/a get route');
+});
+```
+
+For validation, you can use request()->validate(\[]) to pass in validation rules as an associative array for each of your properties. 
+
+```php
+request()->validate([
+	'title' => ['required', 'min:3'],
+	'salary' => ['required']
+])
+```
+
+Laravel has a list of validation rules that can be used in [here](https://laravel.com/docs/11.x/validation)
+
+In case of errors Laravel refreshes the page and returns th errors inside a $errors variable. You can use $errors->all() to view them or $errors->any() to know if any errors exist. 
+
+```php
+
+@if ($errors->any())
+	@foreach($errors->all() as $error)
+		<p>{{ $error }}</p>
+	@endforeach
+@endif
+
+// You can also use @error and pass in the name of an input field to only do something when that field gives back an error like this
+@error('title')
+	<p> {{ $message }} </p>
+@enderror
+```
+
+Your browser supports both "get" and "post" requests natively however most web frameworks also support additional request methods. Two of them are:
+* Patch
+* Delete
+```php
+Route::patch('', function () {
+
+});
+
+
+Route::delete('', function () {
+
+});
+```
+
+**Unique tidbit:** You can attach a button into a totally different form by giving the form's id to its form attribute.
+
+```php
+<button form="xform">Submit</button>
+
+<form id="xform">
+
+</form>
+```
+
+# Route Model Binding
+
+Laravel has a feature where for wildcards, instead of an id, we can give exactly the model that we desire. For instance, we can give a route a Job model and it will detect that automatically.
+
+```php
+Route::get('/jobs/{job}', function (Job $job) {
+	return view('jobs.show', [
+		'job' => $job
+	]);
+});
+```
+
+A few rules need to be abided:
+
+* The wild card has to be named as exactly the variable parameter of the function.
+* The anonymous function's varaible needs to have an explicit variable type declaration.
+
+## Controllers
+
+We've gone through Models, we've also gone through views but we still have not talked about the C in MVCs, That is **Controllers**.
+
+In full-scale applications, controllers are the ones that process data and update views and models. Therefore it is not wise to delegate that job to the Routes in web.php.
+
+You can create a controller class like this:
+
+```shell
+$ php artisan make:controller JobController
+```
+
+Then if you want to route the URI to the Controller:
+
+```php
+Route::get('/jobs', [JobController::class, '<name of action>'])
+```
+
+Actions are basically the functions that the controller has. The most common [[CRUD]] actions are:
+
+* index: the homepage of the resource in general.
+* show: Get action that shows a view for the models details
+* edit: Get action that shows an edit view
+* create: get action that shows a create view
+* store: Post action that creates and stores a model instance
+* update: Patch action that updates a model instance
+* destroy: Delete action that deletes a model instance
+
+You can also group these routes inside a Route::controller like this:
+
+```php
+Route::controller(JobController::class)->group(function () {
+	Route::get('/jobs', 'index');
+	Route::get('/jobs/create', 'create');
+	Route::get('/jobs/{job}', 'show');
+	Route::get('/jobs/{job}/edit', 'edit');
+	Route::post('/jobs', 'store');
+	Route::patch('/jobs/{job}', 'update');
+	Route::delete('/jobs/{job}', 'destroy');
+});
+```
+
+For views that are static and can never change, you can simply use Route::view.
+
+```php
+Route::view('/', 'home');
+```
+# Users and Authentication
+
+Laravel makes dealing with user authentication really simple.
+
+The way authentication generally works is that while registered a user is created. Then when the time comes for the user to sign in, a session is created inside the session table and the user is given a session token. For security reasons, it is generally recommended to regenerate this session token on each login.
+
+the @auth and @guest are blade directives that indicate code that need to be performed while the viewer is an authenticated user (@auth) or a guest user (@guest).
+
+```php
+@auth
+<form method="POST" action="/logout">
+	@csrf
+	<x-form-button>Logout</x-form-button>
+</form>
+@endauth
+
+@guest
+	<x-nav-link href="/login">Login</x-nav-link>
+	<x-nav-link href="/register">Register</x-nav-link>
+@endguest
+```
+
+**Some Tidbits:**
+* after validating user input: request()->validated(\[]), it returns an array of the validated items, assuming that the validated items' keys are the same as their database counterpart, you can send them directly to the Model's create function.
+* the Illuminate\\Support\\Facades\\Auth class deals with authentications automatically. Use Auth::Login takes in a user model to login an existing user. Auth::logout also logs out the user. 
+* **it's frowned upon to use a get request to logout a loggedin user. That is usually done by a POST request**
+
+There are 2 general ways to authorize a user for certain jobs:
+### Gates
+
+Gates are as the name suggests, gates that either allow or not allow a user to do certain things. 
+Illuminate\\Support\\Facades\\Gates is a laravel class that handles such things.
+
+For instance, for being able to edit a job, the user has to own an employer than has that job. We have to define a gate like this:
+
+```php
+// user is given by the session, if the viewer is a guest, then this gate will also never allow the given action
+Gate::define('edit-job', function (User $user, Job $job) {
+	return $job->employer->user->is($user);
+});
+```
+
+You can then use Gate::Authorize('edit-job', $job), giving in an action and a job model. You can also use Gate::allowed or Gate::denied to get boolean expressions.
+
+* These gates are ordinarily defined inside our AppServiceProvider in order to give global access to this action.
+```php
+public function boot(): void {
+	Gate::define('edit-job', function (User $user, Job $job) {
+		return $job->employer->user->is($user);
+	});
+}
+```
+
+You can also ideally use the can() or cannot() method for the same thing.
+
+```php
+Auth::user()->can('edit-job', $job); // edit-job action is defined by our gate.
+```
+
+### Middleware
+
+### Policy
+
+You can create policies for models in order to define what can or can't be done to them. This is used for most non-trivial applications.
+
+```shell
+$ php artisan make:policy
+```
+
+```php
+class JobPolicy {
+	public function edit(User $user, Job $job): bool {
+		return $job->employer->user->is($user);
+	}
+}
+```
+
+Once you've defined a function, you can use that function's name as an action verb to supply can() and cannot() functions like before.
+
+# Mailable Classes
+
+In order to be able to mail to the user, we need mailable classes
+
+```shell
+$ php artisan make:mail
+```
+
+You'll have to change the content of your mailable class to return a view.
+
+By default, the mail is sent to a log file. If you want the mail to be sent to a real email, you'll have to use third party mail services and you'll have to set it up inside your .env file.
+[Here is an easy mailing service](https://mailtrap.io)
+
+Whenever you want to send an email, you can do this:
+
+```php
+// ordinarily to() has to get an email address, however if your model has an email address, sending in the model itself does the job as well
+Iluminate\Support\Facades\Mail::to($user)->send(new JobPosted());
+```
+
+
+# Queues
+
+Sending Emails is great and all, but it is a slow process and can halt the entire website for a while. In order to avoid doing that, we can use a Queue.
+
+laravel has a queue system that handles jobs asynchronous from the website's activities.
+
+These jobs are held within the jobs table in the database. 
+
+By executing this command, all jobs held within the jobs table will be executed.
+
+```Shell
+$ php artisan queue:work
+```
+
+In production, you can use services that handle queue's automatically.
+
+dispatch() is a function that takes in an anonymous function. Its purpose is to call these functions through a queue.
+
+```php
+dispatch(function () {
+	logger("Hi! This has been written asynchronously through a queue");
+});
+```
+
+**By chaining a delay() function and giving it a number of seconds, it will delay its execution by that amount.**
+
+# Dedicated Job Classes
+
+You can dedicate a Job class to the handling of jobs. 
+
+```php
+$ php artisan make:job
+```
+
+```php
+class TranslateJob implements ShouldQueue// this trait will make this job be something a queue can execute
+{
+use Queueable;
+
+/**
+
+* Create a new job instance.
+
+*/
+
+public function __construct(public Job $joblisting)
+{
+//
+}
+/**
+
+* Execute the job.
+
+*/
+// this method is where your dispatch logic will be located 
+public function handle(): void
+{
+	logger('Translating ' . $this->joblisting->title);
+}
+
+}
+```
+
+You can give this job a variable to work off of if necessary. For instance a job listing.
+
+```php
+$job = Job::first();
+TransalteJob::dispatch($job);// you still use the dispatch method to handle its execution
+```
+
+# Unit Tests
+
+Laravel comes with a default unit testing framework called Pest which is a wrapper on PHPUnit.
+
+You can create a unit test by calling:
+
+```shell
+$ php artisan make:test JobTest
+```
+
+Inside a method of a unit test, you are generally going to follow these steps:
+
+* Arrange: Arrange the world and states that you want to test under
+* Act: Do an action
+* Assert: Check if things change they way you had expected
+
+**add this line to Pest.php to be able to unit test successfuly**
+
+```php
+uses(
+	Tests\TestCase::class,
+	Illuminate\Foundation\Testing\RefreshDatabase::class,
+)->in('Feature', 'Unit');
+```

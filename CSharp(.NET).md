@@ -235,8 +235,7 @@ A few notes:
 
 * Static data of a class is shared by all objects of the class.
 * A static member can not reference non-static members.
-* Assigning an static member inside a constructor will reset its value each time an object is created.
-
+* Assigning a static member inside a constructor will reset its value each time an object is created.
 
 # Delegates and Events
 
