@@ -374,7 +374,7 @@ Route::view('/', 'home');
 
 Laravel makes dealing with user authentication really simple.
 
-The way authentication generally works is that while registered a user is created. Then when the time comes for the user to sign in, a session is created inside the session table and the user is given a session token. For security reasons, it is generally recommended to regenerate this session token on each login.
+The way authentication generally works is that while registered, a user is created. Then when the time comes for the user to sign in, a session is created inside the session table and the user is given a session token. For security reasons, it is generally recommended to regenerate this session token on each login.
 
 the @auth and @guest are blade directives that indicate code that need to be performed while the viewer is an authenticated user (@auth) or a guest user (@guest).
 
