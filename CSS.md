@@ -266,7 +266,7 @@ Using psuedo-elements we can add special tags after or before a tag's contents.
 
 In order to create a well-designed layout, we use a few techniques
 
-### **Flex** 
+### **FlexBox**
 
 Using this property on a tag, will organize its children in an inline fashion. A characteristic of this property is that if one tag's height changes, the others change with it. Here's a few properties that will be activated for its parent and its children.
 
@@ -274,12 +274,64 @@ Using this property on a tag, will organize its children in an inline fashion. A
 	* row-reverse: reverses row direction
 	* column: is aligned in columns.
 	* column-reverse: reverses column direction.
-* **flex-wrap**: 
+* **flex-wrap**: if there isn't enough space, it will wrap.
+
+## **justify-content**: Used to align items
+
+* **center**
+* **flex-start** 
+* **flex-end**
+* **space-between**
+* **space-around**
+* **space-evenly**
+* **initial**
+* **inherit**
+
+## align-items
+
+
+## align-content
 
 
 
-* Grid:
-* Flout:
+The `flex-grow` property specifies how much a flex item will grow relative to the rest of the flex items. The value must be a number, default value is 0.
+
+
+
+# Grid
+
+Another way to design webpages is through grids of items
+
+```HTML
+<div class="grid-container">
+	<div>1</div>
+	<div>2</div>
+	<div>3</div>
+	<div>4</div>
+	<div>5</div>
+	<div>6</div>
+	<div>7</div>
+	<div>8</div>
+	<div>9</div>
+	<div>10</div>
+	<div>11</div>
+	<div>12</div>
+</div>
+```
+
+All direct children of the grid container automatically become _grid items_.
+
+
+* Each vertical line of a grid are called its columns
+* Each Horizontal line is a row
+* The space between grid-items is called a gap
+
+You can use these properties to adjust gap
+* column-gap
+* row-gap
+* gap
+
+*Use these properties on a grid-container. it will have no affect on individual grid items.*
 
 
 

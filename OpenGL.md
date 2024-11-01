@@ -113,6 +113,8 @@ glGenBuffers(1, &VBO);//1 means creating only 1 buffer and we send a reference t
 glBindBuffer(GL_ARRAY_BUFFER, VBO);//first parameter is the type of buffer
 ```
 
+Because OpenGL is a state machine, you won't be drawing an "object" but more so you'll have the buffers in memory and simply select which buffers to load by the glBindBuffer function. the unsigned int is going to be the handle for a specific buffer you had generated.
+
 There are many types of buffers in OpenGL and GL_ARRAY_BUFFER is the type of a vertex buffer object, because at the end of the day our triangle is just an array of float numbers.
 
 Then finally we copy the vertices we defined into our buffer object by making a call to glBufferData()
@@ -133,7 +135,45 @@ A usuage of GL_DYNAMIC_DRAW will ensure the data is placed in a way that reading
 
 Next we have to create both a **vertex** and **fragment** shader that can process the array of vertices we put in the GPU's memory.
 
+For drawing there are a few functions that handle that and we can use in our render loop.
+
+```cpp
+glDrawArrays(GL_TRIANGLES, 0, 3);//Start from 0, then pass in the amount of 2D vertices
+```
+
+But it can't draw anything if a shader is not defined and the program doesn't know what the data in the buffers actually mean.
+
+## Tell the program what the data in the buffers mean.
+
+Using the glVertexAttribArray(), we can give context to the data we have given to the buffer.
+
+[This is the documentation for this function](https://docs.gl/gl4/glVertexAttribPointer)
+
+The vertices in the buffer are indexed much like an array. each index contains the information for one vertex.
+
+* index: From which index should it be read. From 0, means start from the starting vertex.
+* size: this means how many points of data one vertex is, if a vertex contains only 2 positions, then this will be 2. Size can only be an integer between 1 and 4.
+* stride: How many bytes are dedicated for each vertex in the buffer
+* pointer: define the offset from which each type of vertex is separated. you can use offsetof() macro to do this dynamically.
+
+# Shaders
+
+A shader is basically a program that runs on the GPU.
+
 *Shaders are written in GLSL(OpenGL Shading language)*
+
+The two most popular types of shaders are:
+
+* Vertex Shaders: Runs for every vertex of a shape and determines the position.
+* Fragment Shaders: Fills in the pixels between the vertices. For a triangle, it's similar to coloring in the outline. It runs for every pixel between the vertices. It usually determines the texture or color.
+
+**Because fragment shaders can run hundreds or thousands of times, they are important thresholds for optimizations and performance bottlenecks.**
+
+**Rasterization** is basically the process of rendering a shape on screen.
+
+Because OpenGL is a state machine, Shaders are also enabled or disabled inside the context.
+
+Data is sent to a shader in the form of a **uniform**.
 
 Here is a simple vertex shader for our traingle:
 
@@ -145,6 +185,64 @@ void main()
 	gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
 }
 ```
+
+# Index Buffers
+
+*OpenGL renders everything based on triangles, for example a rectangle will basically be two triangles stuck together*
+
+It'll be wastefull to repeat vertices that we already have inside the buffer just to draw them again, therefore we can use index buffers.
+
+```C++
+float positions[] = {
+	-0.5f, -0.5f, // 0
+	 0.5f, -0.5f, // 1
+	 0.5f,  0.5f, // 2
+	-0.5f,  0.5f, // 3
+};
+// we still load in the buffers the same as always, however when it comes to drawing we use an index buffer to indicate a particular part of the buffer to the GPU
+unsigned int buffer;
+// generate a buffer and assign it to traingle_buffer
+glGenBuffers(1, &buffer);
+// bind the id
+glBindBuffer(GL_ARRAY_BUFFER, buffer);
+glBufferData(GL_ARRAY_BUFFER, sizeof(positions), positions, GL_STATIC_DRAW);
+  
+glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
+glEnableVertexAttribArray(0);
+
+unsigned int indices[] = {
+	0, 1, 2,
+	2, 3, 0
+};
+
+unsigned int ibo;
+glGenBuffers(1, &ibo);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * 6, indices, GL_STATIC_DRAW);
+
+// render loop
+while(...)
+{
+	glDrawElements(GL_TRIANGLE, 6, GL_UNSIGNED_INT, nullptr);
+}
+```
+
+**The indices array HAS to be unsigned int**
+
+# Error Checking
+
+There are two main ways to check for errors in OpenGL.
+
+* glError: returns an error flag if one has occured. repeated calling will give back more error flags if they exist.
+* glDebugMessageCallback: It's a new edition to OpenGL from 4.2 onwards. It gives more detailed information about its errors.
+
+# Uniforms
+
+A way for us to pass in data from the code to the shader.
+
+
+
+
 
 
 

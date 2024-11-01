@@ -382,7 +382,6 @@ let clone = Object.assign({}, user);
 alert(clone.name); // John
 alert(clone.age); // 30
 ```
-
 # DOM (Document Object Model)
 
 It represents all page content as an object in Javascript. The **document** is the entry point to the page and represents the html document that belongs to the script.
@@ -411,6 +410,7 @@ if (confirm("Go to Wikipedia?")) {
 
 The BOM is a part of the general [HTML specification](https://html.spec.whatwg.org)
 
+# Dom Tree
 
 
 

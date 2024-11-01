@@ -215,7 +215,7 @@ You can also use cursor based pagination(**cursorPaginate**), however in this wa
 
 # Database Seeders
 
-When you freshly migrate a database, the datat that the tables held are all droped and you'll have to re-populate every table from scratch. However using seeders you can seed data into your tables right after you've migrated.
+When you freshly migrate a database, the data that the tables held are all droped and you'll have to re-populate every table from scratch. However using seeders you can seed data into your tables right after you've migrated.
 
 You can make new seeders in order to make isolate seeders for each of your databases.
 
@@ -394,7 +394,7 @@ the @auth and @guest are blade directives that indicate code that need to be per
 
 **Some Tidbits:**
 * after validating user input: request()->validated(\[]), it returns an array of the validated items, assuming that the validated items' keys are the same as their database counterpart, you can send them directly to the Model's create function.
-* the Illuminate\\Support\\Facades\\Auth class deals with authentications automatically. Use Auth::Login takes in a user model to login an existing user. Auth::logout also logs out the user. 
+* the Illuminate\\Support\\Facades\\Auth class deals with authentications automatically. Use Auth::Login which takes in a user model to login an existing user. Auth::logout also logs out the user. 
 * **it's frowned upon to use a get request to logout a loggedin user. That is usually done by a POST request**
 
 There are 2 general ways to authorize a user for certain jobs:
