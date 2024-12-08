@@ -31,3 +31,7 @@ Nowadays it is more common to use the ReLU function however.
 
 What we mean by a Neural Network learning, is it minimizing soe sort of **cost function**
 
+
+
+# CNN: Convolutional Neural Networks
+

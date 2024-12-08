@@ -85,8 +85,8 @@ C++ contians a concept called **operators** which are similar to operators in ma
 	* **Important**: In C++ (And most languages) '=' actually just means assignment (This is= that) and **Not mathematical equality**. For example, this is possible even though it does not make any mathematical sense. a = a + 8
 * +=: a += x is short form of a = a + x;
 * -=: Same but for subtraction
-* \\\*=: Same but for multiplication
-* /=: Same but for division
+* \*=: Same but for multiplication
+* =: Same but for division
 * Incrementor: You can use this operator to add 1 to a variable. x++ means x = x + 1
 	There are two types of incrementors:
 		* post-incrementor: x++
@@ -196,7 +196,7 @@ int array[y]; // This will not compile
 
 # Pointers
 
-Pointers are known as some of the most confusing aspects of C/C++ (Hyperbole). Although the actual idea of a pointer variable is fairly straightforward, it's its execution that can confuse a lot of first time programmers.
+Pointers are known as some of the most confusing aspects of C/C++. Although the actual idea of a pointer variable is fairly straightforward, it's its execution that can confuse a lot of first time programmers.
 
 Pointers are bascially types of variables that *point* to another variable inside memory. **They contain the address of that variable**, in simple terms.
 

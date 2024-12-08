@@ -106,3 +106,130 @@ A **Learning Agent** Contains:
 
 # Chapter 3: Searching Algorithms
 
+A form of a goal-based agent, is a **problem-solving agent**.
+
+In order for a problem-solving agent to solve a problem. Our problem needs to be well-defined (**Problem Formulation**) and its goals need to be clear for there to be no possible ambiguity (**Goal Formulation**).
+
+**Problem Formulation**: Process of deciding what actions and states to consider.
+**Graph Formulation**: The process of deciding what the next goal should be
+
+**Search** is a process of finding a series of actions that satisfy the current goal. One that maximizes the performance measure will be an **Optimal Solution**.
+
+Every problem requires 5 factors that need to be fleshed out:
+* **Initial State**: What state the agent will start in
+* **Possible Actions**: Given each state, what actions can the agent take
+* **Transition Model**: What will each action do. Basically what new state will be the **Result** of an action
+* **Goal Test**: Test if the current state is what the agent desires
+* **Path Cost**: A penalty for its actions reflected by the performance measure.
+
+A **solution** to a problem is a set of actions that takes the agent from the **initial state** to a **goal state**
+
+There are however some problem types:
+* **Fully-Observable**: The set of all states is given to the agent (**Single-State Problem**)
+* **Not Observable**: (**Non-deterministic**)
+* **Partially-Observable**: (**Contingency Plan**)
+* **Unknown State Problem**
+
+For a fully-observable problem, the solution will be merely a sequence of actions.
+in partially-observable or non-deterministic problems, the solution will depend on new perceptions that the agent aquires.
+
+For simplicity, let's only consider **Single-State Problems** for now.
+## State Space Graphs
+
+A mathematical representation of a search problem in the form of a **graph**.
+
+Each state will be its **nodes** and Each action will be the **links**, with the resulting node being the **transition** or **Result**.
+
+**We can not have duplicate states (nodes)!!!**
+
+By **searching** through this graph, we can start building a **search tree**
+## General Tree Search
+
+```Psuedo-Code
+function Tree-Search (Problem, Strategy) returns solution or failure:
+	initialize search tree with initial state and update frontier with it
+	loop do:
+		if frontier is empty---->return failure
+		choose a leaf node and remove it from frontier
+		check if the chosen leaf node is the goal--->if true return solution
+		Expand the chosen node and add its leaf nodes to the frontier
+	endloop
+```
+
+Once searching has ended on somewhere it can't continue any longer, we need another node to start searching in. Therefore, we can store each node inside a data-structure called the **fringe** or **frontier**, meaning the nodes we've explored.
+
+
+## Uninformed Search Algorithms
+
+The agent has no additional information other than the information that is already given in each state.
+
+### Breadth-First Search
+
+A tree search method that visits all of the nodes in the same depth as each other in the tree. This is achieved by using a FIFO data structure for Frontier. 
+
+d: depth of the shallowest goal state
+m: depth of the tree
+b: branching factor (*example: b = 2 for a binary tree*)
+
+```Psuedo-Code
+node = problem.initial_node
+if Goal_test(node) == true return success
+frontier = FIFO queue with node as first element
+explored = ()
+loop:
+	if frontier is empty return failure
+	node = pop(frontier)
+	explored += node
+	for each action in problem.Actions(node.State)
+		child = Child_node
+		if child is not in explored or frontier:
+			if goal_test(child) == true return success
+			frontier.insert(child)
+```
+
+**Analysis of algorithm:**
+* Complete: **Yes**, for **finite** number of branching factors
+* Time Complexity: **O(b<sup>d</sup>)** because each node expands to branching factor number of nodes until it reaches shallowest goal state
+* Space Complexity: We keep every node in memory so O(b<sup>d</sup>)
+* Optimal: Only optimal when path cost is a **non-decreasing** function of depth.
+
+***The memory is a bigger problem than its execution time***
+### Uniform-Cost Search
+
+Similar to BFS however it chooses the node with the **lowest path cost g(n)** instead of the shallowest node. 
+
+Another difference is that goal test is applied when it is **selected for expansion**
+
+a test is added at the end, in case a found node exists in frontier with lower path cost
+
+```Pseudo-Code
+node = initial state
+frontier = priority queue by Path Cost with node
+explored = empty set()
+loop:
+	if frontier empty return failure
+	node = pop(frontier) // chooses lowest cost node 
+	if goal_test(node) return solution
+	explored += node
+	foreach action in problem.actions(node):
+		child = child_node(node)
+		if child not in explored or frontier:
+			frontier.insert(child)
+		else if child is in frontier with higher path cost:
+		replace node in frontier with child
+```
+
+### Depth-First Search
+
+Always expands the deepest node in current frontier.
+
+It uses a LIFO frontier data structure (I.E the Stack)
+
+
+
+
+#### Depth-Limited Search
+
+#### Iterative deepening Depth-First Search
+
+## Informed Search Algorithms

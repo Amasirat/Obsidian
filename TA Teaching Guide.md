@@ -26,7 +26,6 @@ Then help them setup Visual Studio for them. Either in video form or on-site.
 
 
 
-*No Homework*
 
 # Session 3: C++ Control Flows
 

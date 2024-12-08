@@ -12,7 +12,10 @@ A great learning resource is [The Modern Javascript Tutorial](https://javascript
 * Most browsers have an embedded engine called a JavaScript virtual machine. Chrome, Opera, and Edge have [V8], while Firefox has [SpiderMonkey].
 
 **JavaScript can remember data on the client-side**
-
+namespace mila
+{
+    int x = 8;
+}
 In order to protect safety of users, there are things that Javascript can't do. 
 
 * It has no direct access to operating system, so no read/write on hard disk.
@@ -412,5 +415,33 @@ The BOM is a part of the general [HTML specification](https://html.spec.whatwg.o
 
 # Dom Tree
 
+We can do anything with a DOM object but first we have to reach it.
 
+All operations on the DOM start with document.
+
+document----->body------>div------>etc
+
+While reaching the body, it may at times return null if the code for example is in the head section, there the document can not have access to body.
+
+**The childNodes collection stores all child nodes of a tag**
+
+```Javascript
+for (let i = 0; i < document.body.childNodes.length; i++)
+{
+	alert(document.body.childNodes[i]);
+}
+```
+
+childNodes is a collection not an array, as a consequence we can use for...of to quickly iterate through it as well.
+
+```Javascript
+for(let i of document.body.childNodes)
+{
+...
+}
+```
+
+**These DOM collections are also read-only and you can't change them**
+
+parentNode, nextSibling, and also previousSibling are all present and able to be used.
 

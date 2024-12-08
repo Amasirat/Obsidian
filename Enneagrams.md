@@ -54,7 +54,7 @@ They are called idealists because they prefer their ideal world over the real wo
 
 * Contradict their rigid morality.
 * They get moody, irrational and self-indulgent.
-* They start to live in fantasy lands where they can do wahtever they want without repercussions.
+* They start to live in fantasy lands where they can do whatever they want without repercussions.
 * If they do that, they get plagued with shame and a sense of guilt.
 * They can turn the rage that they usually have against others, towards themselves.
 * They can feel depressed and run into trouble if they find out that their vision of the perfect world was false or actually harmful to themselves or others.
