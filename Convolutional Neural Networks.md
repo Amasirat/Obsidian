@@ -11,11 +11,10 @@ They also use a special filter called a kernel. It is basically a nxn matrix (us
 It's basically a convolution operation, multiplying the pixel values by the kernel values, then summing up the results.
 
 0 1 2              0  1
-3 4 5      \*     2  3          =   19   25
+3 4 5      \*      2  3          =   19   25
 6 7 8                                  37  43
 
 (0\*0) + (1\*1) + (3\*2) + (4\*3) = 19
-
 
 The output matrix of this process is known as the **feature map**.
 
