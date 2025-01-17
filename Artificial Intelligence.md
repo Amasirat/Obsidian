@@ -504,7 +504,7 @@ There are many types of constraints:
 * Preferences (Soft-Constraints): In real world examples, some constraints may not be deal breakers but some are more prefered than others, for example for a class scheduling problem, a professor may prefer to teach in the mornings however afternoon is still a correct solution.
 These problems with preferences are **Constrained Optimization Problems**
 
-In reqular state-space search, an algorithm can only search but in CSPs, an algorithm can either search or do a type of inference called **Constraint Propagation**
+In regular state-space search, an algorithm can only search but in CSPs, an algorithm can either search or do a type of inference called **Constraint Propagation**
 
 It's basically the act of reducing the amount of possible values using the constraints provided, which is called **local consistency**.
 
@@ -543,6 +543,12 @@ Some limitations of Arc Consistency include:
 * Can have one solution left
 * Can have multiple solutions left
 * Can have no solutions left
+
+## Forward checking
+
+It's the process of filtering the possible domain values after an assignment. A simple method is to remove a domain value from a variable's neighbors (given by the constraint) that it was assigned itself. 
+
+The limitation of this is the fact that you can not know more than the step you already. If there is for example one domain value left in two neighbors where if one is chosen the other will become inconsistent, this can not be detected until the variable is already assigned. That's why Arc consistency works better in that regard although it is more expensive to compute.
 ## Solving CSPs
 
 ### Backtracking Search
@@ -580,8 +586,3 @@ The straightforward way of implementing `Select_Unassigned_Variable()` and `Orde
 There are two general methods of ordering, meaning in which order to select variables:
 * **Minimum Remaining Value(MRV)**: Choose the variable that is the most constrained from its surroundings and therefore the least amount of options. For example if inside a map, we have painted a region's neighbors with red and blue, the region doesn't have any other choice but being green, therefore it is prefered to assign that straightaway so that we don't run into failure in a later step and have to backtrack. (Choosing Variable)
 * **Least Constraining Value(LCV):** Once a variable has been selected, we have to decide which domain value to select, so we can select the one that has the least amount of constrains, the one that rules out the fewest options basically. (Choosing Domain Values) 
-## Forward checking
-
-It's the process of filtering the possible domain values after an assignment. A simple method is to remove a domain value from a variable's neighbors (given by the constraint) that it was assigned itself. 
-
-The limitation of this is the fact that you can not know more than the step you already. If there is for example one domain value left in two neighbors where if one is chosen the other will become inconsistent, this can not be detected until the variable is already assigned. That's why Arc consistency works better in that regard although it is more expensive to compute.
