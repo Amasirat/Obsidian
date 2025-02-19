@@ -47,7 +47,9 @@ The variables returned by data() are tracked throughout the DOM and once they ar
 
 The above code will enter the greeting variable's data inside the input tag's value. By changing that value, the value of greeting will also change **in real time**.
 
-mounted() function will also do some things, once view is mounted on an html tag.
+Vue has **reactivity** which means it constantly keeps track of the object returned by data() (**the source of truth**), and once it changes it re-renders the page.
+
+mounted() function will be called once it has been mounted.
 
 ```Javascript
 Vue.createApp({
@@ -65,3 +67,56 @@ Vue.createApp({
 	}
 }).mount("#app");
 ```
+
+Once greeting changes, the source of truth changes, therefore Vue automatically re-renders the page to reflect that fact.
+
+## Attribute Binding
+
+We can bind source of truth variables to html attributes by the keyword v-bind
+
+```Html
+<button v-bind:class="buttonClasses">Click Me</button>
+
+<button :class="buttonClasses">Click Me</button> 
+<!-- Or use the short form with a single colon like above -->
+<script>
+
+Vue.createApp({
+	data() {
+		return {
+			buttonClasses: "text-green"
+		};
+	}
+	}).mount("#app");
+
+</script>
+```
+
+For event-handling, for example when you click on the button the text-green should turn into text-red.
+
+```HTML
+<button :class="active ? 'text-red' : 'text-green'" v-on:click="toggle"></button>
+<button :class="active ? 'text-red' : 'text-green'" @click="toggle"></button>
+<!-- Or use the short form with a single @ like above -->
+<script>
+Vue.createApp({
+	data() {
+		return {
+			active: false
+		};
+	},
+
+	methods: {
+		toggle() {
+			this.active = ! this.active;
+		}
+	}
+	}).mount("#app");
+
+</script>
+```
+
+This method is an old way of doing this called the **options API**. It existed from Vue version 1. In Version 3 a **Composition API** is used instead.
+
+
+
