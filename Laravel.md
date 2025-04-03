@@ -564,3 +564,52 @@ uses(
 	Illuminate\Foundation\Testing\RefreshDatabase::class,
 )->in('Feature', 'Unit');
 ```
+
+# Steps to do for deployment
+
+Install composer and npm packages:
+
+```bash
+composer install --optimize-autoloader --no-dev
+```
+
+Same thing for npm:
+
+```bash
+npm ci
+```
+
+Use ci instead of install to not change the npm package-lock file. Then, there won't be any merge conflicts. It is recommended to not make any staged changes to these files on remote and only pull into it instead.
+
+```bash
+php artisan key:generate
+```
+## Setup Nginx
+
+## Setup php-fpm
+
+
+## Permissions
+
+Assign ownership to the nginx user/group (Fedora/CentOS/RHEL):
+```bash
+sudo chown -R nginx:nginx /home/fedora/amaweb.site
+```
+
+Directories:
+Storage: Writable by Nginx/PHP-FPM:
+```bash
+sudo chmod -R 775 /home/fedora/amaweb.site/storage
+```
+
+Bootstrap/Cache: Writable by Nginx/PHP-FPM:
+  
+```bash
+sudo chmod -R 775 /home/fedora/amaweb.site/bootstrap/cache
+```
+
+Public Directory: Readable by all:
+
+```bash
+sudo chmod -R 755 /home/fedora/amaweb.site/public
+```

@@ -117,6 +117,8 @@ Vue.createApp({
 ```
 
 This method is an old way of doing this called the **options API**. It existed from Vue version 1. In Version 3 a **Composition API** is used instead.
+## Components
+
 
 
 

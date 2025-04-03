@@ -3,8 +3,7 @@ The author's of Being the Center of Attention or BCA for short, aim to predict t
 An important challenge in trying to quantify a nebulous concept such as Personality is identifying the right framework for personality analysis. Fortunately, many researches in the field of psychology have produced a popular, useful, and accurate framework for personality characterization called the Big-Five Personality Trait Model.
 # Personality
 
-The Big-Five Personality Trait model or Five-Factor model is comprised of five factors of personality that can describe a general assesment of an individual's personal inclinations with how they react in an environment.
-
+The Big-Five Personality Trait model or Five-Factor model is comprised of five factors of personality that can describe a general assesment of an individual's personal inclinations regarding how they react in an environment.
 ## Extraversion
 
 Captures sociability and energeticness in social situations. People with high extraversion thrive in social situations, where as people with low extraversion tend to prefer non-social situations.

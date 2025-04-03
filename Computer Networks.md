@@ -39,6 +39,8 @@ Some terminology:
 
 **Swtiches**: They are basic computers that do the job of recieving packets, storing them and then forwarding them in the network. This way, client computers can simply be connected instead of also taking on the burden of packet forwarding, these computers are called **hosts**.
 
+Switches connect computers **within** a network.
+**Routers** connect networks to **outside** networks.
 ### Cost-Effective Resource Sharing
 
 Packets need to be forwarded through the network in as efficient a manner as possible.
@@ -88,7 +90,7 @@ A network needs to be managed. So another requirement of a network is to make it
 
 Abstractions are critical to understanding network architectures, it is a tool for designers to manage complexity while designing systems. Abstraction usually leads to a layered approach to design. The benefits of this includes:
 * Manageability: Decomposes a complex problem into small manageable problems.
-* Modularity and Separation of concerns: Makin it so that you can easily change technologies related to on layer of the design without impacting the lower layers.
+* Modularity and Separation of concerns: Makin it so that you can easily change technologies related to one layer of the design without impacting the lower layers.
 
 Abstract objects that make up the layers of a network architecture are called **Protocols**.
 
@@ -142,13 +144,163 @@ While the 7-layer OSI model can theoratically be applied to the internet, the 4 
 Application Layer relates to layer 7 of the OSI model. 
 Transport layer relates to layer 4.
 IP is layer 3.
-And the subnet layer is layer 2.
+And the subnet layer is layer 2 and 1.
 
 Internet Architecture has three features:
 * Does not imply strict layering, meaning an application is free to bypass the defined transport layer (TCP and UDP), and to directly use IP.
 * IP serves as the focal point of the architecture. This creates an hourglass shape in the protocol graph (Shown above)
 * For a new protocol to be officially recognized, there must be both a **specification** and the existence of at least one or two **implementations**.
+## Socket Programming
 
+The architecture of the internet has made it available to create APIs or abstractions on top. That way we are able to connect with the internet with just a few lines of programming.
+
+Each protocol provides a certain set of *services*, but the point of an API is to provide a *syntax* by which those services can be invoked.
+
+There have been many APIs that different Operating Systems exposed for network programming, however nowadays a particular network API has gained popularity. That is the **Socket** API.
+
+The Socket API abstracts the act of connecting to a network as **opening sockets**. A Socket is a point of connection for local applications to the network. This connection can be either a TCP connection `SOCK_STREAM`, a UDP connection `SOCK_DGRAM`, or a direct connection using IP and dealing with packets directly.
+
+A client side code, does an **active** connection which uses functions such as this:
+
+```C
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <strings.h>
+#include <string.h>
+#include <unistd.h>
+
+#define SERVER_PORT 5432
+#define MAX_LINE 256
+
+int main(int argc, char* argv[])
+{
+	FILE* fp;
+	// A host entity
+	struct hostent* hp;
+	// information related to the socket address on the other host
+	struct sockaddr_in sin;
+	// name of the host in string (we'll get it from argv)
+	char* host;
+	// The buffer that we are going to send at the end
+	char buffer[MAX_LINE];
+	if(argc == 2)
+	{
+		host = argv[1];
+	}
+	else
+	{
+		fprintf(stderr, "usage: program-name host\n");
+		return 1;
+	}
+	// It reads the string and resolves it to a host entity
+	hp = gethostbyname(host);
+	if (!hp)
+	{
+		fprintf(stderr, "Unknown host: %s\n", host);
+		return 2;
+	}
+	// We have to set the memory of the sockaddr_in to zero before using it
+	bzero((char*)&sin, sizeof(sin));
+	// address family (AF_INET == IPv4)
+	sin.sin_family = AF_INET;
+	// Copies the IPv4 address of the desired host to the sin_addr
+	bcopy(hp->h_addr_list[0], (char*)&sin.sin_addr, hp->h_length);
+	// sets the destination port
+	sin.sin_port = htons(SERVER_PORT);
+	
+	// create a socket connection
+	int s = socket(PF_INET, SOCK_STREAM, 0);
+	// Error checking
+	if(s < 0)
+	{
+		perror("socket error");
+		return 1;
+	}
+	// an active connection to the newly created socket
+	if(connect(s, (struct sockaddr*)&sin, sizeof(sin)) < 0)
+	{
+		perror("connect error");
+		close(s);
+		return 1;
+	}
+	
+	int len;
+	// Reads maximum 255 characters from IO and fills our buffer
+	while(fgets(buffer, sizeof(buffer), stdin))
+	{
+		buffer[MAX_LINE-1] = '\0';
+		// length of the string we inputed
+		len = strlen(buffer) + 1;
+		// We then send the buffer to the socket connection
+		send(s, buffer, len, 0);
+	}
+	return 0;
+}
+```
+
+A server instead does a **passive** connection. For that the server opens a socket that waits for a connection. Once a connection has been detected, a new socket is created so that it can recieve the data from the connection.
+
+```C
+#include <stdio.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <unistd.h>
+#include <strings.h>
+
+#define SERVER_PORT 5432
+#define MAX_PENDING 5
+#define MAX_LINE 256
+int main()
+{
+	struct sockaddr_in sin;
+	char buffer[MAX_LINE];
+	bzero((char*)&sin, sizeof(sin));
+	
+	sin.sin_family = AF_INET;
+	// the address of the other host can be anything so it's set to that
+	sin.sin_addr.s_addr = INADDR_ANY;
+	// The specific port that the server listens on
+	sin.sin_port = htons(SERVER_PORT);
+	// The socket connection that is meant to just listen
+	int sock = socket(PF_INET, SOCK_STREAM, 0);
+	if(sock < 0)
+	{
+		perror("socket fail");
+		return 1;
+	}
+	// binds to the socket instead of a direct connect
+	if(bind(sock, (struct sockaddr*)&sin, sizeof(sin)) < 0)
+	{
+		perror("bind failed");
+		return 1;
+	}
+	// listening
+	listen(sock, MAX_PENDING);
+	
+	int new_sock;
+	socklen_t len = 0;
+	while(1)
+	{
+		// Here the accept function returns a new socket, if a connection was 
+		// established
+		if((new_sock = accept(sock, (struct sockaddr*)&sin, &len)) < 0)
+		{
+			perror("accept failed");
+			return 1;
+		}
+		// Then it recives the data from the new socket.
+		while((len = recv(new_sock, buffer, sizeof(buffer), 0)))
+			fputs(buffer, stdout);
+		close(new_sock);
+	
+	}
+}
+```
 ## Performance
 
 The functionality is all well and good, but if it's not performant then what's the point?
@@ -172,6 +324,8 @@ Latency = Propagation + Transmit + Queue
 
 If data is just one bit of data then Transmit and Queue have no effect.
 
+**Data Rate**: How many bits a second can a link send in a particular time.
+
 ## Delay x Bandwidth Product
 
 We can think of a network as a pipe. In this way, the bandwidth is the diameter and delay the length of the pipe. 
@@ -190,5 +344,78 @@ Throughput is defined in this way:
 *Throughput = TransferSize/TransferTime*
 *TransferTime = RTT + 1/Bandwidth x TransferSize*
 
+
+**Jitter**: The variation in latency is called Jitter. If the spacing between when packets arrive at the destination is varaible, the the delay will cause the packets to come in out of order, causing jitter.
+
 # Chapter 2: Getting Connected
+
+In the lowest layer of a network system, there are five general problems to solve to send bits through the network:
+
+* **Encoding**: Finding a way to encode binary meaning on wires
+* **Framing**: delineating a sequence of bits that was transmitted, these are often called **frames** so the problem is called framing.
+* **Error Detection**: Errors inevitably occur when sending signals through wires.
+* **Making the link appear reliable despite it creating errors half the time** (Sadly couldn't shorten this one)
+* **Media Access Control**
+
+## Classes of Links
+
+Most practical links rely on some sort of electromagnetic radiation.
+
+Two methods of characterizing links, **the medium** like copper wire as in Digital Subscriber Line (DSL), coaxial cable, optical fibres, or wireless links and the **frequency** mesaured in hz. 
+
+The distance between a pair of adjacent maxima and minima of a wave is called the *wavelength*.
+![[2025-03-31_12-49.png]]
+
+
+**Modern long-distance links are almosqt exclusively replaced by fiber today.** They commonly use a technology called SONET. 
+
+There are also links that you find inside a building or a campus, refered to as *local area networks (LAN)*. Ethernet is a popular example and has been dominant in these types of links.
+
+Despite the wide variety of link types and all the complexity, different networking protocols can take advantage of that diversity and present a consistent view of the network to the higher layers.
+## Encoding
+
+We can think of the problem of encoding binary meaning on signals as two layers, the modulation where a signal like an on or off switch changes intensity. We'll think of a signal as simply having low or high signals, so we'll ignore the details. Now what's important is to find a way to encode meaning to these high and low signals.
+
+The job of a **network adapter** is to encode and decode these types of meanings onto these signals. It contains a signaling component that encodes and decodes signals.
+![[2025-03-31_13-05.png]]
+## NRZ: non-return to zero
+
+The obvious way is to correspond low with 0 and high with 1, that is NRZ. 
+![[2025-03-31_13-05_1.png]]
+
+The problem is that for long strings of 0s or 1s the signal can not change. There are two issues this causes:
+
+* baseline wonder: the reciever keeps an avearge of the signal seen and uses it to distinguish between high and low, however consecutive 1s or 0s cause the average to change, making distinguishing them difficult.
+* It is necessary for the signal to change to enable *clock recovery*. Every clock cycle the sender transmits and reciever recovers a bit, so the sender and reciever need to have precise clocks. The reciever derives the clock from the recieved signal, whenever it changes, the clock changes. With consecutive 0s or 1s, it will be difficult to decipher the clock cycle, making desynchronization more likely.
+
+## NRZI: non-return zero inverted
+
+A method of fixing the issues with NRZ is this. encode a 1 by transitioning from the current signal and encode a 0 as staying on the current signal. This solves consecutive 1s but obviously does nothing for consecutive 0s.
+
+## Manchester
+
+Another method is encoding 0 as a low-to-high transition and 1 being a high-to-low transmition. The clock can be effectively recovered at the reciever with this method.
+
+The problem is that it doubles the rate at which signal transitions are made on the link which means the reciever has half the time to detect each pulse of the signal.
+
+The rate at which the signal changes in a link is called the *baud rate*. In this method, the bit rate is half the baud rate so it is considered as 50% efficient.
+
+![[2025-03-31_13-16.png]]
+
+## 4B/5B
+
+The idea is to break up long sequences of 1s or 0s by inserting extra bits into the stream.
+
+Every 4 bits of actual data are encoded in a 5-bit code that is then transmitted to the reciever. The 5 bit codes are selected to have no more than one leading 0 and no more than two trailing 0s.So no pair of 5 bit codes sent will have more than 3 consecutive 0s. Then the signals are decoded using **NRZI**. Solving both the consecutive 1s and 0s problem as a result. This results in 80% efficiency.
+
+![[2025-03-31_14-21.png]]
+
+5 bits can represent more things because there 32 possible symbols and only 16 of them is used for the actual data.
+
+11111 is used when the line is idle and 00000 is used when the line is dead, and 00100 is interpreted as halt. 7 of the remaining 13 codes are invalid because they invalidate the one leading and two trailing 0s rule. And the 6 others represent control symbols.
+
+## Framing
+
+When node A wishes to send a frame to node B, the adaptor on node B has to determine where the frame begins and ends in the signal and that is the central problem called the **Framing Problem**.
+
 
