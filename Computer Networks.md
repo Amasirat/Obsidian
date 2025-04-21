@@ -845,3 +845,22 @@ There are also two categories of source routing, strict where a strict route to 
 ## Bridges and LAN Switches
 
 Widely used in campus and enterprise networks. There is a class of switches used to forward packets between LANs such as Ethernets which are also referred to as *bridges*.
+
+In order to connect two Ethernet networks together, we can put a node with an Ethernet adaptor on it operating in promiscuous mode. That is a bridge!
+
+A collection of LANs connected like this is called an extended LAN. Simple bridges are ones that get incoming frames and copy them on the outgoing interface.
+
+An optimization we can make is to not copy frames if they are intended for hosts within one network. Bridges learn that information by inspecting the source address and record which port they arrived in, that way it knows where they live. So a table of Hosts and ports are created. Each entry has a timeout associated to it and if they do not hear from each, they are discarded.
+
+The above strategy works until there is a loop in the extended LAN. Why would that be?
+
+* managed by more than one administrator
+* Another more likely reason is that it is done in purpose to provide redundancy in case of a link failure
+
+This is solved by having the bridges running a spaning tree algorithm. A spanning tree is a sub graph that has no loops. If we think of the extended LAN as a graph, its bridges can run a spanning tree algorithm to determine a subgraph with no loops.
+
+
+
+
+
+
