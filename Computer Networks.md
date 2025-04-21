@@ -857,10 +857,22 @@ The above strategy works until there is a loop in the extended LAN. Why would th
 * managed by more than one administrator
 * Another more likely reason is that it is done in purpose to provide redundancy in case of a link failure
 
-This is solved by having the bridges running a spaning tree algorithm. A spanning tree is a sub graph that has no loops. If we think of the extended LAN as a graph, its bridges can run a spanning tree algorithm to determine a subgraph with no loops.
+This is solved by having the bridges running a spaning tree algorithm. A spanning tree is a sub graph that has no loops. If we think of the extended LAN as a graph, its bridges can run a spanning tree algorithm to determine a subgraph with no loops. The idea is to restrict the bridges so that they should not send frames over specific ports so that a loop is not caused.
 
+Each bridge is given an ID. The bridge with the smallest ID is elected as the root bridge. The root bridge always forwards frames out over all its ports. Then each bridge computes the shortest path to the root and notes which one of its ports are in the path, finally all bridges designate one bridge that will be responsible for forwarding frames to the root bridge. 
 
+We however need all the bridges to agree on one configuration, so the below algorithm is used:
+Each bridge claims to be root and advertises that using information like this: (Root Node, distance to root, Sending Node), for example the bridge which is called B3 will send this: (B3, 0, B3). If they get a better message than what they recorded they will adjust it. A better message is:
 
+* A root with a smaller ID
+* The same root but with a shorter distance
+* The same root and distance but smaller ID of the sender
 
+After it discards the old information it will add 1 to the distance it had recorded.
 
+Once the root has been chosen the others stop transmiting configuration messages and only the root does so. If it for whatever reason stops sending them, the algorithm restarts again to elect a new root node.
+
+*Although the algorithm can reconfigure in case of failure, it can't due anything about rerouting in the case of congestion or anything like that*
+
+There are limitations to bridges, 
 
