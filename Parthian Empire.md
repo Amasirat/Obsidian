@@ -25,18 +25,37 @@ The seleucid Empire had become weaker by many wars in the west, which created a 
 The history of Parthia can be divided into four periods.
 ## Phase I (247-165 BC)
 
-The first phase is the development from a vassal state to the Parthian Empire
+The first phase is the development from a vassal state to the Parthian Empire which covers 80 years. 
+insuffieciently informed on the beginnings.
+
+The Parni belonging to the Dahae a community of Central Asian nomads. They sought new homes by invading neighboring areas, occupying and defending them. In 280 BC they invaded Margiana which was under the command of Diodotus who reigned in Bactria and Parthia, Seleucid vassal states, however they failed and were driven back but they remained a constant threat. Arasces I, the leader to the Parni at the time, in 239 BC successfuly invaded the satrapy of Parthia. The invasion was supported by the indigenous people, that's why they were named the Parthians as a whole afterwards. The Parni even adopted the Language of the Parthians which was the language of the western Iranian roots.
+
+The reason that the Parni, a mere nomadic tribe could accomplish such a feat was because at that time it was pretty much impossible to govern the Seleucid Empire without problems and there were many vassal states in the east that had been trying to become independant. 
+
+After Arasces I, The Parthians tried to achieve greater independence however their territory was falling again under the Seleucid rule. A contract was signed between them however it only lasted for 20 years.
+
+A power vaccum emerged after the defeat of Antiochus III in a war with Rome and the Parthians extended their domain again.
+
+Interesting to note that on the coins of the Parthians, Arasces is called an 'Autocrat' showing that Parthia was still a dependancy of Seleucids however during Arasces II the coins only said 'Arasces'.
 ## Phase II (165-70 BC)
-
-
 The power of the Parthians grew after the death of Antiochos III or even the Antiochos IV in 164 BC.
 
-In the 140s Mithradates I conquered the Seleucid core provinces of Media and Babylonia, starting the further decline of the Seleucid Empire.
+The Seleucid Empire was struggling with uprisings and decline. Alexander Balas, a usurper succeeded in gaining the throne from Demetrius I in 150 BC. Demetrius II, Son of Demetrius I regianed the throne in 5 years however his weakness in leadership coupled with struggles in Syria resulted in the power transitions which set the stage for the expansion of the Parthians.
+
+At the time of Mithradates I, the Parthians fought and conquered a lot of lands. At this period in time, the rulers of Parthia took the title of 'King of Kings', harkening back to the kings of the Aachamenid Empire.
 ## Phase III (70 BC - 51 AD)
 
+In this phase, there were a lot of tensions between Parthia and Rome. Many diplomantic contacts were established however some failed and war between these two broke out. 
 
+The Roman govenor of Syria Marcus Licinius Crassus broke out the first major war against Parthia, which was Romans' greatest defeat in history. This resulted in Rome having to recognize that Parthia had become an equivalent great power.
+
+At the end, peace negotiations were held between Augustus and the Parthians.
 ## Phase IV (51-224 AD)
 
+The peace after the Augustus negotiations were fragile, power struggles took place after that.
 
 
+
+
+# Cultures
 

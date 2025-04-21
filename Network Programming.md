@@ -72,7 +72,7 @@ In order to have IPv4 compatibility, you can show IPv4 addresses like this in IP
 
 192.60.2.102 ======> ::ffff:192.60.2.102
 
-Some CPUs store numbers in reverse order which is called in **little-endian**. 
+Some CPUs store numbers in reverse order which is called **little-endian**. 
 
 The prefered way to store numbers in networks is in **big-endian** or storing it in the correct way. 
 
@@ -124,4 +124,65 @@ struct sockaddr_in6 sa6; // IPv6
 inet_pton(AF_INET, "10.12.110.57", &(sa.sin_addr));
 inet_pton(AF_INET6, "2001:db8:63b3:1::3490", &(sa6.sin6_addr));
 ```
+
+NAT is a technology used to make local IP addresses discoverable to external networks in disconnected local networks behind a firewall.
+
+A few best practices to support IPv6:
+
+* use getaddrinfo() instead of packing the structures by hand.
+* Any place where you are hard-coding IP address make it a helper function
+* INADDR_BROADCAST no longer works, use IPv6 multicast.
+
+# System Calls
+
+Here is some system calls used for communicating with the socket API implemented by the OS kernel.
+
+## getaddrinfo()
+
+Helps set up the needed strcuts.
+
+You used to have to do a DNS lookup using gethostbyname() and then load that information into `struct sockaddr_in` and then use that. But that is old and not IPv6 compatible.
+
+`getaddrinfo()` is there to fullfil the role of `gethostbyname()` and also fills out the structs.
+
+```C
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
+
+int getaddrinfo(const char* node,     // e.g. "www.example.com" or IP
+                const char* service,  // e.g. "http" or port number
+                const struct addrinfo* hints,
+                struct addrinfo** res);
+
+```
+
+Here is a server being set up to listen to a host's IP address on port number 3490.
+
+```C
+#define LISTEN_PORT "3490"
+
+struct addrinfo hints;
+struct addrinfo* servinfo;
+
+memset(&hints, 0, sizeof hints); // set struct to zero
+hints.ai_family = AF_UNSPEC; // don't care which IP version this is
+hints.ai_socktype = SOCK_STREAM; // TCP
+hints.ai_flags = AI_PASSIVE; // address of local machine
+
+int status = getaddrinfo(NULL, LISTEN_PORT, &hints, &servinfo);
+if (status != 0)
+{
+	fprintf(stderr, "getaddrinfo error: %s\n", gai_strerror(status));
+	return -1;
+}
+
+// Do the listening
+
+freeaddrinfo(servinfo);
+```
+
+
+## Socket
+
 
