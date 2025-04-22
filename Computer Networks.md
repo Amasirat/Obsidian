@@ -874,5 +874,19 @@ Once the root has been chosen the others stop transmiting configuration messages
 
 *Although the algorithm can reconfigure in case of failure, it can't due anything about rerouting in the case of congestion or anything like that*
 
-There are limitations to bridges, 
+There are limitations to bridges, mainly one being that they are not scalable and the spanning tree algorithm scales linearly.
+
+A method for increasing scalability is the virtual LAN (VLAN).
+
+![[2025-04-21_21-15.png]]
+
+An attractive feature of VLAN is that you can change the topology without moving any wires. If you want to add Z to VLAN 100 for instance, you can just change a configuration on bridge 2.
+
+Bridges can only connect networks that support the same framing format (48 bit size payload), they can't for instance connect ATM networks.
+
+Their main advantage however is that LANs can be connected without any host knowing about it. The main danger with that is a bridged network is more unpredictable than a single LAN, bridges can be congested or fail, resulting in variable latency.
+
+## Basic Internetworking (IP)
+
+
 
