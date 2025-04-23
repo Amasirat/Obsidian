@@ -888,5 +888,58 @@ Their main advantage however is that LANs can be connected without any host know
 
 ## Basic Internetworking (IP)
 
+An internet is a *logical* network built out of a collection of physical networks.
+
+The internet protocol is the key tool used to build scalable heterogenous internetworks.
+IP has defined what services it provides, it was important for IP to not wish for much and make the standard fairly lax in order to have more connections. For instance it does not need to have a specific latency, that way networks with higher latency can also be connected as well.
+It has:
+* An addressing scheme
+* A Datagram delivery model
+
+The network makes its best effort to get a packet to its destination, but it does not guarantee it.
+This is called a *best-effort connectionless* service or an *unreliable service*. It is however the simplest thing to ask for an internetwork to do, do its best to deliver packets. If it was instead a *reliable* model that was running on an unreliable network, there would have be a lot of extra functionality that a router needed to have. The simplicity of the demands of IP is deemed as its key to success.
+
+![[2025-04-22_11-20.png]]
+The format of an IP packet is like this:
+**First word**
+* Version: Dictates what IP version it is, IPv4 or IPv6
+* HLen: The length of the header in 32 bit words
+* TOS: For the type of service, this header has changed over the years
+* Length: Length of the datagram including the header, this one counts bytes rather than words. the maximum size of an IP datagram is 65,535 bytes.
+
+**Second Word**
+Contains information about **fragmentation** and **reassembly**. Although a packet can be 65,535 bytes long, the network may not support that, so a large packet may be fragmented.
+
+**Third Word**
+* TTL: Time to live, intent is to catch packets that have been going around in routing loops and discard them. It used to be seconds but now its a hop count
+* Protocol: a demultiplexing key signifying which higher level IP to pass this to
+* Checksum: calculated considering the entire IP header, uses the checksum algortihm discussed in [[#Checksum]]
+
+The last two words are the source address and destination addresses.
+
+The challenge with connecting different network types together using IP is that each one has a different idea of how big a packet should be. We can either choose a small enough packet to send that will fit all, or we can fragment and reassemble if necessary to pass through networks with different sized packets.
+
+Each network type has a *maximum transmission unit* (MTU), which is the largest IP datagram that it can carry in a frame. This value is smaller than the largest packet size on that network.
+
+If the MTU of a local network is smaller than the packet size of an IP datagram, it has to be fragmented and then reassembled inside the network. Otherwise there won't be a need for that. It's like a filter telling the outside network how big a packet should be, and then it will chop up anything larger to fit inside. The reverse is true as well, a larger sized packet can't leave the network unless it is fragmented out by the host.
+
+If every fragment of a datagram reaches the reciever then they are reassembled, otherwise it will be discarded. IP does not try to recover from missing fragments.
+![[2025-04-22_12-01.png]]
+
+The M bit is set to one if there are more packets that need to arrive.
+For example we have two routers with different MTU sizes, the first one has a larger MTU but smaller than the datagram size which will fragment the packet into two. Then the next router has an MTU of 532 bytes which will again fragment it into another two. All in all three fragmented packets will be recieved at the host.
+
+The offset means what byte position this belongs to, however it is counted in 8-byte chunks not 1 byte chunks. So 512 / 8 = 64.
+
+It is usually a good thing to avoid fragmentation as much as we can because it may lead to more complexity.
+
+## Global Addresses
+
+IP Addresses are hierarchical meaning they are made of several parts that correspond to one hierarchy of the network. IP addresses consist of two parts:
+* Network: Identifies the network the host is attached
+* host: 
+
+
+
 
 
