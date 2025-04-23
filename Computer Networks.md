@@ -936,10 +936,45 @@ It is usually a good thing to avoid fragmentation as much as we can because it m
 ## Global Addresses
 
 IP Addresses are hierarchical meaning they are made of several parts that correspond to one hierarchy of the network. IP addresses consist of two parts:
-* Network: Identifies the network the host is attached
-* host: 
+* Network: Identifies the network the host is attached. All hosts attached to the same network have the same Network part
+* host: identifies each host uniquely
 
+IP is written as four integer numbers from 0 to 255 separated by a dot. (Each representing one byte of the address)
 
+e.g: 178.21.3.12
 
+IPs used to be divided into different classes
+* Class A: Signified by the MSD being a 0
+* Class B: Signified by the MSD and the bit next to it being 1 and 0
+* Class C: Signified by 110 in its MSDs
+* Class D (For multicast groups)
+* Class E (unused currently)
+![[2025-04-23_10-57.png]]
 
+This seemed a flexible design. There could only be 126 class A networks, each accomodating for about 16 million hosts. Class B allocates 14 bits for network and 16 bits for hosts meaning each class B can have 65,534 hosts. Class C dedicates 21 bits to network and 8 bits to host which means it can have only 254 attached hosts. The idea was that the internet would like this:
+* Some Wide Area Networks (Class A)
+* A moderate amout of medium sized networks (Class B)
+* And a lot of LANs (Class C)
+However it turned to not be as flexible as it was thought so nowadays IP addresses are not class based.
+
+## Datagram Forwarding in IP
+
+Forwarding is the process of taking a packet from input and sending it through the right output but *routing* is the process of building up the tables that allow correct output to be determined.
+
+* Every datagram has the IP of the destination host
+* The network part uniquely identifies a physical network inside the internet
+* All host and routers that share the same network part can communicate each other on the same network
+* Every physical network has at least one router which is at least connected to one other physical network
+
+When a packet is sent from a source host, it passes through different routers until it reaches the destination host. Once a packet is sent to a router, it first checks to see if the network part of the packet is the same as one of the physical networks it is connected to. If it is not connected to the same physical network as the destination then it sends the datagram to another router. 
+
+They have a choice of routers, so they need to pick the best one. The chosen router is called the *next-hop router*. It holds an ordered list of \<NetworkNum, NextHop\> which tells it what the next hop router will be for a particular network part. If it is not listed, it also has a default router that it sends to.
+
+## Subnetting and Classless Addressing
+
+The initial idea was that the Network part would represent only one physical network. There are however only a finite number of network numbers and as the internet grew larger, it became unsustainable. Another issue was that most people would rather get a Class B network instead of a Class C one because who knew if thir network would need more than 254 hosts?
+
+Another problem with the class-based system was that, if we had a class C network with only 2 nodes, we would essentially be throwing away the remaining 253 addresses we could have had. So the class based IP scheme would use up most IP addresses much faster.
+
+Another drawback is concerned with routing. Routers keep a network address in their memory, if network addresses become large, routers will run out of space, not to mention they become much slower to operate.
 

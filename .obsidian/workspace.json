@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "efefd46dc0bb422d",
@@ -166,6 +165,7 @@
   },
   "active": "790e15089ff51a5b",
   "lastOpenFiles": [
+    "Attachments/2025-04-23_10-57.png",
     "Attachments/2025-04-22_12-01.png",
     "Attachments/2025-04-22_11-20.png",
     "Attachments/2025-04-21_21-15.png",
@@ -179,7 +179,6 @@
     "Attachments/2025-04-14_21-21.png",
     "Attachments/2025-04-14_21-04.png",
     "Attachments/2025-04-14_21-02.png",
-    "Attachments/2025-04-14_19-16.png",
     "Parthian Empire.md",
     "Untitled 1.md",
     "C++.md",
