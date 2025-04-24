@@ -933,7 +933,7 @@ The offset means what byte position this belongs to, however it is counted in 8-
 
 It is usually a good thing to avoid fragmentation as much as we can because it may lead to more complexity.
 
-## Global Addresses
+### Global Addresses
 
 IP Addresses are hierarchical meaning they are made of several parts that correspond to one hierarchy of the network. IP addresses consist of two parts:
 * Network: Identifies the network the host is attached. All hosts attached to the same network have the same Network part
@@ -957,7 +957,7 @@ This seemed a flexible design. There could only be 126 class A networks, each ac
 * And a lot of LANs (Class C)
 However it turned to not be as flexible as it was thought so nowadays IP addresses are not class based.
 
-## Datagram Forwarding in IP
+### Datagram Forwarding in IP
 
 Forwarding is the process of taking a packet from input and sending it through the right output but *routing* is the process of building up the tables that allow correct output to be determined.
 
@@ -970,7 +970,7 @@ When a packet is sent from a source host, it passes through different routers un
 
 They have a choice of routers, so they need to pick the best one. The chosen router is called the *next-hop router*. It holds an ordered list of \<NetworkNum, NextHop\> which tells it what the next hop router will be for a particular network part. If it is not listed, it also has a default router that it sends to.
 
-## Subnetting and Classless Addressing
+### Subnetting and Classless Addressing
 
 The initial idea was that the Network part would represent only one physical network. There are however only a finite number of network numbers and as the internet grew larger, it became unsustainable. Another issue was that most people would rather get a Class B network instead of a Class C one because who knew if thir network would need more than 254 hosts?
 
@@ -1005,7 +1005,7 @@ If we have a network that needs 256 hosts, we can give it a class B network addr
 
 With the advent of CIDR, during forwarding packets we can come across a situation where IP addresses overlap each other. For example we can have both 168.25.2.10 and 168.25 as entries. The rule here will be the longest match will win. If a packet destination for example is 168.25.2.10, then the first entry will be used otherwise if we have 168.25.3.1, because we don't have any direct entries with this IP number then the second entry will be used.
 
-## Address Translation
+### Address Translation
 
 IP datagrams only have information about their IP addresses, however to a host or router the only thing they understand is addressing scheme of that particular network. (MAC addresses for example), so we need a way of translating IP addresses into data-link level addresses.
 
@@ -1016,9 +1016,10 @@ Here comes the Address Resolution Protocol (ARP). The goal of ARP is to enable e
 If host A wants to send a packet to host B for example within one network it checks to see if it has the MAC address (or hardware address) of the destination IP. It checks a special table called the ARP cache.
 
 This is an example, this is the arp cache of my computer, The IP address shown here is my default gateway A.K.A the ADSL router. The Device tells me which interface I used to access this gateway. wlp8s0 is the name of my WiFi interface. If I had connected a direct Ethernet cable to my router then the device would be en2p.
+(I hid my router's MAC address with xx just in case)
 ```bash
 IP address       HW type     Flags       HW address            Mask     Device
-192.168.1.1      0x1         0x2         40:ae:30:16:fa:03     *        wlp8s0
+192.168.1.1      0x1         0x2         30:ef:xx:xx:xx:xx     *        wlp8s0
 ```
 
 It is fair to assume a router also has an arp cache which dictates the MAC address of the routers they are connected to.
@@ -1030,4 +1031,80 @@ An ARP request includes the IP and Hardware address of host A along with the des
 This way once host A recieves the ARP response it can cache that address and start communicating with host B. If instead of the host, it was connected to a multi-access network of switches, bridges, and routers, etc. The process will be the same but host A only has to worry about the router or switch that it is connected to. The rest of the job will be done by them.
 
 Each ARP entry will be deleted if there has been no connection to it for 15 or so minutes. This way the entire process will repeat if the network changes, or hardware addresses change as well for example a change in router in a home network setting.
+
+![[2025-04-24_19-23.png]]
+
+### Host Configuration
+
+Ethernet and hardware addresses are gobally unique and that's all we ask of them to be.
+
+However IP addresses also need to represent their network structure, therefore we can't just set a fixed IP address to one host, so they need to be reconfigurable. 
+
+The primary method of assigning IPs to hosts is using a protocol known as Dynamic Host Configuration Protocol. 
+
+A DHCP server exists to store all the IP addresses that are assigned or are available to the network and a sophistacated use of a DHCP server would be to have it assign IP addresses to a newly booted host.
+
+a newly attached host sends a DHCPDISCOVER broadcast message to all nodes on the network. In the simplest terms, one of these nodes will be the DHCP server but since it would still be unrealistic to have a DHCP server per one network, a realy agent whose job is to connect to a DHCP server does the job instead. Once a relay agent gets the broadcast message, it unicasts the message to the DHCP server, awaits the response and then sends it back to the host.
+
+*Fun fact: The message is sent using the User Datagram Protocol (UDP)*
+
+![[2025-04-24_19-48.png]]
+
+The host puts its hardware address in the *chaddr* field, then the DHCP server replies by filling *yiaddr* (your ip address), other information like a default gateway can be included in *options*.
+
+A DHCP server can not give an IP address permenantly to someone else since it will run out however it can't count on the client to send it back because a problem could have risen with it. That's why an IP address is *leased* and will be re-aquired once it runs out. A client therefore has to renew it periodically if it is functioning correctly.
+
+Since IP now is dynamic it might make the job of the network admin harder in the case where a particular host is malfunctioning.
+
+### Error Reporting
+
+Internet Control Message Protocol (ICMP) defines a collection of error messages that can be sent in the case of an error in processing an IP Datagram or other things. Like when a detination is unreachable, the router sends an ICMP message back, or if a reassembly procces failed, etc.
+
+The most interesting ICMP message is the *ICMP-Redirect*. If a router for example knows that for a specific connection another router is better it will send this to let the host know and send it through that instead.
+
+ICMP echo messages are also behind the ping command, determining if a node is alive and reachable. *traceroute* is also provided by this protocol. 
+
+### Virtual Networks and Tunnels
+
+
+
+## Routing
+
+The fundamental problem of routing is how switches and routers aquire the information in their forwarding tables.
+
+There are several routing algorithms that exists, they generally don't scale very well however they help build the bedrock of the routing infrastructure of the internet collectively known as intradomain routing protocols or interior gateway protocols.
+
+We shall first explore these algorithms on mid-sized networks like a university campus or company servers, etc.
+
+In essence a routing problem is a shortest-path graph problem. Each node being a client, router, switch, or network, etc and each edge being a link, with its weight symbolizing our inclination for sending traffic on that network. We can simply calculate all shortest paths and save them however the problem with that is:
+
+* Does not deal with node or link failure
+* does not consider addition of new nodes or links
+* it implies that edge costs do not change which is not true at all for networks
+
+It is difficult to make centralized solutions scalable, so most used protocols use *distributed algorithms* to solve these problems. However that causes additional complexity to the problem. For instance two routers can have different ideas about the shortest path, both thinking their closer to the destination and decide to send packets to the other one, causing an infinite loop.
+
+### Distance-Vector (RIP)
+
+Each node constructs a one-dimensional array containing costs to all other nodes and distributes that to its immediate neighbors. A link that is down is assigned an infinite cost.
+
+![[2025-04-24_20-59.png]]
+
+For example, node A initially sets a cost of one to all its adjacent nodes. So A to B is 1, A to E is 1, A to F is also 1 as well as C.
+
+then every node sends a message to all its direct neighbors with their current beliefs. For example, F knows it can reach G in one hop, so A figures out that it can go to G in 2 hops by hopping on F. 
+
+When A gets the information that B can reach C in 1, it'll ignore it since it already had a shorter path by going to it directly and 1 < 2.
+
+![[2025-04-24_21-03.png]]
+
+![[2025-04-24_21-04.png]]
+
+Two different circumstances when a given node decides to send a routing update to its neighbors:
+* *periodic* update: Each node automatically sends an update message every so often
+* *triggered* update: When a node notices a link failure or recieves an update from its neighbors
+
+The system normally settles down pretty quickly after a change in network topology. An update is sent from the node that realizes the change first and this update propogates through out the graph.
+
+There is however a specific circumstance that causes issues. For example, let's say node E from the picture goes down. Node E was only connected to A so if the link fails it will become completely unreachable. A advertises a distance of infinity but B and C still think they can reach in two hops, not registering the new information of infinity because infinity > 2. In this manner, B advertises that it can reach E in 3 hops since C can reach it in 2, node A then concludes it can reach E in 5, etc. This goes on forever but none of the nodes can ever figure out that E has become unreachable in actuality. This is called the *count to infinity*.
 
