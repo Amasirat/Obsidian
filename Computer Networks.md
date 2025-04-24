@@ -978,3 +978,33 @@ Another problem with the class-based system was that, if we had a class C networ
 
 Another drawback is concerned with routing. Routers keep a network address in their memory, if network addresses become large, routers will run out of space, not to mention they become much slower to operate.
 
+subnetting is giving the same network address to many physical networks and dividing their address space among them. A perfect scenario is a large campus that has many networks which are represented by the same general network address part. From the outside the only thing you need to know to reach any subnet of the campus is where it connects to the internet.
+
+Now each host comes with a *subnet mask* as well as its IP address. If we want to know what network a host belongs to, we do a bitwise AND of its IP with its subnet mask.
+
+IP Address: 128.96.34.15
+Subnet Mask: 255.255.255.128
+
+Result: 128.96.34.0, this called the subnetted address or subnet number
+
+![[2025-04-24_16-18.png]]
+
+A Host does a bitwise AND of the subnet mask and the IP address, if it belongs to the same subnet number it will do the connection directly otherwise the packet has to do a hop.
+
+The forwarding table of a router will change with this new scheme, instead of \<NetworkNum, NextHop\> we're going to have \<SubnetNumber, SubnetMask, NextHop\>
+
+The router ANDs the packet destination address with the SubnetMask for each entry. If it matches with one, that hop is done otherwise it goes through the default router.
+
+A consequence of subnetting is that different parts of the internet see it very differently. routers outside the campus see the collection of networks as just 128.96 and they keep one entry but inside the campus, routers need to forward packets to the right subnets. This is an example of *aggregation* of routing information which is very important to scalability of these routing systems.
+
+subnetting has a counterpart, *supernetting*, more often called *classless Interdomain Routing* (CIDR).
+
+If we have a network that needs 256 hosts, we can give it a class B network address or many class C addresses. However what if instead of that we give *contiguous* class C networks for example from 192.4.16.x to 192.4.31.x. The top 20 bits are the same so we can say this is a 20 bit network number, something between a class B IP and a class C IP. We define this by a CIDR prefix like this:
+
+128.4.16/X, the X means how many bits are the network part. For our example 128.4.16/20 will be the IP. Nowadays instead of class C IPs we say they are /24 IPs meaning 24 bits belong to the network (3 bytes). 192.168.1/24 is a common IP address for home networks in Iran for instance with 24 bits of network and a subnet mask of 255.255.255.0 meaning the entire space is used as one network. from 0 to 255 meaning 254 hosts can be connected (the first address 192.168.1.1 is reserved for the default gateway or the home router in other words and the last one 192.168.1.255 is used as a broadcast IP if any host wants to broadcast a packet to all hosts within the network)
+
+With the advent of CIDR, during forwarding packets we can come across a situation where IP addresses overlap each other. For example we can have both 168.25.2.10 and 168.25 as entries. The rule here will be the longest match will win. If a packet destination for example is 168.25.2.10, then the first entry will be used otherwise if we have 168.25.3.1, because we don't have any direct entries with this IP number then the second entry will be used.
+
+## Address Translation (ARP)
+
+
