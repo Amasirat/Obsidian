@@ -1005,6 +1005,29 @@ If we have a network that needs 256 hosts, we can give it a class B network addr
 
 With the advent of CIDR, during forwarding packets we can come across a situation where IP addresses overlap each other. For example we can have both 168.25.2.10 and 168.25 as entries. The rule here will be the longest match will win. If a packet destination for example is 168.25.2.10, then the first entry will be used otherwise if we have 168.25.3.1, because we don't have any direct entries with this IP number then the second entry will be used.
 
-## Address Translation (ARP)
+## Address Translation
 
+IP datagrams only have information about their IP addresses, however to a host or router the only thing they understand is addressing scheme of that particular network. (MAC addresses for example), so we need a way of translating IP addresses into data-link level addresses.
+
+There are manual ways of doing so but all of them are not scalable, so it's better to have a dynamic method of finding information about that.
+
+Here comes the Address Resolution Protocol (ARP). The goal of ARP is to enable each host to build a table of mappings between IP addresses and link-level addresses.
+
+If host A wants to send a packet to host B for example within one network it checks to see if it has the MAC address (or hardware address) of the destination IP. It checks a special table called the ARP cache.
+
+This is an example, this is the arp cache of my computer, The IP address shown here is my default gateway A.K.A the ADSL router. The Device tells me which interface I used to access this gateway. wlp8s0 is the name of my WiFi interface. If I had connected a direct Ethernet cable to my router then the device would be en2p.
+```bash
+IP address       HW type     Flags       HW address            Mask     Device
+192.168.1.1      0x1         0x2         40:ae:30:16:fa:03     *        wlp8s0
+```
+
+It is fair to assume a router also has an arp cache which dictates the MAC address of the routers they are connected to.
+
+You could have manually added them but what if a particular IP interface decides to change its wifi card or adaptor? we need to find the hardware address dynamically. If host A does not have the desired hardware address, it sends a broadcast message through the network, this message is called an ARP request. 
+
+An ARP request includes the IP and Hardware address of host A along with the destination IP, whoever in the network has the same IP address will respond with an ARP response to host A (This will be simple because host A's ARP request included its hardware address as well). Host B will also cache the hardware address of this IP address if it had not done so.
+
+This way once host A recieves the ARP response it can cache that address and start communicating with host B. If instead of the host, it was connected to a multi-access network of switches, bridges, and routers, etc. The process will be the same but host A only has to worry about the router or switch that it is connected to. The rest of the job will be done by them.
+
+Each ARP entry will be deleted if there has been no connection to it for 15 or so minutes. This way the entire process will repeat if the network changes, or hardware addresses change as well for example a change in router in a home network setting.
 
