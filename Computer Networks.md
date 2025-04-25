@@ -1108,3 +1108,13 @@ The system normally settles down pretty quickly after a change in network topolo
 
 There is however a specific circumstance that causes issues. For example, let's say node E from the picture goes down. Node E was only connected to A so if the link fails it will become completely unreachable. A advertises a distance of infinity but B and C still think they can reach in two hops, not registering the new information of infinity because infinity > 2. In this manner, B advertises that it can reach E in 3 hops since C can reach it in 2, node A then concludes it can reach E in 5, etc. This goes on forever but none of the nodes can ever figure out that E has become unreachable in actuality. This is called the *count to infinity*.
 
+Routing Information Protocol (RIP) is a straight-forward implementation of the distance-vector algorithm. In an internetwork, routers advertise the cost of reaching *networks* instead of individual nodes. 
+
+Routers running RIP send advertisements every 30 seconds.
+![[2025-04-25_11-44.png]]
+
+An RIP packet also supports multiple address families and not just IP.
+
+RIP assumes a weight of 1 for each link, valid distances are 1 to 15 meaning the maximum size of a network is limited to fairly small networks with a maximum of 15 hops. 16 is deemed as infinity.
+
+## Link Stat
