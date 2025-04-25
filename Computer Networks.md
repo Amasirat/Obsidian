@@ -8,7 +8,21 @@ A series of interconnected computers are called a **Network**. It is a wide and 
 * [[#Network Architecture]]
 * [[#Socket Programming]]
 [[#Chapter 2 Getting Connected]]
+* [[#Classes of Links]]
+* [[#Encoding]]
+	* [[#NRZ non-return to zero]]
+	* [[#NRZI non-return zero inverted]]
+	* [[#Manchester]]
+	* [[#4B/5B]]
+ * [[#Framing]]
+ * [[#Error Detection]]
+ * [[#Reliable Transmission]]
+ * [[#Multiple Access Networks]]
+ * [[#Wireless]]
 [[#Chapter 3 Internetworking]]
+* [[#Switching and Bridging]]
+* [[#Basic Internetworking (IP)]]
+* [[#Routing]]
 
 # Chapter 1: Foundation
 
@@ -1117,4 +1131,62 @@ An RIP packet also supports multiple address families and not just IP.
 
 RIP assumes a weight of 1 for each link, valid distances are 1 to 15 meaning the maximum size of a network is limited to fairly small networks with a maximum of 15 hops. 16 is deemed as infinity.
 
-## Link Stat
+## Link State
+
+The link state is another method of finding the shortest path. The idea is also similar to distance-vector in that we assume each node knows how to reach its neighbors and if we make sure that the totality is disseminated to every node, we can find the shortest path.
+
+*reliable flooding* is the process of making sure thqat all nodes get a copy of the link-state information. 
+
+Each node creates an update packet which is called the *link-state packet (LSP)* which has:
+* ID of the node creating the LSP
+* A list of its neighbors with the cost of each link
+* a sequence number
+* time to live (TTL)
+
+The first two are necessary for route calculation and the last two are for reliability. Like making sure each node has the most recent copy of the information.
+
+To make LSPs reliable they use a similar system of acknowledgements and timeouts. If Node X gets an LSP from Node Y, it first checks if it has gotten an LSP from this node before, if not it accepts it however if it has gotten one, it checks to see if its sequence number is greater than its previous LSP from this node. If it is it'll update its information and if not it will discard the LSP. if it has accepted an LSP, it will send a copy of that LSP to all its neighbors except Y. In turn, X's neighbors will do the same until the most recent copy of the link-state information reaches all nodes.
+
+*A node does not send a copy to the one it has recieved an LSP because that way the broadcasting can end at some point*
+
+One of link-state's goals is to quickly update every node on the current state of the network and do not let old information stay for too long.
+
+Each time a node generates a new LSP, it increments the sequence number by 1, these sequence numbers are not expected to wrap.
+
+If a node goes down and comes back up, the sequence number starts from 0.
+
+Aside from that a TTL is stored, whenever an LSP moves through each node, it gets decremented by 1. That is there to make sure old information dies eventually and gets deleted. If TTL = 0, a node knows that it has to delete that LSP. This is to avoid the count to infinity problem.
+
+After all LSPs from every node reaches it, the node starts to do the route calculations. It uses a variant of the Dikjstra's Algorithm to find the shortest path called the *forwarding search*
+
+Each node saves two lists of confirmed and tentative. It first adds itself to the confirmed list (D, 0, -), because it knows it can reach itself in 0 hops (duh!)
+
+Whenever a new confirmed entry is added, check the LSP of the newly confirmed node, therefore we check what the currently confirmed node knows about its neighbors.
+The information about the node that we get, if there has been no entry in tentative, we just add, but if we did have, we check if the sum of reaching that node from the current is smaller than the cost it previously has in tentative,
+
+then we add or update the tentative list accordingly. After that we choose the entry from tentative with the least cost to join the confirmed list. rinse and repeat.
+
+Here's a live example of how it works, here's an example graph:
+![[2025-04-25_12-20.png]] And then here are the steps it takes:
+
+![[2025-04-25_12-25.png]]
+
+The difference between distance-vector and link-state is that, distance-vector tells its neighbors the latest information it thinks it has of the whole network however link-state only advertises the information it knows *for sure* that it has, I.E the cost to reach its own neighbors.
+
+### OSPF
+
+The Open Shortest Path First Protocol (OSPF) was created under the Internet Engineering Task Force (IETF). The SPF comes from the alternate name of link-state. This protocol includes a few extra features:
+* Authentication of routing messaages: if a node lies about the state of the network, routing will become problematic, therefore it's good to authenticate these messages. At first a simple 8-byte password was used, it would not stop malicious actors however avoided misconfiguration or casual attacks. later stronger cryptographic techniques were used.
+* Additional hierarchy: OSPF partitions a domain into different areas, a router does not need to know how to reach every network within that domain, it might be enough for it to know how to get to that *area* instead. 
+* Load Balancing: allows multiple routes to the same place be assigned the same cost. This way we can make better use of the network capacity.
+![[2025-04-25_12-35.png]]
+The above is an OSPF packet format, some important properties include:
+* **Type**: means which type of message this is, 1 for a simple hello to know if a link is in working order, the remaining types are used to request, send, and acknowledge reciepts of link-state messages.
+* **SourceAddr**: What address has sent this packet
+* **Checksum**: the entire packet except the authentication is protected by a 16 bit checksum
+* **Authentication Type**: means which system of authentication is used. 1 for simple password 
+* **Authentication**: This one then contains the actual authentication being used.
+
+![[2025-04-25_12-41.png]]
+
+An LSP is OSPF is called an LSA and its format is above

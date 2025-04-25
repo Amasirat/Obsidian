@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "efefd46dc0bb422d",
@@ -165,6 +166,10 @@
   },
   "active": "790e15089ff51a5b",
   "lastOpenFiles": [
+    "Attachments/2025-04-25_12-41.png",
+    "Attachments/2025-04-25_12-35.png",
+    "Attachments/2025-04-25_12-25.png",
+    "Attachments/2025-04-25_12-20.png",
     "Attachments/2025-04-25_11-44.png",
     "Attachments/2025-04-24_21-04.png",
     "Attachments/2025-04-24_21-03.png",
@@ -172,10 +177,6 @@
     "Attachments/2025-04-24_19-48.png",
     "Attachments/2025-04-24_19-23.png",
     "Attachments/2025-04-24_16-18.png",
-    "Attachments/2025-04-23_10-57.png",
-    "Attachments/2025-04-22_12-01.png",
-    "Attachments/2025-04-22_11-20.png",
-    "Attachments/2025-04-21_21-15.png",
     "Olympiad.md",
     "Computer Networks.md",
     "Network Programming.md",
