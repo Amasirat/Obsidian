@@ -795,9 +795,17 @@ There are 4 variants of the 802.11 standard which supports different daata rates
 * The original 802.11 standard defined two radio-based physical layers, both providing up to 2 Mbps
 * 802.11g also used OFDM and delivers 54 Mbps and is backward compatible with version b
 
-It is common for commercial products to support all versions of the 802.11 standard.
+It is common for commercial products to support all versions of the 802.11 standard. Although they define maximum bit rates they also support lower bit rates as well. At lower bit rates it is easier to decode transmitted signals in the presence of noise.
 
 There of course needs to be redundant error correcting information (an XOR of the data), the higher resilience requires more information however at the cost of lowering effective data rate. The systems try to pick an optimal bit rate based on the environment. 
+
+Collision detection in wireless networks is a lot more difficult than Ethernets.
+
+The 802.11 standard uses CSMA/CA for Collision Avoidance in contrast to CD of Ethernets which meant collision detection.
+
+Take for instance three nodes A, B, and C. A and B know they exist but A has no information about C because they do not overlap, but A and B do. Say that A and C want to send frames to B, because they doon't have any idea they exist, there's going to be interference in that case.
+
+
 # Chapter 3: Internetworking
 
 We know how to connect a few hosts together and how to send data to them. Now how do we scale it globally and into multiple networks? That is what *internetworking* tries to solve.
