@@ -708,7 +708,7 @@ Today's Ethernets are usually point-to-point so the multiple access part of the 
 
 ### Physical Properties
 
-originaly made using coaxial cable of length up to 500 m. A **transciever** is a small device directly attached to the tap that detects when a line was idle and drove the signal when the host was transmitting, it also recieved incomming signals. It was connected to an adaptor which was connected to the host.
+originaly made using coaxial cable of length up to 500 m. A **transciever** was a small device directly attached to the tap that detected when a line was idle and drove the signal when the host was transmitting, it also recieved incomming signals. It was connected to an adaptor which was connected to the host.
 ![[2025-04-14_21-02.png]]
 
 Multiple Ethernet segments can be joined together by a *repeater* that forwards digital signals like an amplifier.
@@ -728,7 +728,7 @@ Because all hosts have access to one shared medium, it is important to deal with
 
 The algorithm that allows access control is also called *Multi Access Control (MAC)*.
 
-Each Ethernet frame has the following format:
+An Ethernet frame must contain at least 46 bytes of data, the reason for this minimum is that the frame must be long enough to detect collision. Each Ethernet frame has the following format:
 * Preamble(64 bits): that is attached to the frame by the host adaptor and removed by the reciever adaptor
 * CRC (32 bits): also attached by the adaptor and then removed
 * Destination Address (48 bits)
@@ -763,7 +763,7 @@ The benefits of Ethernet is:
 * Cable is cheap
 * Easy to administer and add a new host
 
-Experience with Ethernet networks showed that it worked best in light workloads (30 percent).
+Experience with Ethernet networks showed that it worked best in light workloads (30 percent). The capacity is wasted by collisions otherwise.
 
 *The Ethernet cables can not have more than 2 repeaters between any pair of hosts and can be no more than 2500 m in length.*
 ## Wireless
@@ -774,6 +774,19 @@ Wireless differs from wired technologies:
 * inherently multi-access
 * it's hard to control who recieves your signal so there are security threats.
 
+Because wireless links share the same medium (air) the challenge is to share it so that they don't interfere with each other.
+
+One way is to assign exclusive frequency band and restrictions in space. This assignment is usually done by government organizations. 
+
+Another idea is *spread spectrum*, the idea is to change the frequency often using a psuedorandom number generator. Both sender and reciever have the same seed so they can change frequencies instead of staying on one. Basically **spread out** their frequency. Makes it unlikely that two signals would be using the same frequency for a long time.
+
+A second spread technique is *direct sequence*, it adds redundant information to spread out the signal far more than it would have takenn based on the frame it was sending. it has n random bits called n-bit chipping code. They are generated using a pseudo random number generator known to both sender and reciever. For each bit, its exclusive OR is sent as well.
+![[2025-04-26_11-35.png]]
+
+There are two endpoint classifications:
+* *base station* where there is one single base station that is connected to the internet via wire but it transmits a signal which lets client nodes connect to the internet through it as well.
+* *ad hoc* topology or *mesh* networks. This way many non-base nodes connect to each other as peers and messages may be forwarded via a chain of peer nodes as long as they are in range
+### 802.11 Standard
 Wi-Fi is based on IEEE 802.11 standards, and is also called 802.11 sometimes.
 
 There are 4 variants of the 802.11 standard which supports different daata rates:
