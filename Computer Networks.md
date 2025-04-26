@@ -7,8 +7,10 @@ A series of interconnected computers are called a **Network**. It is a wide and 
 * [[#Requirements]]
 * [[#Network Architecture]]
 * [[#Socket Programming]]
+* [[#Performance]]
 [[#Chapter 2 Getting Connected]]
 * [[#Classes of Links]]
+* [[#Shannon-Hartley Theorem]]
 * [[#Encoding]]
 	* [[#NRZ non-return to zero]]
 	* [[#NRZI non-return zero inverted]]
@@ -303,15 +305,15 @@ int main()
 		perror("bind failed");
 		return 1;
 	}
-	// listening
+	// listening, it tells the kernel that sock is willing to accept 5 connections on waiting list (however this program itself can only deal with one connection at a time)
 	listen(sock, MAX_PENDING);
 	
 	int new_sock;
 	socklen_t len = 0;
 	while(1)
 	{
-		// Here the accept function returns a new socket, if a connection was 
-		// established
+		// Here the accept function returns a new socket specific to that 
+		// connection
 		if((new_sock = accept(sock, (struct sockaddr*)&sin, &len)) < 0)
 		{
 			perror("accept failed");
@@ -321,7 +323,6 @@ int main()
 		while((len = recv(new_sock, buffer, sizeof(buffer), 0)))
 			fputs(buffer, stdout);
 		close(new_sock);
-	
 	}
 }
 ```
@@ -394,6 +395,29 @@ The distance between a pair of adjacent maxima and minima of a wave is called th
 There are also links that you find inside a building or a campus, refered to as *local area networks (LAN)*. Ethernet is a popular example and has been dominant in these types of links.
 
 Despite the wide variety of link types and all the complexity, different networking protocols can take advantage of that diversity and present a consistent view of the network to the higher layers.
+
+## Shannon-Hartley Theorem
+The Shannon-Hartley theorem is given by this formula:
+
+$$
+C = B\log_2 (1 + S/N)
+$$
+
+C is the achievable capacity measured in bits per second.
+B is the frequency bandwidth in Hz.
+S is the average signal power
+N is the average noise power
+
+S/N is also related to the signal to noise ratio or SNR, expressed usually with decibels:
+
+$$
+SNR = 10\log_10(S/N)
+$$
+A 30 dB would imply S/N = 1000. thus we will have:
+$$
+C = 3000\log_2(1001) = 30 kbps
+$$
+
 ## Encoding
 
 We can think of the problem of encoding binary meaning on signals as two layers, the modulation where a signal like an on or off switch changes intensity. We'll think of a signal as simply having low or high signals, so we'll ignore the details. Now what's important is to find a way to encode meaning to these high and low signals.
@@ -506,6 +530,15 @@ A third approached used by the Synchronous Optical Network (SONET) standard. Fir
 
 It addresses both the encoding and framing problems and also multiplexing several low-speed links onto one high-speed link which phone companies deal with a ton.
 
+Each SONET frame is 9 x 90 byte rows. The first three columns of each row is overhead and the rest is the payload. 
+
+The first 2 bytes of the frame is used to determine where it starts. bit stuffing is not used in SONET, so to guard against the payload having a similar bit sequence, the reciever looks for the special bit pattern consistently appearing once every 810 bytes. 
+
+The overhead bytes are encoded using NRZ but to avoid baseline wonder and other problems with that approach, the bytes get XORed with a special bit pattern that results in a bit pattern that changes more often.
+
+The frames said above are for STS-1 frames that have a max bandwidth of around 50 Mbps. STS-2 or STS-3 and STS-N have larger frames, integer multiples in fact. STS-2 is 2 times 810, STS-3 is 3 times, etc. This way frames of different lengths can be multiplexed together because 2 frames of STS-1 can fit in 1 frame of STS-2 for example.
+
+A link that contains a concatenated frame of different STS-N frames is called STS-Nc, c for concatenated.
 ## Error Detection
 
 bit errors are sometimes introduced into frames. Detecting errors is one part of the problem the other is dealing with it. One way is to simply retransmit the frame, the other is using algorithms that correct the error.
@@ -517,12 +550,13 @@ The basic idea is to send redundant information to help detect if any errors occ
 
 We can however shorten that. We use a few algorithms that derive a piece of redundant bits from the data itself and then send it. If the reciever does the same algorithm and gets the same result then everything is in order otherwise a bit must have flipped.
 
+General approach is to add extra redundant bits that are derived from the original message. If the message is corrupted, then by looking at the redundant information we can tell something went wrong.
 ### Two-Dimensional Parity
 
-TODO: Watch 3Blue1Brown's video on this.
+Used by BISYNC when it is transmitting ASCII characters. The idea is to have an even number of 1s in the data no matter what. The extra information is another bit, it checks to see if the number of 1s in a single row is even or odd, if it's odd, the redundant bit will be 1, otherwise it will be 0.
 
-
-
+Now if the recieving side ever sees that there are odd number of 1s, taking in both the error-detecing codes and the data itself. It knows that an error has occurred.
+![[2025-04-26_10-41.png]]
 ### Checksum
 A checksum is named as such because it involves a summation. 
 This algorithm isn't used on the link level.
@@ -674,7 +708,7 @@ Today's Ethernets are usually point-to-point so the multiple access part of the 
 
 ### Physical Properties
 
-originaly made using coaxial cable of length up to 500 m. A **transciever** a small device directly attached to the tap detected when a line was idle and drove the signal when the host was transmitting, it also recieved incomming signals. It was connected to an adaptor which was connected to the host.
+originaly made using coaxial cable of length up to 500 m. A **transciever** is a small device directly attached to the tap that detects when a line was idle and drove the signal when the host was transmitting, it also recieved incomming signals. It was connected to an adaptor which was connected to the host.
 ![[2025-04-14_21-02.png]]
 
 Multiple Ethernet segments can be joined together by a *repeater* that forwards digital signals like an amplifier.
