@@ -116,6 +116,18 @@ Vue.createApp({
 </script>
 ```
 
+if we have a list in our view, we can dynamically print them using v-for
+```HTML
+<li v-for="assignment in assignments">{{ assignment.name }}</li>
+
+return {
+	assignments: [
+		{name: "finish project", complete: false },
+		...
+	]
+}
+```
+
 This method is an old way of doing this called the **options API**. It existed from Vue version 1. In Version 3 a **Composition API** is used instead.
 ## Components
 

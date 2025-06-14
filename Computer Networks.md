@@ -25,6 +25,7 @@ A series of interconnected computers are called a **Network**. It is a wide and 
 * [[#Switching and Bridging]]
 * [[#Basic Internetworking (IP)]]
 * [[#Routing]]
+[[#Chapter 4 Advanced Internetworking]]
 
 # Chapter 1: Foundation
 
@@ -834,7 +835,7 @@ Whenever a packet wants to move from a host to another, the switch consults the 
 * When a host sends a packet it has no way of knowing if a destination host can even get its message
 * A host can send packets anywhere it wants at any time because any packet that turns up at a switch can be immediately forwarded. That's why datagram method is called *connection-less*
 * Each packet forwarded is unique from each other, thus two successive packets send to and from the same hosts can follow different paths.
-* a switch or link failure may not hava any serious effects if it is possible to find an alternate route around it.
+* a switch or link failure may not have any serious effects if it is possible to find an alternate route around it.
 ### Virtual Circuit Switching
 
 This is a connection-oriented model. it requires setting up a **virtual connection** from source to destination before data is sent.
@@ -910,7 +911,6 @@ There are three ways of dealing with the headers:
 Source routing can be used in both datagram and virtual circuit networks as well. 
 
 There are also two categories of source routing, strict where a strict route to a different host has to be included and loose where it only specifies a set of nodes. The good thing about that is it helps limit the information that a source needs to create a source route.
-
 ## Bridges and LAN Switches
 
 Widely used in campus and enterprise networks. There is a class of switches used to forward packets between LANs such as Ethernets which are also referred to as *bridges*.
@@ -1190,7 +1190,7 @@ RIP assumes a weight of 1 for each link, valid distances are 1 to 15 meaning the
 
 The link state is another method of finding the shortest path. The idea is also similar to distance-vector in that we assume each node knows how to reach its neighbors and if we make sure that the totality is disseminated to every node, we can find the shortest path.
 
-*reliable flooding* is the process of making sure thqat all nodes get a copy of the link-state information. 
+*reliable flooding* is the process of making sure that all nodes get a copy of the link-state information. 
 
 Each node creates an update packet which is called the *link-state packet (LSP)* which has:
 * ID of the node creating the LSP
@@ -1244,4 +1244,213 @@ The above is an OSPF packet format, some important properties include:
 
 ![[2025-04-25_12-41.png]]
 
-An LSP is OSPF is called an LSA and its format is above
+An LSP is OSPF is called an LSA and its format is above.
+
+# Chapter 4: Advanced Internetworking
+
+The central problem now is how can we scale the internetwork so that billions of end nodes can connect to each other without problems? Basically the problem of scalability.
+
+The internet is comprised of different physical networks that are connected together by routers. Because each provider of these networks is independant from the others, they will likely have different ideas about how routing inside their network operates, each provider's network is usually called an **Autonomous System (AS)** for that reason. 
+
+There are two issues to scalability:
+* Minimize number of network numbers: Not store too many network numbers in routing protocols
+* Address utilization: make sure we don't run out of IP
+
+We use hierarchy to scale the internet. 
+## Routing Areas
+
+A routing domain is usually partitioned into sub-domains called *areas*. An area is a set of routers that are configured to exchange link-state information with each other. 
+
+* A special Area 0 exists in every domain called **The Backbone Area**
+* Routers that are a part of the backbone, but also a non-backbone area are called **Area Border Routers**
+* Routers that are on the edge of an autonomous system are called **AS border routers**
+
+A routing protocol only runs within a single area and each router inside one area does not know anything about other areas. This way this protocol can scale a lot better.
+
+![[2025-05-17_14-01.png]]
+
+In this way, for each packet that wants to be sent to different areas, they have to go through the backbone area, the ABRs inside that area will then summarize the information inside the areas they are connected to which will help each area to know which router to send their packets to.
+
+The issue here is that even if two routers of differents areas were connected to each other, the packet will have to go through the backbone no matter what, therefore the absolute shortest path is sacrificed for scalability which is interestingly often more preferable.
+
+**(There is frequently a trade off between optimality and scalability)**
+
+## Interdomain Routing (BGP)
+
+We break up the internet into different autonomous systems or *domains* and break up the problem of routing to:
+* **Interdomain Routing**: Routing between **different** domains 
+* **Intradomain Routing**: Routing within each domain
+
+**Local traffic** is traffic that originates or terminates within one AS.
+**Transit Traffic** is traffic that passes through an AS.
+
+AS have three broad categories:
+* Stub AS: Has only one single connection to another AS, it carries only local traffic.
+* Multihomed AS: Connections to more than one AS but refuses to carry transit traffic
+* Transit AS: Connections to more than one AS and can carry both types of traffic such as the backbone providers
+
+Each AS can define policies as well, rules like *I can let traffic through X but if X is broken Y can be set as fallback however I will not EVER let traffic through Z, etc*
+
+When the strucure of the internet was more tree-like, the EGP (Exterior Gateway Protocol) was used as an interdomain routing protocol, it however assumed a tree-like structure which the internet of today is not!
+
+BGP (Border Gateway Protocol) has no assumptions on how these ASs are configured or connected to each other. BGP is focused more on scalability that optimality. Therefore its goals are:
+
+* Find a path that is loop free
+* Paths compliant with the policies of each AS or domain which could be arbitrarily complex
+
+This is pretty much more complex than even a simple optimization problem that link-state tries to solve. interdomain only advertises **reachability** and makes no guarantees on the shortness of the path because each domain can have its own method of intradomain routing which makes the task of calculating shortest path almost impossible.
+
+The Challenges are summarized to:
+* Scalability
+* Each AS has its own methods of routing so finding shortest path is impossible
+* trust issues: An AS can't trust every advertisement from different providers
+* Need for supporting complex policies
+
+Each AS has one or more *border routers* that take the traffic from the current domain to other domains. Each AS that participates in BGP needs to have at least one **BGP Speaker**. A border router can also be a speaker but not always.
+
+**BGP** advertises *complete paths*, so it's called a *path-vector* protocol because of that. This is to prevent loops from happening.
+
+For example, an AS (which could be a provider AS) that is connected to stub AS (which could be a client AS, either home or company network) their BGP speaker will advertise that it can reach networks 128.96, 192.4.153, 192.4.32, 192.4.3 directly. Other AS get this advertisement and make advertisements of their own.
+
+![[2025-06-12_18-40.png]]
+
+Say for instance that AS2 and AS3 were to be connected. When AS1 advertises that it can reach 128.96 (which it got from AS2), AS3 will also recieve that and say that it can reach 128.96 to AS2, AS3 then may think that AS3 is actually directly connected to 128.96 instead of itself, so a loop will happen. However by advertising complete paths, this situation will be avoided because If an AS recieves an advertisement path that sees itself listed, it will discard it to prevent loops.
+
+Provider AS have 16-bit unique IDs which makes it possible to detect loops like above, however stub AS do not have to have unique IDs.
+
+An AS has a choice of which routes to advertise given its policies. It also can refuse to advertise which is what multi-homed AS do.
+
+Given that links fail or policies change, AS have to be able to cancel previous advertised paths. A negative advertisement known as withdrawn route is given. A BGP update carries both positive and negative reachability information. 
+
+BGP runs on TCP and unless a change occurs, AS speakers don't need to advertise anything. They can just send keepalive messages. 
+
+![[2025-06-12_18-50.png]]
+
+There are 3 common relationships between ASs:
+* *Provider-Customer*: A Provider AS connects a Client AS (Which is normally a Stub AS), its job is to advertise the networks the provider can access in the Client AS to other ASs and advertise the rest to the client as well. (Advertise everything)
+* *Customer-Provider*: The policy for this is: Advertise routes learned from its provider and its own routes to itself but don't advertise routes learned from one provider to another provider (To make sure it does not carry traffic to another AS itself)
+* *Peer*: Two providers see themselves as peers, They advertise routes from their customers to its peers, routes learned from its peers to its customers but do not advertise routes from its peers to any other provider.
+
+At the bottom, we have stub networks that are customers, and the higher we go we see providers that have other providers as customers.
+
+**We also have providers who have customers and peers but are not customers of anyone. These are Tier 1 providers.**
+
+### Integrating inter and intra domain routing
+
+How do all the routers in a domain get rotuing information?
+
+* Stub AS: Route any route outside the area to the border router (gateway)
+* For Provider AS: inject routes from its customer AS to its intradomain.
+* Backbone Networks: too costly to inject all its external routing information, They use iBGP to redistribute information. 
+
+## IPv6
+
+There are many techniques of using as much of the IPv4 address space as possible but it's still not enough. So IPv6 was formed. It has a size of 128 bits.
+
+The address here is classless unlike IPv4. This format is showcased by colons between each 2 bytes.
+47CD:4587:A1D4::A3F1
+0s in the middle are abbrevaited with two colons.
+
+IPv4 compatibility: Show every IPv4 address in IPv6 address like this:
+::128.42.1.187
+
+It has a 40 byte header and they are mostly fixed ordered and length.
+
+![[2025-06-14_11-00.png]]
+
+## Multicast
+
+We saw examples of hardware multicasting with Ethernet. However in the broader internetwork, there are many circumstances where multicasting is necessary in which they have to scale in.
+
+* For example **one-to-many relationships** where a sender has to send one message to multiple hosts such as radio, news, stock prices, software updates, etc.
+* Another is a **many-to-many relationship** such as online multiplayer games, teleconferencing, etc where data is sent from multiple senders to multiple recievers.
+
+Normal IP communications don't suit these applications. Using that protocol, the sender has to send one packet multiple times to multiple hosts which:
+
+* Consumes more bandwidth
+* Redundancy
+* traffic will be concentrated on one sending host, may overload capacity
+
+IP provides an IP-Level multicast service. The service that handles one-to-one traffic is called *unicast*
+
+The idea is to group our desired hosts together and give them one *multicast group address*. If a sender wants to send a multicast message then it can just send it to the multicast address once. 
+
+A multicast group is dynamic, hosts can signal that they want to be added or removed from groups. The job of handling that is the router's. A host uses the Internet Group Management Protocol (IPv4) or Multicast Listener Discovery (IPv6) to send a local router signals that which groups it wants to be added or removed from.
+
+Because a host can fail, the local router periodically polls the LAN to determine which groups are still of interest tot he host.
+
+IP has been suppliemented with support for one-to-many multicast
+
+* **Source Specific Multicast (SSM):** One-to-Many Relationship, A recieving host specifies both a multicast group and sending host
+* **AnySource Multicast(ASM):** Many-to-Many relationship
+### Multicast Addresses
+
+A subrange of IP is reserved for multicast addresses, class D address space for IPv4 and a specified portion of IPv6. There are 28 bits of possible multicast address in IPv4.
+
+However a hardware Ethernet multicast has only 23-bit addresses, ... (don't know what the fuck it's talking about)
+### Multicast Routing
+
+Just like how routers map links to different unicast addresses, multicast addresses are also stored as a **list** of links. (More than one link), so unicast forwarding tables specify a set of paths, but multicast forwarding tables specify a **multicast distribution trees**.
+
+##### Distance Vector Multicast Routing 
+
+The first widespread protocol used for multicast routing.
+
+We know that the shortest path to destination is thorugh the NextHop in the unicast forwarding table. If a multicast packet comes through NextHop
+
+##### Protocol Independent Multicast (PIM)
+
+
+### Routing for Mobile
+
+The central issue is that a mobile node can move from and to new networks, then it needs new IP addresses however if data was being transmitted to it, how can that app know to which IP it has to send the rest?
+
+Mobile IP is how this issue is solved. Each mobile node has a fixed home address.
+
+Two special routers are used:
+* Home Agent: Knows the home address of the mobile host
+* Foreign Agent: The Home Agent then sends a message recieved to the home address to the foriegn agent which handles which network the mobile host is a part of now.
+![[2025-06-14_14-39.png]]
+
+# Chapter 5: End to End Protocols
+
+Transport Layer's job is to make process-to-process communications between hosts. A transport protocol is expected to:
+* Guarantee message delivery
+* Deliver messages in order
+* one copy of each message
+* arbitrarily large messages
+* synchronization support
+* apply flow control to sender
+* multiple processes on each host
+
+However the layer beneath it, the network layer is a *best-effort* protocol. Meaning it can:
+* Drop messages
+* Reorder messages
+* have copies
+* limit messages to finite size
+* deliver with long delays
+
+Therefore we need Transport protocols to hide the unreliability of the internet with different algorithms.
+
+## Simple Demultiplexer
+
+Simplest transport protocol is one that just extends the host-to-host delivery to a process-to-process service, by just adding a demultiplexing mechanism to allow different applications to use the internet.
+
+Internet User Datagram Protocol (UDP) is a transport protocol that does this.
+
+When a host wants to send data a specific application process, they will send it to that host and a specific port number (the *identifier*), alternatively this identifier could have been an OS PID for the process however that only works in closed distributed system with only one OS. The way it is done is that the UDP defines port numbers where application processes listen on. 
+
+Once a client has contacted a server, the server knows which specific port number it should send the data to, however a client will not always know what port number to send a request towards.
+
+* One method is to define popular and widely known port numbers to listen on, for example an HTTPS request is done on port 443, or an email service listens on port 25.
+* Another method is generalized. Instead of sending data directly through ports, first the port mapper service gets the data and maps it to a port on the server. This way client only needs to know the port that the port mapper service listens to.
+
+Ports are abstractions that can be implemented in different ways. The Socket API for example defines them as queues where packets are stored into. 
+
+UDP does not have flow controll or reliable/ordered delivery therefore if a queue is full the front packet is dropped and the new packet takes its place.
+
+UDP also has a checksum field, the checksum algorithm takes inputs such as:
+* UDP header
+* message content
+* a *psuedoheader*
+The pseudoheader has *protocol number*, *src and dest IP*, and the *UDP length*. It is used to tell if the message is delivered between the correct two endpoints.

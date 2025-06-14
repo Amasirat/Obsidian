@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "ed42cc0c0dfdf77c",
+        "id": "fc70f3b50ecf541c",
         "type": "tabs",
         "children": [
           {
-            "id": "790e15089ff51a5b",
+            "id": "5d43d64be19a72b0",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -63,8 +63,8 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "computer netw",
-                "matchingCase": false,
+                "query": "",
+                "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
                 "extraContext": false,
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "efefd46dc0bb422d",
@@ -164,21 +163,27 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "790e15089ff51a5b",
+  "active": "5d43d64be19a72b0",
   "lastOpenFiles": [
-    "Attachments/2025-04-26_11-35.png",
-    "Attachments/2025-04-26_10-41.png",
-    "Untitled 2.md",
-    "Computer Networks.md",
-    "Attachments/2025-04-25_12-41.png",
+    "Attachments/2025-06-14_14-39.png",
+    "Attachments/2025-06-14_11-00.png",
+    "Attachments/2025-06-12_18-50.png",
+    "6G Technologies.md",
+    "EigenFaces.md",
+    "Attachments/2025-05-30_21-09.png",
+    "Attachments/2025-05-27_18-02.png",
+    "Pasted image 20250527180238.png",
+    "OpenCV.md",
+    "Attachments/2025-05-23_11-21.png",
+    "Attachments/2025-05-27_15-41.png",
     "Attachments/2025-04-25_12-35.png",
-    "Attachments/2025-04-25_12-25.png",
-    "Attachments/2025-04-25_12-20.png",
-    "Attachments/2025-04-25_11-44.png",
-    "Attachments/2025-04-24_21-04.png",
-    "Attachments/2025-04-24_21-03.png",
-    "Attachments/2025-04-24_20-59.png",
-    "Attachments/2025-04-24_19-48.png",
+    "Attachments/2025-04-25_12-41.png",
+    "Attachments/2025-04-26_10-41.png",
+    "Untitled 3.md",
+    "Computer Networks.md",
+    "Face Recognition with EigenFaces.md",
+    "Vue.JS.md",
+    "Untitled 2.md",
     "Olympiad.md",
     "Network Programming.md",
     "Parthian Empire.md",
@@ -186,7 +191,6 @@
     "C++.md",
     "MariaDB.md",
     "Fundamental Theorem of Music.md",
-    "Vue.JS.md",
     "Lecture Notes.md",
     "Laravel.md",
     "Being the Center of Attention.md",
@@ -197,11 +201,6 @@
     "Digital Systems.md",
     "Failure Schema.md",
     "Neural Networks.md",
-    "Object-Oriented-Paradigm.md",
-    "Cargo.md",
-    "OpenGL.md",
-    "Pointers.md",
-    "PHP.md",
     "Attachments"
   ]
 }

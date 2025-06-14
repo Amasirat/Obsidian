@@ -1,0 +1,1 @@
+The goal of the paper was to find a **fast**, **reasonably accurate**, and **accurate** method of face recognition. 
