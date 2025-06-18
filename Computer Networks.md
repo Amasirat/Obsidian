@@ -26,6 +26,24 @@ A series of interconnected computers are called a **Network**. It is a wide and 
 * [[#Basic Internetworking (IP)]]
 * [[#Routing]]
 [[#Chapter 4 Advanced Internetworking]]
+* [[#Routing Areas]]
+* [[#Interdomain Routing (BGP)]]
+* [[#Integrating inter and intra domain routing]]
+* [[#IPv6]]
+* [[#Multicast]]
+	* [[#Multicast Addresses]]
+	* [[#Multicast Routing]]
+	* [[#Distance Vector Multicast Routing]]
+	* [[#Protocol Independent Multicast (PIM)]]
+* [[#Routing for Mobile]]
+[[#Chapter 5 End to End Protocols]]
+* [[#Simple Demultiplexer (UDP)]]
+* [[#Reliable Byte Stream (TCP)]]
+	* [[#Connection]]
+	* [[#Sliding Window Revisited]]
+	* [[#Triggering Transmission]]
+	* [[#Adaptive Retransmission]]
+[[#Chapter 6 Congestion Control and Resource Allocation]]
 
 # Chapter 1: Foundation
 
@@ -1432,25 +1450,280 @@ However the layer beneath it, the network layer is a *best-effort* protocol. Mea
 
 Therefore we need Transport protocols to hide the unreliability of the internet with different algorithms.
 
-## Simple Demultiplexer
+## Simple Demultiplexer (UDP)
 
-Simplest transport protocol is one that just extends the host-to-host delivery to a process-to-process service, by just adding a demultiplexing mechanism to allow different applications to use the internet.
+Simplest transport protocol is one that just extends the host-to-host delivery to a process-to-process service, by adding a demultiplexing mechanism to allow different applications to use the internet at the same time.
 
 Internet User Datagram Protocol (UDP) is a transport protocol that does this.
 
-When a host wants to send data a specific application process, they will send it to that host and a specific port number (the *identifier*), alternatively this identifier could have been an OS PID for the process however that only works in closed distributed system with only one OS. The way it is done is that the UDP defines port numbers where application processes listen on. 
+When a host wants to send data a specific application process, they will send it to that host and a specific port number (the *identifier*), alternatively this identifier could have been an OS PID for the process however that only works in closed distributed systems with only one OS. The way it is done is that the UDP defines port numbers where application processes listen on. 
 
 Once a client has contacted a server, the server knows which specific port number it should send the data to, however a client will not always know what port number to send a request towards.
 
-* One method is to define popular and widely known port numbers to listen on, for example an HTTPS request is done on port 443, or an email service listens on port 25.
+* One method is to define popular and widely known port numbers to listen on, for example an HTTPS request is recieved on port 443 in the web server, or an email service listens on port 25.
 * Another method is generalized. Instead of sending data directly through ports, first the port mapper service gets the data and maps it to a port on the server. This way client only needs to know the port that the port mapper service listens to.
 
 Ports are abstractions that can be implemented in different ways. The Socket API for example defines them as queues where packets are stored into. 
 
-UDP does not have flow controll or reliable/ordered delivery therefore if a queue is full the front packet is dropped and the new packet takes its place.
+![[2025-06-16_15-25.png]]
+
+UDP does not have flow control or reliable/ordered delivery therefore if a queue is full the front packet is dropped and the new packet takes its place.
 
 UDP also has a checksum field, the checksum algorithm takes inputs such as:
 * UDP header
 * message content
 * a *psuedoheader*
 The pseudoheader has *protocol number*, *src and dest IP*, and the *UDP length*. It is used to tell if the message is delivered between the correct two endpoints.
+## Reliable Byte Stream (TCP)
+
+TCP is more complex than UDP because along with its demultiplexing feature, allows reliable, full-duplex, two-way connection in both directions (byte stream), and order-preserving method of sending packets to an application process.
+
+TCP also has an ever-evolving congestion control to **prevent too much data to be sent to the network**. 
+
+Window sliding algorithm is at the root of TCP but because TCP runs on the internet some complications occur.
+
+* TCP has an initial establishment phase because it's connecting two seperate computers on the wider network. During this it shares some states so that they can start the window sliding algoirthm. It also has a teardown sequence so that each computer knows if they can release their shared state.
+* RTT is variable in this protocol, so it has to account for that. The timeout mechanism of window sliding algorithm must be adaptive.
+* Packets are going to arrive out of order through the internet, TCP has to deal with that. It assumes each packet has a maximum segment lifetime (MSL), this setting is usually set at 120 seconds.
+* Variable computers are connected to the internet with varying resources, TCP must account for different buffer spaces, bandwidths, etc. This is the *flow problem*.
+* On a link-to-link setup, we know how fast the packets are going to be sent, however TCP does not know which links in the middle are going to be used to send data.
+
+TCP wants reliable and in order delivery, so it has to solve several issues on the end-to-end. Another approach to this problem is checking for reliability on each hop between the source and destination. The theory is that, by doing this on the network layer, we can guarantee in order delivery. This is flawed:
+* If a heterogeneous link is added, there is no guarantees that this hop will preserve the same service.
+* Just because it is guaranteed that messages will be delivered reliably from node A to node B and then from node B to node C, it is not guaranteed that node B behaves perfectly.
+At the end of the day, we still have to check for reliability at the end points.
+
+TCP buffers enough bytes of data from the host transmitting data and then sends it when there is a reasonable amount of bytes buffered. Those collections are called segments and the format is like this:
+
+![[2025-06-16_16-25.png]]
+
+The SrcPort, DstPort, SrcIP, DstIP identify the particular byte stream connection between the two hosts.
+
+Because TCP connections come and go, we can open a connection, sending segments from the same port and host, close it and then re-open with the same segments, This situation is referred to as an incarnation of the same connection.
+
+The 6 bit Flags field is used to relay control information between TCP peers. Possible flags are:
+* SYN: flag to start a connection
+* FIN: flag to end a connection
+* ACK: to acknowledge a segment recieved
+* URG: Signifies this segment contains urgent data, the urgent data is located at the front of the segment and the UrgPtr field indicates where the urgent data ends.
+* PUSH: indicates that the sender invoked a push operation and that the reciever should notify the process
+* RESET: Indicates that the reciever is confused and wants to abort
+
+Checksum is used exactly the same as in UDP. It is required both in IPv4 and IPv6 as opposed to UDP that only requires it in IPv6.
+
+Because the header can be a variable length, the HdrLen includes the length of the header. It is also known as offset which is used to offset from the start of the packet to the start of the data.
+
+### Connection
+
+For a connection, the client does an **active** open on a server. A server has to have already done a passive open on that particular port for this to work however.
+
+![[2025-06-16_18-02.png]]
+
+The above picture shows a **three-way handshake** algorithm that TCP uses to establish connection. The client sends a SYN segment with a randomized starting sequence number x. The server sends a SYN back and acknowledges the connection. It then sets the acknowledgement state of the sliding window algorithm to x + 1. At last the client sends an acknowledgement back with a y+1 value to the server.
+
+A state diagram of closing and opening a connection is shown below.
+
+![[2025-06-16_18-09.png]]
+
+A connection in the TIME_WAIT state can not move to the closed state until it has waited for two times the maximum amount of time an IP datagram might live in the internet. (Reason?)
+### Sliding Window Revisited
+
+TCP's use of the [[#Sliding Window]] Algorithm is similiar to what we discussed except that its goals are:
+* Reliable Data delivery
+* In orderness
+* Enforces flow control
+
+Instead of having a fixed window, the reciever advertises their window size to the sender, using the AdvertisedWindow on the TCP header. The reciever chooses that based on the amount of memory it has for that particular connection.
+
+![[2025-06-17_11-47.png]]
+
+Both the sending side and the receiving side maintain a buffer like above. The sender holds all the unacknowledged bytes and all the data that has been written by the sending applicaiton but not yet transmitted. The receiving side also holds all the unread bytes and the last bytes sent, even if they are out of order (Like it currently arrived in the picture given the gap between)
+
+Relationships between pointers in the sending side:
+$$
+LastByteAcked \leq LastByteSent \leq LastByteWritten 
+$$
+Between pointers in the receiving side:
+
+$$
+LastByteRead < LastByteExpected
+$$
+
+$$
+LastByteExpected \leq LastByteRcvd + 1 
+$$
+Because if all bytes were received in order, then *LastByteExpected* is the one after the lastByteRcvd, if it's not it's going to be definitely smaller than that value.
+
+Example:
+$$
+LastByteExpected = 5, LastByteRcvd = 4
+$$
+$$
+LastByteExpected = 5, LastByteRcvd = 8
+$$
+In the second example we need 5, 6, 7 until we reach the last byte that was received and everything comes in order.
+
+#### Flow Control
+
+Here I will explain how TCP controls the flow of data being sent and received.
+
+First of all each Sender and receiver have a max buffer size indicated by MaxSendBuffer and MaxRcvBuffer where:
+
+$$
+LastByteRcvd - LastByteRead \leq MaxRcvBuffer
+$$
+
+The window that the receiver advertises therefore is:
+
+$$
+AdvertisedWindow = MaxRcvBuffer - ((NextByteExpected-1) - LastByteRead)
+$$
+
+If the AdvertisedWindow is 0 then the sender can not send any other packets. Therefore the sender must adhere to this condition:
+
+$$
+LastByteSent - LastByteAcked \leq AdvertisedWindow
+$$
+
+Essentially there is an EffectiveWindow that the sender can send data with.
+
+$$
+EffectiveWindow = AdvertisedWindow - (LastByteSent - LastByteAcked)
+$$
+
+If the EffectiveWindow is 0 then the sender must stop sending more bytes.
+
+If a receiver is unable to receive more packets, the sender application will write bytes into the buffer until the buffer is filled, then TCP blocks the sending process is blocked.
+
+Once the receiving side starts acknowledging packets, LastByteAcked is incremented meaning the sendbuffer gets freed and TCP starts the sending process again. 
+
+**The Receiver's  last AdvertisedWindow is sent to the sender in each of its ACK segments**
+
+#### Protecting against wraparound
+
+**AdvertisedWindow is a 16 bit sequence and the SequenceNum is 32 bits long which satisfies the requirement that the SequenceNum field be twice as large as the AdvertisedWindow**
+
+The problem is that the SequenceNum may wraparound at some point. We have to make sure it can never wraparound before the recommended MSL which is 120 seconds. This depends on the **Speed** of sending data.
+
+![[2025-06-17_12-30.png]]
+
+IETF has already worked out an extension to TCP which will stop a wraparound for faster speeds.
+
+#### Keeping the Pipe Full
+
+A sender can send as much as the AdvertisedWindow the receiver allows. It is ideal that the AdvertisedWindow is big enough to keep the pipe full in a sense. That has everything to do with the Bandwidth x delay product. The window needs to be open enough to send a full delay x bandwidth product's worth of data.
+
+a 16-bit field no longer satisfies the needs of higher bandwidth networks. A TCP extension also remedies this problem.
+
+### Triggering Transmission
+
+How does TCP decide what size a segment for transmission should be at a given time? That is the question. There are 3 mechanisms that dictate when TCP should transmit bytes.
+
+* TCP maintains a variable called MSS and it sends a segment as soon as it gathers MSS bytes of data. This MSS at the start of a connection is the same size as the MTU of the direct network.
+* Second is if the push operation is invoked. A push operation basically flushes the buffer and forces it to send all unsent bytes in the buffer.
+* The third one is when a timer fires.
+
+#### Silly Window Syndrome
+
+If there is no flow control then We can continue sending MSS sized segments and everything will work great. However if the AdvertisedWindow is closed and it only opens up for a half of MSS worth for example. Should TCP wait for MSS sized segments or should it send a segment of size less than MSS?
+
+Earlier TCP implementations did the latter, however that caused something known as the *Silly Window Syndrome*.
+
+![[2025-06-17_12-56.png]]
+
+If the sender sends MSS size segments and Reciever Acknowledges MSS sized bytes, everything works great. 
+
+However if the sender sends small amounts of segments, it will become a performance problem. We are basically continually sending more segments everytime which will be an inefficient use of bandwidth.
+
+A simple solution is Nagle's Algorithm which is to just wait before sending data, how far should we wait? Because waiting too long hurts real-time sensitive applications but watiting too little will get us closer to the Silly Window Syndrome. 
+
+We can use a timer, but not a clock timer. The Nagle's Algorithm treats Ack segments as a timer firing off. The simple logic for transmission is this:
+
+```Logic
+When application produces data
+	if available data and window >= MSS
+		send
+	else
+		if there is unAcked data
+			buffer until ack is received
+		else
+			send all data now
+```
+
+By setting TCP_NODELAY you can turn off this algorithm.
+### Adaptive Retransmission
+
+Because TCP guarantees reliable delivery, it has to send any unACKed data if the time runs out. The value of timeout is decided by the effective RTT of the connection however deciding that is not easy. **TCP uses an adaptive retransmission mechanism.**
+#### Original Algorithm
+
+This is the algorithm first described by the TCP specificiation.
+
+The idea is to compute an average RTT and then update it on each segment delivery. Everytime a data segment is sent, the time gets recorded. Then the time that the ACK for that segment is recieved will also be recorded and the difference between those two will be the SampleRTT.
+
+TCP then computes a weighted sum of the previous EstimatedRTT and the SampleRTT:
+$$
+EstimatedRTT = \alpha \times EstimatedRTT + (1 - \alpha) \times SampleRTT
+$$
+a small $\alpha$ tracks changes in RTT but is too influenced by temperory fluctuations.
+a large $\alpha$ is more stable but does not adapt to real changes quickly enough.
+
+*It was recommended in the original TCP specification that $\alpha$ be around 0.8 and 0.9*
+
+Then Timeout is twice the EstimatedRTT
+$$
+TimeOut = 2 \times EstimatedRTT
+$$
+#### Karn/Patridge Algorithm
+
+There is an obvious flaw in the above algorithm. We won't know which segment was just acknowledged. The existance of an ACK does not tell us when the transmission actually took place. 
+
+![[2025-06-17_13-38.png]]
+
+The solution was proposed in 1987 which is:
+
+SampleRTT is only taken for packets that are transmitted only once and when a retransmission occurs (timeout occured) then the next timeout will be twice the original timeout. It uses the idea of exponential backoff (explored more next chapter [[#Chapter 6 Congestion Control and Resource Allocation]])
+#### Jacobson/Karels Algorithm
+
+Although Karn/Patridge Algorithm helped with congestion issues, the proble was not eliminated. In 1988, Jacobson and Karels proposed the following solution which made a drastic cahnge to TCP:
+
+The problem earlier was that the variation in SampleRTTs were not accounted for. If variation is small, there is no need to double the timeout but if variation is high, we need to account for it.
+
+$$
+Difference = SampleRTT - EstimatedRTT
+$$
+
+$$
+EstimatedRTT = EstimatedRTT + (\delta \times Difference)
+$$
+
+$$
+Deviation = Deviation + \delta(|Difference| - Deviation)
+$$
+
+We calculate Deviation and EstimatedRTT as above and then TimeOut will be calcualted like this:
+
+$$
+TimeOut = \mu \times EstimatedRTT + \phi \times Deviation
+$$
+
+Based on experience, $\mu$ is set to 1 and $\phi$ is set to 4.
+
+**A large variance causes the Deviation to dominate the calculation**
+# Chapter 6: Congestion Control and Resource Allocation
+
+Packets wait their turn to be sent through the link on router nodes, for that they are reserved in queues. If this queue becomes full, packets get dropped. If this occurs many times, it is said that *congestion* has occured.
+
+Congestion is not a problem limited to only one layer of the internet.
+
+*Resource Allocation* is the process of meeting the demands of applications on the network, that being **buffer space** or **link bandwidth**.
+
+*Flow Control* is slowing down a sender to not overload a reciever, but *congestion control* is stopping a **set** of senders from introducing too many packets *inside the network*.
+
+Even though the network layer is largely connectionless, we can store soft state at each router trying to tell flows apart (packets going to and from the same IP addresses) It's not connection-oriented where each router preserves explicit state (The buffer dedicated to that connection like in ATM) but packets are also not treated completely equally. A router can tell which packets belong to which flow for resource allocation purposes only.
+
+
+
+
+
+
+

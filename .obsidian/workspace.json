@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "efefd46dc0bb422d",
@@ -165,20 +166,20 @@
   },
   "active": "5d43d64be19a72b0",
   "lastOpenFiles": [
+    "Attachments/2025-06-17_13-38.png",
+    "Attachments/2025-06-17_12-56.png",
+    "Attachments/2025-06-17_12-30.png",
+    "Attachments/2025-06-17_11-47.png",
+    "Attachments/2025-06-16_18-09.png",
+    "Attachments/2025-06-16_18-02.png",
+    "Attachments/2025-06-16_16-25.png",
+    "Attachments/2025-06-16_15-25.png",
     "Attachments/2025-06-14_14-39.png",
     "Attachments/2025-06-14_11-00.png",
     "Attachments/2025-06-12_18-50.png",
     "6G Technologies.md",
     "EigenFaces.md",
-    "Attachments/2025-05-30_21-09.png",
-    "Attachments/2025-05-27_18-02.png",
-    "Pasted image 20250527180238.png",
     "OpenCV.md",
-    "Attachments/2025-05-23_11-21.png",
-    "Attachments/2025-05-27_15-41.png",
-    "Attachments/2025-04-25_12-35.png",
-    "Attachments/2025-04-25_12-41.png",
-    "Attachments/2025-04-26_10-41.png",
     "Untitled 3.md",
     "Computer Networks.md",
     "Face Recognition with EigenFaces.md",
