@@ -44,6 +44,11 @@ A series of interconnected computers are called a **Network**. It is a wide and 
 	* [[#Triggering Transmission]]
 	* [[#Adaptive Retransmission]]
 [[#Chapter 6 Congestion Control and Resource Allocation]]
+* [[#Taxonomy]]
+* [[#Evaluation Criteria]]
+* [[#Queuing Disciplines]]
+* [[#TCP Congestion Control]]
+* [[#Congestion-Avoidance Mechanisms]]
 
 # Chapter 1: Foundation
 
@@ -1720,6 +1725,65 @@ Congestion is not a problem limited to only one layer of the internet.
 *Flow Control* is slowing down a sender to not overload a reciever, but *congestion control* is stopping a **set** of senders from introducing too many packets *inside the network*.
 
 Even though the network layer is largely connectionless, we can store soft state at each router trying to tell flows apart (packets going to and from the same IP addresses) It's not connection-oriented where each router preserves explicit state (The buffer dedicated to that connection like in ATM) but packets are also not treated completely equally. A router can tell which packets belong to which flow for resource allocation purposes only.
+
+## Taxonomy
+
+There are many ways that we can classify resource allocation mechanisms based on their approaches to solving it, however these approaches are not mutually exclusive and both can be used at the same.
+
+Resource Allocation mechanisms can be classified into two groups:
+* Router-Centric: Most of the burden falls onto the nodes within the network (routers and switches)
+* Host Centric: The end-to-end host observe network condition
+
+They can also be classified by:
+* Reservation-Based: A sender first asks for a reservation of capacity from the network to be allocated to its flow, if for whatever reason the router can't fulfil it, it rejects the reservation. **Implies router-centric approach**
+* Feedback-Based: Doesn't care how much capacity it has, the sending rate gets tweaked by getting feedback from the network. It can be either explicit (router sending info, **Implies router-centric approach**)or implicit (according to packet losses in the network). **Implies Host-centric Approach**
+
+Also:
+* Window Based: reciever advertises a window of data it can recieve (TCP is window Based)
+* Rate Based: How many bits per second a reciever can absorb. Makes sense for multimedia applicaitons
+
+In practice two general strategies are tied to the service model of the internet:
+
+* A best-effort service generally uses feedback based approaches because reservation is not possible in a service that is best-effort. This implies that it is coupled with window based approaches and most of the burden falls on the host. This is how most of internet handles things.
+* A QoS based service model however uses reservation, is Rate-Based and needs router involvement.
+
+## Evaluation Criteria
+
+We have two broad measures of comparing resource allocation schemes with each other. 
+
+### Effectiveness
+
+The power of a network is defined as:
+
+$$
+Power = Throughtput / Delay
+$$
+This definition poses problems as to whether it is a great aassessment for general effectiveness:
+* It assumes infinite queues
+* typically defined relative to a single connection (flow)
+Despite that, there are no alternatives so it is used.
+
+![[2025-06-18_18-32.png]]
+
+Our goal is to maximize the above function. The smaller the load is, it means the system is being conservative and throughput goes down however if load goes up due to queuing problems and packet drops, delay will increase. The ideal is somewhere in the middle.
+
+**It is ideal to make sure the system still operates when the load is heavy. That is called a system that is *stable*. However if a mechanism is not stable, the network may experience *congestion collapse*.**
+### Fairness
+
+If we assume fairness to be equal share of the bandwidth in equal paths, Jain's fairness function is defined like this: (xi being flow throughputs in bits/second)
+$$
+f(x1, x2, ..., xn) = \frac{(\sum xi)^2}{n\sum xi^2}
+$$
+
+## Queuing Disciplines
+
+
+## TCP Congestion Control
+
+## Congestion-Avoidance Mechanisms
+
+
+
 
 
 
