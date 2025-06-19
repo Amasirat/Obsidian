@@ -257,3 +257,13 @@ Multidimensional arrays are stored in major row order, meaning the rows are righ
     }
 ```
 
+# Strings
+
+A C string literal is a series of characters that are enclosed in " "s. If you need to write the rest of a string literal on a new line you can add a \ at the end.
+
+```C
+printf("This is some random text that mean absolutely nothing \
+While it is true I am useless it doesn't mean I'm not worth \
+a damn");
+```
+
