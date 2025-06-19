@@ -1725,7 +1725,6 @@ Congestion is not a problem limited to only one layer of the internet.
 *Flow Control* is slowing down a sender to not overload a reciever, but *congestion control* is stopping a **set** of senders from introducing too many packets *inside the network*.
 
 Even though the network layer is largely connectionless, we can store soft state at each router trying to tell flows apart (packets going to and from the same IP addresses) It's not connection-oriented where each router preserves explicit state (The buffer dedicated to that connection like in ATM) but packets are also not treated completely equally. A router can tell which packets belong to which flow for resource allocation purposes only.
-
 ## Taxonomy
 
 There are many ways that we can classify resource allocation mechanisms based on their approaches to solving it, however these approaches are not mutually exclusive and both can be used at the same.
@@ -1744,13 +1743,11 @@ Also:
 
 In practice two general strategies are tied to the service model of the internet:
 
-* A best-effort service generally uses feedback based approaches because reservation is not possible in a service that is best-effort. This implies that it is coupled with window based approaches and most of the burden falls on the host. This is how most of internet handles things.
+* A best-effort service generally uses feedback based approaches because reservation is not guaranteed in a service that is best-effort. This implies that it is coupled with window based approaches and most of the burden falls on the host. This is how most of internet handles things.
 * A QoS based service model however uses reservation, is Rate-Based and needs router involvement.
-
 ## Evaluation Criteria
 
 We have two broad measures of comparing resource allocation schemes with each other. 
-
 ### Effectiveness
 
 The power of a network is defined as:
@@ -1758,14 +1755,14 @@ The power of a network is defined as:
 $$
 Power = Throughtput / Delay
 $$
-This definition poses problems as to whether it is a great aassessment for general effectiveness:
+This definition poses problems as to whether it is a great assessment for general effectiveness:
 * It assumes infinite queues
 * typically defined relative to a single connection (flow)
 Despite that, there are no alternatives so it is used.
 
 ![[2025-06-18_18-32.png]]
 
-Our goal is to maximize the above function. The smaller the load is, it means the system is being conservative and throughput goes down however if load goes up due to queuing problems and packet drops, delay will increase. The ideal is somewhere in the middle.
+Our goal is to maximize the above function. The smaller the load is, it means the system is being too conservative and throughput goes down however if load goes up due to queuing problems and packet drops, delay will increase. The ideal is somewhere in the middle.
 
 **It is ideal to make sure the system still operates when the load is heavy. That is called a system that is *stable*. However if a mechanism is not stable, the network may experience *congestion collapse*.**
 ### Fairness
@@ -1777,8 +1774,56 @@ $$
 
 ## Queuing Disciplines
 
+There are two general systems of keeping packets in buffer spaces:
+### FIFO
 
+First In First Out is a simple queuing algorithm used by most of the internet which puts the burden of congestion control largely on the edges of the network. 
+
+Packets are stored in queues, but if a packet arrives at a router and the queue is full, that packet will get dropped. This is called *tail drop*
+
+*tail drop* has nothing to do with FIFO. It is a policy of when to drop packets, or a *drop policy*. Another network can take on a different *drop policy* than what was said.
+
+A simple variation is a *priority queuing*. Mark each packet as a different class of priority. Routers implement multiple queues for each priority class and then the routers first start on the queue with highest priority and if that queue is empty, they'll go to the next high priority queue in turn. 
+
+Problem is that a high priority queue might starve out other lower priority queues if it is contineously being used. We need a limit on how much high priority traffic can be inserted into queues. 
+
+We of course can not let users treat all their connections as high priority.
+* Either prevent them from doing this
+* Or provide pushback: network charging more for high-priority traffic however this is difficult to setup on the decentralized internet.
+A place that uses priority queueing is protecting routing updates for rotuing tables or topology changes.  **This is an example of Differentiated Services.**
+### Fair Queuing
+
+The idea is that each flow gets its own queue and then these queues are serviced similiar to a round robin style algorithm. Each queue belonging to a flow is also treated with the same drop policy as FIFO, this way one flow can not take a massive share of the network's attention. 
+
+It still does not govern any congestion control and expects the end-to-end to handle that. It only makes sure that ill-behaved traffic is segregated from the rest.
+
+A complication, when queues contain packets of varying sizes, a round robin style algorithm will give more attention to flows with larger packets. The ideal equalizer is to send bit-by-bit, but we can't do that here, so a bit-by-bit round robin is simulated. First it determins when a packet would finish transmitting if it were being sent bit by bit and then uses this finishing time to send packets.
+
+We take sending a bit as a clock tick ($A_{i}$), for an $n$ present flows, the clock ticks when $n$ bits are sent, 1 from each flow.
+
+if we take $S_{i}$ to be the time we start transmitting a packet and $P_{i}$ the time it takes to send the packet then the total time it takes to send a packet is:
+
+$$
+F_{i} = S_{i} + P_{i}
+$$
+But the time to send the packet depends both on what clock tick the packet arrived and the time it took to send the previous packet.
+
+$$
+S_{i} = max(F_{i-1}, A_{i})
+$$
+The packet that is sent first is the one with the smallest $F_{i}$
+
+The reason this is an estimation is that if a packet is sent and another packet with a smaller $F_{i}$ arrives, the packet has to wait for the larger packet to be sent first. Therefore this strategy is non-preemptive.
+
+This strategy also never leaves a link idle for too long. As long as there is a flow, the link will be busy. This characteristic is said to be *work conserving*. If a flow is sharing a link with other flows but the other flows are not sending anything, the flow can have the full link bandwidth.
+
+A variation of FQ is *weighted fair queuing* (WFQ) that allows each flow to get a weight associated to it. This weight dictates how many bits are simulated in one clock tick. For example a flow with a weight of 2 will send 2 bits each tick while others send 1. In FQ, every flow has a weight of 1.
 ## TCP Congestion Control
+
+Here we discuss what congestion control mechanisms TCP employs on the end to end.
+
+
+
 
 ## Congestion-Avoidance Mechanisms
 

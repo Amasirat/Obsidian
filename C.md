@@ -6,6 +6,7 @@ C is a low level language creating in Bell Labs.
 `stdbool.h`: For the boolean type... (C99 only)
 `stdint.h`: Standardized types with defined sizes
 `ctype.h`: 
+`stdlib.h`: contains `exit()` and `EXIT_SUCCESS`
 # Reading Input
 
 Reading and writing input and output is done by `scanf()` and `printf()` functions located in `stdio.h` header.
@@ -36,6 +37,7 @@ These are called conversion specifications:
 * `%e` ===> showcases floating point numbers in scientific notation
 * `%g` ===> Shows a suitable version of the float depending on the number 
 * `%c` ===> for a single character
+* `%p` ===> for pointer values
 
 Printing a number works like below:
 
@@ -172,4 +174,86 @@ int main()
 
 Because an array collapses into a pointer to the first element of the array, any changes we make on the array inside the function will be present after the function is done.
 
+In C99, we can use variable length parameters,
+
+```C
+int sum(int n, int m, int matrix[n][m])
+{
+
+}
+// function declarations
+int sum(int n, int m, int matrix[n][m]);
+int sum(int n, int m, int matrix[*][*]);
+int sum(int n, int m, int matrix[][m]);
+int sum(int n, int m, int matrix[][*]);
+```
+
+The static keyword gives a hint as to how large an array is at least.
+
+```C
+int sum(int a[static 3], int n);
+```
+
+static can only be used on the first dimension.
+
+It can in some cases make the compiler better make the program faster because it can prefetch more at the start of the function.
+
+We can use compouned literals to pass in anonymous arrays.
+
+```C
+sum((int []) {1, 2, 3, 8, 9}, 5);
+```
+# Pointers
+
+Functions can declare that they won't change the value that the pointer points to.
+
+```C
+void foo(const int* ptr);
+```
+
+You can do pointer arithmetic if you have pointed to an element of an array.
+
+C supports three operations on pointers:
+* Adding an integer
+* Subtracting an integer
+* subtracting with another pointer
+
+```C
+// Integer Addition
+int array[4] = {1, 2, 3, 4};
+int* p = &array[1];
+int* q = p + 1 // points to index 2, *q is 3
+q = p - 1 // points to index 0, *q is 1
+int
+```
+
+```C
+// A function written using pointer arithmetic
+int sum(int array[], int n)
+{
+    int sum = 0;
+    for(int* p = &array[0]; p < &array[n]; p++)
+    {
+        sum += *p;
+    }
+   return sum;
+}
+```
+It used to be that the above method would save execution time but that is now implementation based. Some compilers even work better with subscripting.
+
+Multidimensional arrays are stored in major row order, meaning the rows are right after each other. By using pointer arithmetic we can access all elements of multidimensional arrays like a 1 Dimensional array.
+
+```C
+    int matrix[LENGTH][LENGTH] = {
+        {-11, -10,  -9, -8, -6},
+        {-5,   -4,  -3, -2, -1},
+        { 0,    1,   2,  3,  4},
+        { 5,    6,   7,  8,  9},
+    };
+    
+    for(int* p = &matrix[0][0] ; p < &matrix[LENGTH-1][LENGTH-1]; p++)
+    {
+        printf("%i\n", *p);
+    }
+```
 
