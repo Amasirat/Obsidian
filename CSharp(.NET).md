@@ -245,3 +245,21 @@ A few notes:
 
 LINQ is a unified query system designed to retrieve and send data to any sort of database system. 
 
+# Object Lifetime
+
+When variables go out of scope they become candidates for garbage collection. 
+
+Whenever the `new` keyword is encountered, a CIL `newobj` instruction is emitted. C# keeps its heap tidy which is why it is called the *managed heap*. The CIL will maintain a pointer that points to the next place in memory where the next object will be located. The newobj instruction does 3 things:
+* Calculates how much memory the object will take
+* Checks if the managed heap has enough space
+* Advance the next object pointer and then return a reference to the object it created
+
+If the CLR determines that the managed heap does not have space garbage collection will occur.
+
+A storage location that has a reference to an object in heap whether global, static or local is called a *root*.
+During the garbage collection process, the CLR will keep track of objects that are still reachable (Those that are rooted). It will build an object graph
+
+The garbage collector gives generational labels on objects. newly created objects are generation 0. The GC first starts sweeping any unrooted generation 0 objects. The surviving objects get promoted to generation 1, If the application requires the additional space, it will start sweeping generation 1 objects after cleaning generation 0s. The surviving ones again are promoted to generation 2 and stay there. The idea here is that objects that stay very long in memory (For example the main window) then they are less likely to become unrooted than more temperory objects. giving specific generations to objects that have been proven to have stayed long are not bothered and GC won't waste its time checking their reachability.
+
+Prior to .NET 4, Dotnet used a Concurrent Garbage Collection system. It would suspend all active threads on every collection cycle to ensure the app doesn't use the managed heap while a sweep was in process. After .NET 4 uses *background garbage collection*.
+

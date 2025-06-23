@@ -267,3 +267,97 @@ While it is true I am useless it doesn't mean I'm not worth \
 a damn");
 ```
 
+This is called splicing in C. The problem is it has to start from the beginning of the next line.
+
+Two string literals separated by white space will be printed together:
+```C
+printf("Hello, We are at the "
+		"cusp of war!\n");
+```
+
+**You can not modify a string literal**
+
+You can store a string literal both in char arrays and a char pointer. If a string has n characters, the array has to at least have n + 1 size otherwise the null character may not be stored which causes problems in C algorithms.
+
+Just like initializing any array with fewer elements than its size, initializing a string array with lower sized string, is filled with null characters.
+
+Two differences between pointer strings and array strings:
+* an array can be modified but pointers can't
+* the pointer version is a varaible that can point to something else.
+
+A pointer sets aside enough variable for a pointer varaible but it does not save the string literal anywhere.
+
+## Reading and writing strings
+
+`puts()` function outputs a string with a new line tacked on at the end.
+
+`printf()` can also print strings by using the type conversion `%s` (It is for char pointers), it will print the string character by character until it reaches the null character.
+
+Specify how many characters to print like this:
+```C
+printf("%.6s\n", str);
+```
+
+Right justify a string with a smaller size than m with:
+
+```C
+char* string = "Hello"
+printf("%12s\n", string); //prints with white space:
+//------Hello
+```
+
+scanf can take a string array and read strings. It ignores all white space however, so you can not have a space in your string.
+
+`gets()` also reads strings into a char array however it doesn't skip whitespace before or after. It reads until it sees a new line character, the new line character is discarded. (gets is currently deprecated for some reason). gets is dangerous because it can potentially write more than the string array has room for, potentially writing in memory space that it should not.
+
+Because reading strings is dangerous, it is common to read strings character by character. Make sure to remember inputting the null character ourselves.
+
+`string.h` has many functions for working with strings. Be careful with functions that do not state const in their parameters, they could change your string.
+
+`strcpy(str1, const str2)` copies str2 into str1 and returns the value it copied (it continues until it reaches a null character), but it doesn't have any idea of knowing if str2 will fit in str1 which makes this function unsafe.
+
+`strncpy()` is safer but slower. 
+```C
+strncpy(str1, str2, sizeof(str1));
+```
+
+But it will not insert a null character at the end of str1 if the length of str2 is more than str1. Here's a safer way:
+
+```C
+strncpy(str1, str2, sizeof(str1) - 1);
+str1[sizeof(str1)-1] = '\0';
+```
+
+`size_t strlen(const char* s)` returns size of a string.
+
+`strcat()` concatenates str2 at the end of str1 and returns a pointer to str1.
+
+If the array of str1 is not large enough to accomodate the new string the function's behavior will be undefined. This function then is unsafe in that manner.
+
+`strncat()` is the safer but slower version. Unlike the other n functions, it will terminate the string with a '\0' if it has enough space.
+
+```C
+strncat(str1, str2, sizeof(str1) - strlen(str1) - 1);
+```
+
+`strcmp(char* str1, char* str2)` compares two strings. If str1 is less than str2 it returns a number less than 0, if they are equal it returns 0, if str1 is greater than str2 it returns a number greater than 0.
+
+It defines greatness by lexicographic ordering (the same used in dictionaries) C < Z and C > A and A == A.
+
+## String Arrays
+
+We can have an array of pointers that point to strings instead of a two-dimensional array of characters.
+
+```C
+char *planets[] = {"Hi", "There", "Lovely", "To", "M"};
+```
+
+
+
+
+
+
+
+
+
+

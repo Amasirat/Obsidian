@@ -49,6 +49,7 @@ A series of interconnected computers are called a **Network**. It is a wide and 
 * [[#Queuing Disciplines]]
 * [[#TCP Congestion Control]]
 * [[#Congestion-Avoidance Mechanisms]]
+* [[#Quality of Service]]
 
 # Chapter 1: Foundation
 
@@ -1822,10 +1823,167 @@ A variation of FQ is *weighted fair queuing* (WFQ) that allows each flow to get 
 
 Here we discuss what congestion control mechanisms TCP employs on the end to end.
 
+TCP employes a feedback-based approach to congestion control and assumes  FIFO queuing on routers but can also work with fair queuing.
 
+Here we will discuss three mechanisms that join together to form the *standard* TCP's congestion control methods.
 
+### Additive Increase/Multiplicative Decrease
 
+Basically increase the allowed packets additively and decrease them multiplicatively. TCP cautiously bumps up the allowed packets but drops fast at the first sign of trouble.
+
+TCP maintains a **CongesionWindow** variable and instead of the advertised window, a minimum between CongestionWindow and AdvertisedWindow is taken. 
+
+$$
+MaxWindow = Min(CongestionWindow, AdvertisedWindow)
+$$
+$$
+EffectiveWindow = MaxWindow - (LastByteSent - LastByteAcked)
+$$
+
+CongestionWindow is first set and then once a packet that the source has sent was detected to have been dropped, it decreases multiplicatively. However CongestionWindow is not allowed to fall below maximum segment size (MSS).
+
+Then the CongestionWindow increases gradually based on any acknowledged bytes that were sent. Every time the source sends a CongestionWindow's worth of packets, it adds an equivalent of 1 packet's worth of CongestionWindow.
+
+$$
+Increment = MSS \times (\frac{MSS}{CongestionWindow})
+$$
+$$
+CongestionWindow += Increment
+$$
+
+**An entire MSS byte is not added to congestion, only a fraction of MSS gets added.** Based on the above formula, The higher the CongestionWindow already is, the smaller the fraction of MSS becomes.
+
+There are also methods that do additive decrease as well but it has been shown that a multiplicitive decrease is a necessary condition for a system to be *stable* (recall stable from [[#Evaluation Criteria]])
+### Slow Start
+
+The previous additive increase works when a source is operating close to available capacity of the network however if it's starting from scratch, it's hard to ramp it up. So instead *slow start* is used.
+
+Source starts out with CongestionWindow = 1, then adds 1 when an ACK was recieved, then 2, then 4, etc. It is exponential instead of linear. This continues until a packet is dropped, when multiplicative decrease starts.
+
+Two situations where this is used:
+* At the very beginning of a connection because the source doesn't know how many packets the network can handle.
+* When connection wants to return from a dead state (when connection gets blocked due lowering advertisingWindow) congestion grows back however this time it moves back to the last congestionWindow after a multiplicative decrease, then additive increase is used.
+For the second situation we need to know that information, therefore TCP uses a temperory value called CongestionThreshold which is equal to the CongestionWindow after a multiplicative decrease. Slow Start is used to then reach that CongestionThreshold, after that it is normal additive increase.
+
+This whole thing is similiar to to attacking an enemy base in a stealth game. You don't need to be cautious when you're pretty far, but when you reach the enemy base and somehow get caught, you have to run so they don't notice you. After that you have to more cautiously move around and get back into action.
+
+```C
+while(1) {
+	u_int cw = state->congestionWindow;
+	u_int incr = state->maxseg;
+	if(cw > state->CongestionThreshold) {
+		incr = incr * (incr / cw);
+	}
+	state->congestionWindow = min(cw + incr, TCP_MAXWIN);
+}
+```
+
+Once  timeout occurs the CongestionWindow is reset to one and it slow starts its way back to CongestionThreshold, after that it's additive increase.
+
+![[2025-06-20_15-27.png]]
+
+At the start of a connection, the source needs to figure out what bandwidth the network is capable of. If it is not aggressive in finding that (doing additive increase)
+, it risks losing throughput, else if it is too agressive (during slow start or exponential growth) it risks losing half a window's worth of packets which are dropped by the network.
+
+A proposed alternative to slow start is *quick-start* where the sendrer asks for a rate inside its SYN packet. Routers on the way examine the option, evaluate current congestion and decide if that rate is acceptable or not. If that was the case for all routers then that rate will be the starting point otherwise it will default to slow start.
+
+### Fast Retransmit and Fast Recovery
+
+Experience showed the implementation of TCP timeouts resulted in long periods of times when a connection went dead waiting for a timer to expire to send a packet again. *fast transmit* is a heuristic that sometimes triggers the retransmission of a dropped packet sooner than the regular timeout mechanism.
+
+When receiver's get an out of order packet, instead of waiting for the next packet, send a duplicate ACK for the previously in order packet. This way the sender will know that a packet was delivered out of order, but it will wait for 3 duplicate packets until it retransmits the last packet after the one that got a duplicate ACK, timeout be damned. The reciever then sends a cummulative ACK for all packets delivered up to that point afterwards. This is **Fast Retransmit**.
+![[2025-06-20_16-28_1.png]]
+
+This is how congestion behaves using this mechanism:
+
+![[2025-06-20_16-28.png]]
+
+We can also, rather than drop CongestionWindow to 1 and ramp up again, use the ACKs in the pipe to clock the sending of packets. This mechanism is **fast recovery**.
 ## Congestion-Avoidance Mechanisms
+
+TCP **controls** congestion but it does not try to avoid it. An alternative that has not yet been implemented is to predict when congestion is about to happen. This is called **congestion avoidance** mechanisms.
+
+There are three general mechanisms for this.
+### Decbit
+
+When congestion is about to happen, the router inserts a binary congestion bit in the packets it sends. Once these packets are recieved at the destination, it copies that congestion bit in its ACK to notify the source about it. The source then adjusts its sending rate.
+
+The router first calculates the average queue length of its last busy+idle cycle + the current busy cycle. If it is set to 1 then the router sets the congestion bit.
+
+Once the source sees that congestion bit in its packet's headers, it checks to see if less than 50% of the packets had the bit set it will increase its congestionWindow by 1 otherwise it will decrease it by 0.875.
+## Random Early Detection (RED)
+
+Similar to DECbit, each router is programmed to monitor their own queue length. It differs in two major ways:
+
+* Instead of explicitly telling the source, it will drop its packages earlier than it should have, notifying the source sooner.
+* The way it decides when to drop packets is different
+
+The average length of the queue is calculated like this:
+$$
+AvgLen = (1-Weight) \times AvgLen + Weight \times SampleLen
+$$
+
+This is calculated every time a new packet arrives in most software implementations. Weight is between 0 and 1 and SampleLen is the length of the queue when a sample measurement is made.
+
+There are also two variables MaxThreshold and MinThreshold that are used to make decisions every time a packet arrives.
+
+* If the AvgLen $\leq$ MinThreshold then packet gets queued.
+* If MinThreshold $<$ AvgLen $<$ MaxThreshold, with probability $p$ drop packet
+* if AvgLen $\geq$ MaxThreshold then drop packet
+
+The probability of drop slowly increases as AvgLen hangs around between Minmum and Maximum thresholds. Once AvgLen reaches or succeeds MaxThreshold then drop with no questions asked!(probability of 1)
+
+$$
+TempP = MaxP \times \frac{(AvgLen - MinThreshold)}{MaxThreshold-MinThreshold}
+$$
+$$
+P = \frac{TempP}{1-count \times TempP}
+$$
+
+count is how many newly arrived packets are being queued.
+
+MaxThreshold should be chosen so there will still be free space for any bursting activity
+
+MinThreshold should be reasonably large.
+
+The distance between MaxThreshold and MinThreshold should be the typical queue length in one RTT. In today's internet, a double distance is a good rule of thumb.
+
+## Source-Based Congestion Avoidance
+
+A method that relies only on the end hosts unlike the previous two.
+
+The idea is to figure out congestion by noticing some changes in how the network behaves from the perspective of the host.
+* During Congestion RTT of delivered packets increases
+* During Congestion the sending rate flattens
+
+There are four general ways of handling this:
+
+* Check to see if RTT gets larger: Every two round trips caculate $(CurrentWindow - OldWindow) \times (CurrentRTT - OldRTT)$ If the result is negative(meaning Old RTT or OldWindow is larger) increase Window Size by 1 if not decrease by one-eigth
+* Every RTT increase window size by 1 and compare the resulting throughput. If the difference was less than one half the throughput of sending one packet, decrease window by one.
+The most important mechanism is this: Instead of comparing changes, it compares the measured throughput with an expected one. This is known as **TCP Vegas**
+
+First we define a given flow's BaseRTT as the **RTT of a packet when the flow is not congested**, commonly the RTT of the first packet sent. Then the expected throughput is:
+
+$$
+ExpectedRate = CongestionWindow/BaseRTT
+$$
+
+TCP Vegas then measures the **ActualRate** by recording how many bytes are sent between the time that packet is sent and its acknowledgement arrives. This happens once per round trip time.
+
+
+
+
+
+
+
+
+
+
+## Quality of Service
+
+Applications sensitive to time delays are called *real time applications*. The internet is a best effort service, meaning it does not guarantee timeliness which means it is not sufficient for real time applications. Networks that support timeliness and can treat some packets differently from others (prioritizing them or else) are **Quality of Service** networks.
+
+
 
 
 

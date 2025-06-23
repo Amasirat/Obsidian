@@ -8,35 +8,20 @@
         "type": "tabs",
         "children": [
           {
-            "id": "5d43d64be19a72b0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Computer Networks.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Computer Networks"
-            }
-          },
-          {
             "id": "e324cb9b0be58e11",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "C.md",
+                "file": "CSharp(.NET).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "C"
+              "title": "CSharp(.NET)"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -180,9 +165,14 @@
   },
   "active": "e324cb9b0be58e11",
   "lastOpenFiles": [
-    "Bowed String Instruments.md",
     "Computer Networks.md",
     "C.md",
+    "CSharp(.NET).md",
+    "Attachments/2025-06-20_16-28_1.png",
+    "Attachments/2025-06-20_16-28.png",
+    "Attachments/2025-06-20_15-27.png",
+    "Cloud Computing.md",
+    "Bowed String Instruments.md",
     "Attachments/2025-06-18_18-32.png",
     "Attachments/2025-06-17_13-38.png",
     "Attachments/2025-06-17_12-56.png",
@@ -190,9 +180,6 @@
     "Attachments/2025-06-17_11-47.png",
     "Attachments/2025-06-16_18-09.png",
     "Attachments/2025-06-16_18-02.png",
-    "Attachments/2025-06-16_16-25.png",
-    "Attachments/2025-06-16_15-25.png",
-    "Attachments/2025-06-14_14-39.png",
     "6G Technologies.md",
     "EigenFaces.md",
     "OpenCV.md",
@@ -214,8 +201,6 @@
     "Group Therapy Sessions.md",
     "Untitled.md",
     "Enneagrams.md",
-    "Digital Systems.md",
-    "Failure Schema.md",
     "Attachments"
   ]
 }
