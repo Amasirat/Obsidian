@@ -1401,7 +1401,7 @@ The idea is to group our desired hosts together and give them one *multicast gro
 
 A multicast group is dynamic, hosts can signal that they want to be added or removed from groups. The job of handling that is the router's. A host uses the Internet Group Management Protocol (IPv4) or Multicast Listener Discovery (IPv6) to send a local router signals that which groups it wants to be added or removed from.
 
-Because a host can fail, the local router periodically polls the LAN to determine which groups are still of interest to he host.
+Because a host can fail, the local router periodically polls the LAN to determine which groups are still of interest to the host.
 
 IP has been suppliemented with support for one-to-many multicast
 
@@ -1983,10 +1983,53 @@ TCP Vegas then measures the **ActualRate** by recording how many bytes are sent 
 
 Applications sensitive to time delays are called *real time applications*. The internet is a best effort service, meaning it does not guarantee timeliness which means it is not sufficient for real time applications. Networks that support timeliness and can treat some packets differently from others (prioritizing them or else) are **Quality of Service** networks.
 
+## Application Requirements
+
+Real time applications are applications that need data here and now otherwise it'll be useless to them. A website for example, despite it being agonizing, can hang for a while until it is ready and then we can use it but while talking to someone, once their audio is delayed for a while, there is no use for it coming 5 minutes later. 
+
+Real-Time Audio is a good example, voice samples have to be delivered at a constant rate, otherwise if either of the voice samples get delayed, they are essentially useless.
+
+**One way to make it work**: buffer up some amount of voice samples ahead of time. If a voice sample is delayed slightly it just goes in the buffer until its playback time arrives, if it gets delayed a long time, it will not be stored for very long. This is essentially an offset to the playback time for all packets, this offset is called the **playback point**.
+
+We can't delay playing back data above 300 ms. 
+
+### Taxonomy of Real Time Applications
+Some real time applications are more tolerant of packet losses or delays than others. We can set the playback point of audio a bit later without anyone noticing anything however a robot arm is not the same.
+
+Some Applications are more adaptive than the rest, they can dapt to delays fairly well. Some are adaptive in terms of their rate such a video applications, where the quality can be sacrificed in service to bit rate, those are rate adaptive.
+
+There are two classes of approaches one can take to meet the needs of the above applications:
+
+* *Fine-grained*: Provide QoS to individual applications
+	* Integrated Services and Resource Reservation Protocols
+	* Differentaited Services which is most widely deployed
+* *Coarse-grained*: Provide QoS to large classes of data
+
+## Integrated Services (RSVP)
 
 
 
 
+## Differentiated Services
+
+
+
+
+## Equation-Based Congestion Control
+
+Despite these mechanisms, The current paradigm has been able to handle real time applications fairly well.
+
+Can we have congestion control but also be able to sustaining a smooth transmission rate?
+
+These algorithms' main goals are:
+* Slowly adapt the congestion window instead of per packet basis
+* Being fair to competing TCP flows, enforced by adhering to an equation
+
+$$
+Rate \relation \frac{1}{RTT\times \sqr(\ro)}
+$$
+
+The Rate has to be inversely proportional to RTT times the square root of the loss rate. The reciever periodically reports the loss rate to the sender in which case it adapts to make sure the sending rate adheres the above relation.
 
 
 
