@@ -1320,7 +1320,7 @@ When the strucure of the internet was more tree-like, the EGP (Exterior Gateway 
 BGP (Border Gateway Protocol) has no assumptions on how these ASs are configured or connected to each other. BGP is focused more on scalability that optimality. Therefore its goals are:
 
 * Find a path that is loop free
-* Paths compliant with the policies of each AS or domain which could be arbitrarily complex
+* Paths compliant with the policies of each AS which could be arbitrarily complex
 
 This is pretty much more complex than even a simple optimization problem that link-state tries to solve. interdomain only advertises **reachability** and makes no guarantees on the shortness of the path because each domain can have its own method of intradomain routing which makes the task of calculating shortest path almost impossible.
 
@@ -1332,13 +1332,13 @@ The Challenges are summarized to:
 
 Each AS has one or more *border routers* that take the traffic from the current domain to other domains. Each AS that participates in BGP needs to have at least one **BGP Speaker**. A border router can also be a speaker but not always.
 
-**BGP** advertises *complete paths*, so it's called a *path-vector* protocol because of that. This is to prevent loops from happening.
-
 For example, an AS (which could be a provider AS) that is connected to stub AS (which could be a client AS, either home or company network) their BGP speaker will advertise that it can reach networks 128.96, 192.4.153, 192.4.32, 192.4.3 directly. Other AS get this advertisement and make advertisements of their own.
 
 ![[2025-06-12_18-40.png]]
 
-Say for instance that AS2 and AS3 were to be connected. When AS1 advertises that it can reach 128.96 (which it got from AS2), AS3 will also recieve that and say that it can reach 128.96 to AS2, AS3 then may think that AS3 is actually directly connected to 128.96 instead of itself, so a loop will happen. However by advertising complete paths, this situation will be avoided because If an AS recieves an advertisement path that sees itself listed, it will discard it to prevent loops.
+**BGP** advertises *complete paths*, so it's called a *path-vector* protocol because of that. This is to prevent loops from happening. The reason is simple: 
+
+Say for instance that AS2 and AS3 were to be connected. When AS1 advertises that it can reach 128.96 (which it got from AS2), AS3 will also recieve that and say that it can reach 128.96 to AS2, AS2 then may think that AS3 is actually directly connected to 128.96 instead of itself, so a loop will happen. However by advertising complete paths, this situation will be avoided because If an AS recieves an advertisement path that sees itself listed, it will discard it to prevent loops.
 
 Provider AS have 16-bit unique IDs which makes it possible to detect loops like above, however stub AS do not have to have unique IDs.
 
@@ -1401,7 +1401,7 @@ The idea is to group our desired hosts together and give them one *multicast gro
 
 A multicast group is dynamic, hosts can signal that they want to be added or removed from groups. The job of handling that is the router's. A host uses the Internet Group Management Protocol (IPv4) or Multicast Listener Discovery (IPv6) to send a local router signals that which groups it wants to be added or removed from.
 
-Because a host can fail, the local router periodically polls the LAN to determine which groups are still of interest tot he host.
+Because a host can fail, the local router periodically polls the LAN to determine which groups are still of interest to he host.
 
 IP has been suppliemented with support for one-to-many multicast
 

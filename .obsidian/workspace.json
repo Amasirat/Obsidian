@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CSharp(.NET).md",
+                "file": "Computer Networks.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "CSharp(.NET)"
+              "title": "Computer Networks"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "efefd46dc0bb422d",
@@ -166,8 +167,8 @@
   "active": "e324cb9b0be58e11",
   "lastOpenFiles": [
     "Computer Networks.md",
-    "C.md",
     "CSharp(.NET).md",
+    "C.md",
     "Attachments/2025-06-20_16-28_1.png",
     "Attachments/2025-06-20_16-28.png",
     "Attachments/2025-06-20_15-27.png",
