@@ -2007,9 +2007,42 @@ There are two classes of approaches one can take to meet the needs of the above 
 
 ## Integrated Services (RSVP)
 
+* Guaranteed Service used for intolerant real time applications
+* Controlled load service for the rest: Emulate a lightly load network even though the actual network is heavily loaded, use a queuing mechanism such as WFQ
 
+Generally, we need to tell the network what kind of service we want either qualitavie (I want controlled load) or quantative (100ms or less delay). We also need to tell the network how much bandwidth we want to inject. The set of information that we provide to the network is the *flowspec*.
 
+After that the network needs to tell if it can provide that service, the process of deciding this is called *admission control*.
 
+We need mechanisms for exchanging information between networks basically, refered to as *resource reservation mechanisms*. When flows have been described, routers need to be able to send the packets adequately which involves *packet scheduling*.
+### Flowspec
+Two seperable parts to flowspec:
+* TSpec: Describes flows characteristics
+* RSpec: Describes the service requested from the network
+
+RSpec is specific to a service class, for example controlled load's RSpec is trivial and has little parameters.
+
+We need to know the bandwidth that we are sending however most of the time that's not a single number for applications, it is variable, so we describe it using *token bucket filter*. Assume each token is a byte, an n-byte packet needs n tokens to be sent. A host can gather tokens in r tokens per second however it can not exceed B depth. So there is the r parameter and B parameter representing the depth or the byte limit.
+
+RSVP is a protocol that is used to given reservation based connection to networks.
+* It requires soft state: Soft state times out after a short period if it is not refreshed.
+* Supports Multicast as well as unicast flows.
+* RSVP is receiver-oriented meaning the receivers track and request their own needs
+* It is easy to readjust resource levels: You can send requests for new resources in each refresh message.
+* Once a node fails and does not give refresh messages, then the resources are released.
+Two things must happen so that a receiver can make reservations for sender:
+* Needs to receive the TSpec of the sender's flow
+* Has to get what path the sender will send the packets so that it can make reservations on each router in the path.
+
+So a sender sends a PATH message before sending data. Each router on the way looks at this path and finds a *reverse path* from receiver to sender as well. If the receiver can make a reservation it will send a RESV message back.
+
+The RESV message contains sender's TSpec and RSpec, each router on the path sees this message and tries to allocate resources to it. If it can do that, the RESV is sent to the next router if not an error message is sent back to receiver. (Hence the receiver oriented appraoch of RSVP). If the receiver wants to retain the reservation it sends the RESV message every 30 seconds.
+
+The PATH message is also sent every 30 seconds, or even sooner if a change in topology is detected. (one node in the network fails)
+
+The above was for one sender and one receiver. In the Multi sender to multi receiver scenario, The reservation requests are merged, both the PATH messages and RESV messages. For example, if a receiver already has a reservation of a 100ms delay, another reservation of that RSpec is not needed.
+
+The general issue with IntServ is the fact that scalability is incredibly difficult. If there are 10 flows, it's maneagable but when this grows it'll be harder to implement these algoirthms efficiently. That's why IntServ has not been widely deployed on the internet. 
 ## Differentiated Services
 
 

@@ -1,4 +1,4 @@
-First introduced to the world in 2002, intending to replace the [[COM Model]] and create a more flexible and simpler solution.
+wFirst introduced to the world in 2002, intending to replace the [[COM Model]] and create a more flexible and simpler solution.
 
 ## CLR: Common Langauge Runtime
 
@@ -263,3 +263,27 @@ The garbage collector gives generational labels on objects. newly created object
 
 Prior to .NET 4, Dotnet used a Concurrent Garbage Collection system. It would suspend all active threads on every collection cycle to ensure the app doesn't use the managed heap while a sweep was in process. After .NET 4 uses *background garbage collection*.
 
+# Multi-Threading
+
+Each program is a **Process** in Operating Systems. The Operating System isolates processes from each other and handles how much resources they take.
+
+Each process can have the ability to define separate threads where many tasks can be done at the same time. However that will be true paralelism if both the hardware and OS support it.
+If not each thread is given a time slice to operate and once the time slice is up, the processor will shift contexts to another thread.
+
+In order for this switching mechanism to work, each thread can write data to a Thread Local Storage. These threads are also provided with separate call stacks.
+
+## Processes
+
+We can use `System.Diagnostics` namespace for getting information about processes.
+
+
+## Threads
+
+The System.Threading namespace is one approach to building multi-threaded applications in C#/Dotnet. 
+
+The `Thread` class represents a thread of the application.
+
+```C#
+Thread currThread = Thread.CurrentThread;
+Console.WriteLine(currThread);
+```
